@@ -25,7 +25,7 @@ export default function Navbar() { // Navbar
                     <MenuItem setActive={setActive} active={active} item="Home"></MenuItem>
                     <MenuItem setActive={setActive} active={active} item="Portfolio"></MenuItem>
                     <MenuItem setActive={setActive} active={active} item="About >">
-                        <div className="flex flex-col space-y-1 text-sm">
+                        <div className="flex flex-col space-y-1">
                             <HoveredLink href="/hobby">ประวัติการทำงาน</HoveredLink>
                             <HoveredLink href="/individual">Contact</HoveredLink>
                             <HoveredLink href="/team">Services</HoveredLink>
