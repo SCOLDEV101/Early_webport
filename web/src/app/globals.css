@@ -19,3 +19,48 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6, p {
+  font-size: 1rem;
+} 
+
+.gradient-border-mask { {/*bordergradient and borderRadius*/}
+  display: flow-root;
+  position: relative;
+}
+
+.gradient-border-mask::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  border: 10px solid transparent;
+  background-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(45deg, #969FC1, #6580E1, #5844D7) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
