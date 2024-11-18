@@ -44,7 +44,7 @@ h6, p {
   font-size: 1rem;
 } 
 
-.gradient-border-mask { {/*bordergradient and borderRadius*/}
+.gradient-border-mask { /*bordergradient and borderRadius*/
   display: flow-root;
   position: relative;
 }
