@@ -8,6 +8,7 @@
 // import PortfolioData from 'data';
 // import ServicesData from 'data';
 // import MemberData from 'data';
+import './globals.css';
 
 
 export default function Home() {
@@ -33,10 +34,28 @@ export default function Home() {
 
 {/* //////////////////////////////////////////////////////////////////////// */}
 
+       <section id="About">
+          <div className="grid grid-cols-4 gap-12">
+            <div className="col-span-3 text-[#ECF0FF]">
+            <h1 className="font-bold" >
+              About us
+            </h1>
+              <span className="font-bold text-[1rem]">SCOLDEV</span>{" "}
+              <span className="text-wrap text-[1rem]">เราคือผู้เชี่ยวชาญด้านการพัฒนาเว็บไซต์ สร้างสรรค์ให้ตรงตามความต้องการ และ ช่วยเสริมศักยภาพทางธุรกิจให้กับลูกค้า โดยมุ่งเน้นการพัฒนาเว็บไซต์ที่ สวยงาม ใช้งานง่าย และมีประสิทธิภาพ เพื่อสร้างความเชื่อมั่นแก่ผู้ใช้งานและแบรนด์ของคุณ เราให้ความสำคัญ ตั้งแต่การวิเคราะห์ความต้องการของลูกค้า ไปจนถึงการส่งมอบโซลูชันที่ตอบโจทย์ในทุกมิติ</span>
+            </div>
 
-       {/* <section id="About">
-          
-       </section> */}
+            <div
+            className="gradient-border-mask p-8 text-right rounded-[20px]  text-[#ECF0FF]"
+            style={{
+              boxShadow: "0 25px 90px -30px rgba(236,240,255,0.41), inset 0 3px 3.9px -2px rgba(255,255,255,0.36)"
+            }}
+            >
+              <h2 className="font-bold my-3 bg-gradient-to-br from-[#BDCBFD] to-[#E5D5FF] inline-block text-transparent bg-clip-text">Contact</h2>   {/*textgradient */}
+              <h5 className="font-bold">063-874-0176</h5>
+              <h5 className="font-bold">scoldev101@gmail.com</h5>
+          </div>
+          </div>
+       </section>
 
 {/* //////////////////////////////////////////////////////////////////////// */}
 
