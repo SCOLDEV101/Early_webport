@@ -9,7 +9,7 @@ import Image from "next/image";
 export default function Navbar() { // Navbar
 
     const [active, setActive] = useState<string | null>(null); // ใช้สำหรับ active ของตัว dropdown
-    
+
     return (
         <div
             className={"fixed top-10 inset-x-0 max-w-full mx-[60px] z-50"}
@@ -17,15 +17,27 @@ export default function Navbar() { // Navbar
             <Menu setActive={setActive}>
                 {/* Logo */}
                 <div>
-                    <Image src={"./navbar-logo.svg"} alt="logo" width={150} height={100} />
+                    <Image
+                        src="./navbar-logo.svg"
+                        alt="logo"
+                        width="0"
+                        height="0"
+                        style={{ width: '150px', height: 'auto' }}
+                        priority
+                    />
                 </div>
 
                 {/* Menus */}
                 <div className="flex flex-row flex-nowrap justify-center items-center gap-16">
-                    <MenuItem setActive={setActive} active={active} item="Home"></MenuItem>
-                    <MenuItem setActive={setActive} active={active} item="Portfolio"></MenuItem>
+                    {/* Home menu กดแล้วไป section Home */}
+                    <MenuItem setActive={setActive} active={active} item="Home" href="#home"></MenuItem>
+                    {/* Portfolio menu กดแล้วไป section Portfolio */}
+                    <MenuItem setActive={setActive} active={active} item="Portfolio" href="#portfolio"></MenuItem>
+                    {/* About menu กดแล้วจะขึ้น popup ของ About */}
                     <MenuItem setActive={setActive} active={active} item="About >">
+                        {/*  Popup menus ของ About ทั้งชุด */}
                         <div className="flex flex-col space-y-1">
+                            {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
                             <HoveredLink href="/hobby">ประวัติการทำงาน</HoveredLink>
                             <HoveredLink href="/individual">Contact</HoveredLink>
                             <HoveredLink href="/team">Services</HoveredLink>
@@ -49,24 +61,43 @@ export default function Navbar() { // Navbar
 
 // Navbar sub Elements
 
-const MenuItem = ({
+const MenuItem = ({ // Props
     setActive,
     active,
     item,
     children,
+    href,
 }: {
     setActive: (item: string | null) => void; // จาก useState ด้านบน
     active: string | null; // จาก useState ด้านบน
     item: string; // ชื่อของหัวข้อที่จะใช้แสดง
     children?: React.ReactNode; // จะมีหรือไม่มีก็ได้
+    href?: string, // จะมีหรือไม่มีก็ได้เป็น link ที่จะใช้ href ไปที่หน้าหรือ section อื่น
 }) => {
     return (
         <div onClick={() => setActive(active ? null : item)} className="relative "> {/* onMouseEnter={() => setActive(item)} */} {/* ถ้า active มีค่าอยู่แล้วให้เคลียออก เพื่อที่ dropdown จะได้หายไป ถ้าไม่มีให้ setActive ของ menu นั้นๆ กรณีมีหัวข้อที่กดแล้วเป็น dropdown หลายตัว */}
-            <h5
-                className="cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)]"
-            >
-                {item}
-            </h5>
+            {href ? // เช็คว่าปุ่มนั้นเป็นแบบ Link มั้ย
+                (
+                    // กรณีปุ่มเป็นแบบ Link จะเข้า case นี้
+                    <Link href={href}> 
+                        <h5
+                            className="cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)]"
+                        >
+                            {item}
+                        </h5>
+                    </Link>
+                )
+                :
+                (
+                    // กรณีปุ่ม<ไม่>เป็นแบบ Link จะเข้า case นี้
+                    <h5
+                        className="cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)]"
+                    >
+                        {item}
+                    </h5>
+                )
+            }
+
             {children && active !== null && ( // Dropdown ตัว children คือ element ของ dropdown
                 <div>
                     {active === item && ( // ไว้แสดง dropdown ของแต่ละหัวข้อที่เลือก
@@ -93,7 +124,10 @@ const MenuItem = ({
     );
 };
 
-const Menu = ({
+
+// Body ของ Navbar
+
+const Menu = ({ // Props
     setActive,
     children,
 }: {
@@ -138,6 +172,7 @@ const Menu = ({
     );
 };
 
+// ปุ่มของ Popup
 const HoveredLink = ({ children, ...rest }: any) => { // props ทุกตัวจำเป็นต้องมี
     return (
         <Link
