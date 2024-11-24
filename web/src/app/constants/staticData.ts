@@ -167,7 +167,6 @@ export const member_data: MEMBER_DATA[] = [
                 skill_icon: "/logo/js-1.svg",
                 skill_title: "JavaScript",
             },
-
             {
                 skill_icon: "/logo/ts-1.svg",
                 skill_title: "TypeScript",
@@ -289,7 +288,7 @@ export const member_data: MEMBER_DATA[] = [
     },
     {
         id: "B001",
-        position: "Front-End Developer",
+        position: "Front-End Developer 2",
         name: "กษิดิศ ทองอ่อน",
         img_src: "/member/team/Jhong-Img.png",
         img_alt: "Kasidit Thong-on",
@@ -342,7 +341,7 @@ export const member_data: MEMBER_DATA[] = [
     },
     {
         id: "B002",
-        position: "Front-End Developer",
+        position: "Front-End Developer 3",
         name: "กษิดิศ ทองอ่อน",
         img_src: "/member/team/Jhong-Img.png",
         img_alt: "Kasidit Thong-on",
@@ -395,7 +394,7 @@ export const member_data: MEMBER_DATA[] = [
     },
     {
         id: "UI001",
-        position: "Front-End Developer",
+        position: "Front-End Developer 4",
         name: "กษิดิศ ทองอ่อน",
         img_src: "/member/team/Jhong-Img.png",
         img_alt: "Kasidit Thong-on",
@@ -448,7 +447,7 @@ export const member_data: MEMBER_DATA[] = [
     },
     {
         id: "UI002",
-        position: "Front-End Developer",
+        position: "Front-End Developer 5",
         name: "กษิดิศ ทองอ่อน",
         img_src: "/member/team/Jhong-Img.png",
         img_alt: "Kasidit Thong-on",
