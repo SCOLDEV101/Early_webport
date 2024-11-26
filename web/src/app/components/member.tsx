@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from 'react'
 import { member_data } from '../constants/staticData'
 import { IoChevronBack, IoChevronForward, IoClose } from "react-icons/io5";

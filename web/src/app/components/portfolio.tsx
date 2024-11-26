@@ -1,3 +1,5 @@
+"use client"
+
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { portfolio_data } from '../constants/staticData';
@@ -33,7 +35,7 @@ export default function Portfolio({ }: Props) {
         <>
             <div className="flex flex-row justify-between items-center px-3">
                 {/* Header ของ section นี้ */}
-                <h1 className="font-extrabold">Portfolio</h1>
+                <h1 className="font-extrabold text-white">Portfolio</h1>
 
                 {/* Menus ที่ใช้เลือก filter */}
                 <FilterMenus setFilter={setFilter} Filter={Filter} Menus={menus} />

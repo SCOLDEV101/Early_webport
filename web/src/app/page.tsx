@@ -1,13 +1,9 @@
 import Navbar from './components/navbar'
-// import Projectslider from "./components"
-// import PortfolioDataList from "./components"
-// import ServicesDataList from "./components"
-// import MemberDataList from "./components"
+import Member from './components/member';
+import Portfolio from './components/portfolio';
+import Service from './components/service';
 // import Enquiry from "./components"
 // import Footer from "./components"
-// import PortfolioData from 'data';
-// import ServicesData from 'data';
-// import MemberData from 'data';
 import './globals.css';
 
 
@@ -33,11 +29,11 @@ export default function Home() {
 
 {/* //////////////////////////////////////////////////////////////////////// */}
 
-       {/* <section id="Portfolio">
-          {PortfolioData.map((data,i) => (
-            <PortfolioDataList data={data} />
-          ))}
-       </section> */}
+       <section id="Portfolio">
+        <div className='max-w-full mx-[60px]'>
+            <Portfolio />
+        </div>
+       </section>
 
 {/* //////////////////////////////////////////////////////////////////////// */}
 
@@ -67,20 +63,20 @@ export default function Home() {
 {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-       {/* <section id="services">
-       {ServicesData.map((data,i) => (
-            <ServicesDataList data={data} />
-          ))}
-       </section> */}
+       <section id="services">
+       <div className='max-w-full mx-[60px]'>
+        <Service/>
+        </div>
+       </section>
 
 {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-       {/* <section id="member">
-       {MemberData.map((data,i) => (
-            <MemberDataList data={data} />
-          ))}
-       </section> */}
+       <section id="member">
+       <div className='max-w-full mx-[60px]'>
+        <Member/>
+        </div>
+       </section>
 
 {/* //////////////////////////////////////////////////////////////////////// */}
 
