@@ -8,12 +8,12 @@ import './globals.css';
 
 export default function Home() {
   return (
-    <div className="relative w-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col">
       <Navbar />
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="Home">
+      <section id="Home" className="pt-[150px]">
         <div className='text-center	my-48 text-[#ECF0FF]'>
           <h1
             className="font-bold animated-text-gradient"
@@ -28,32 +28,35 @@ export default function Home() {
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="portfolio">
-        <div className='max-w-full mx-[60px]'>
+      <section id="Portfolio" className="pt-[150px]">
+        <div className='max-w-full mx-[160px]'>
           <Portfolio />
         </div>
       </section>
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="About">
-        <div className="grid grid-cols-4 gap-12 max-w-full mx-[60px]">
-          <div className="col-span-2 text-[#ECF0FF]">
-            <h1 className="font-bold" >
+      <section id="About" className="pt-[150px]">
+        <div className="flex flex-nowrap flex-row justify-between items-center gap-12 max-w-full mx-[160px]">
+          <div className="text-[#ECF0FF]">
+            <h1 className="font-bold">
               About us
             </h1>
-            <span className="font-bold text-[1rem]">SCOLDEV</span>{" "}
-            <span className="text-wrap text-[1rem]">เราคือผู้เชี่ยวชาญด้านการพัฒนาเว็บไซต์ สร้างสรรค์ให้ตรงตามความต้องการ และ ช่วยเสริมศักยภาพทางธุรกิจให้กับลูกค้า โดยมุ่งเน้นการพัฒนาเว็บไซต์ที่ สวยงาม ใช้งานง่าย และมีประสิทธิภาพ เพื่อสร้างความเชื่อมั่นแก่ผู้ใช้งานและแบรนด์ของคุณ เราให้ความสำคัญ ตั้งแต่การวิเคราะห์ความต้องการของลูกค้า ไปจนถึงการส่งมอบโซลูชันที่ตอบโจทย์ในทุกมิติ</span>
+            <p className="text-[1rem]"><span className="font-bold">SCOLDEV</span> เราคือผู้เชี่ยวชาญด้านการพัฒนาเว็บไซต์ สร้างสรรค์ให้ตรงตามความต้องการ และ
+              <br /> ช่วยเสริมศักยภาพทางธุรกิจให้กับลูกค้า โดยมุ่งเน้นการพัฒนาเว็บไซต์ที่ สวยงาม ใช้งานง่าย
+              <br /> และมีประสิทธิภาพ เพื่อสร้างความเชื่อมั่นแก่ผู้ใช้งานและแบรนด์ของคุณ เราให้ความสำคัญ
+              <br /> ตั้งแต่การวิเคราะห์ความต้องการของลูกค้า ไปจนถึงการส่งมอบโซลูชันที่ตอบโจทย์ในทุกมิติ
+            </p>{" "}
           </div>
-          <div className='col-span-1'></div>
-
           <div
-            className="gradient-border-mask p-8 text-right rounded-[20px] col-span-1   text-[#ECF0FF] bg-white/10 backdrop-blur-[30px]"
+            className="gradient-border-mask p-10 text-right rounded-[20px] w-[350px] text-[#ECF0FF] bg-white/10 backdrop-blur-[30px]"
             style={{
               boxShadow: "0 25px 90px -30px rgba(236,240,255,0.41), inset 0 3px 3.9px -2px rgba(255,255,255,0.36)"
             }}
           >
-            <h2 className="font-bold my-2 bg-gradient-to-br from-[#BDCBFD] to-[#E5D5FF] inline-block text-transparent bg-clip-text">Contact</h2>   {/*textgradient */}
+            <h2 className="my-2 bg-gradient-to-br from-[#BDCBFD] to-[#E5D5FF] inline-block text-transparent bg-clip-text font-[900]">
+              Contact
+            </h2> {/*textgradient */}
             <h5 className="font-bold">063-874-0176</h5>
             <h5 className="font-bold break-words">scoldev101@gmail.com</h5>
           </div>
@@ -63,8 +66,8 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-      <section id="services">
-        <div className='max-w-full mx-[60px]'>
+      <section id="services" className="pt-[150px]">
+        <div className='max-w-full mx-[160px]'>
           <Service />
         </div>
       </section>

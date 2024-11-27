@@ -1,23 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&family=Noto+Sans+Thai:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&family=Poppins&display=swap');
 
 :root {
   --background: #16151D;
   --foreground: #171717;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Poppins', sans-serif;
-}
-
-html:lang(th) body {
-  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-family: "Noto Sans Thai", sans-serif;
 }
 
 h1 {

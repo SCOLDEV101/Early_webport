@@ -33,14 +33,14 @@ export default function Portfolio({ }: Props) {
         <>
             <div className="flex flex-row justify-between items-center px-3">
                 {/* Header ของ section นี้ */}
-                <h1 className="font-extrabold">Portfolio</h1>
+                <h1 className="font-extrabold text-white">Portfolio</h1>
 
                 {/* Menus ที่ใช้เลือก filter */}
                 <FilterMenus setFilter={setFilter} Filter={Filter} Menus={menus} />
             </div>
 
             {/* ส่วนแสดงผลข้อมูล portfolio */}
-            <div className="grid grid-cols-1 gap-9 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8">
+            <div className="grid grid-cols-1 gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8">
                 
                 {/* นำ filteredData ที่ประกาศไว้ก่อนหน้า มาทำการ map แยก array */}
                 {filteredData.map((data, idx) => (
