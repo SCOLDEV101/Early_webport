@@ -79,3 +79,35 @@ h6, p {
     background-position: 200%;
   }
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    z-index: 70;
+    top: auto !important;
+    bottom: 10vh;
+    width: 3vw !important;
+    height: 9vh !important;
+}
+
+.swiper-button-prev {
+  background-image: url(/IconPrev.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  }
+  
+  .swiper-button-next {
+  background-image: url(/IconNext.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  }
+  
+  .swiper-button-next::after {
+  display: none;
+  }
+  
+  .swiper-button-prev::after {
+  display: none;
+  }

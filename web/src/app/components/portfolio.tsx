@@ -1,6 +1,14 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { portfolio_data } from '../constants/staticData';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { IoClose } from "react-icons/io5";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import '../globals.css';
+
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 type Props = {}
 
@@ -8,6 +16,11 @@ export default function Portfolio({ }: Props) {
 
     // State สำหรับการ active ของปุ่ม menu filter
     const [Filter, setFilter] = useState<string>("all"); // ค่า filter เริ่มต้นเป็น all
+    const [openPopup, setOpenPopup] = useState(false);
+    const [modalID, setModalID] = useState<number>();
+
+    // function ในการปิด popup
+    const HandleRemovePopUp = () => setOpenPopup(false);
 
     // Menu ตัวเลือกสำหรับการ filter มี field เป็นชื่อ<anycase> และหมวดหมู่<lowercase>
     const menus = [
@@ -46,16 +59,18 @@ export default function Portfolio({ }: Props) {
                 {filteredData.map((data, idx) => (
                     <div
                         key={idx}
+                        onClick={() => { setOpenPopup(true); setModalID(data.id); console.log(modalID);
+                         }} // setModalID ให้เป็น id ของ card ที่เรากด
                         className="w-full bg-transparent space-y-4 transition-shadow p-4 rounded-[15px] hover:bg-[linear-gradient(0deg,_var(--tw-gradient-stops))] from-[rgba(200,189,228,.55)_0%] to-[rgba(96,81,81,0.1)_64%] hover:shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-5px_#ECF0FF]"
                     >
                         {/* รูปของแต่ละ 1 ชุดข้อมูล */}
-                        <Image
+                        <img
                             src={data.img_src}
                             alt={data.img_alt}
-                            width={500}
-                            height={300}
+                            // width={500}
+                            // height={300}
                             className="w-full h-auto object-cover rounded-[10px]"
-                            priority
+                            // priority
                         />
 
                         {/* ส่วนของ detail */}
@@ -68,6 +83,51 @@ export default function Portfolio({ }: Props) {
                     </div>
                 ))}
             </div>
+
+            {openPopup && modalID !== null && (
+    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+        <div className="rounded-lg max-w-[90vw] w-full relative">
+            <button
+                onClick={HandleRemovePopUp}
+                className="absolute top-2 right-2 z-[60]"
+            >
+                <Image 
+                    src={"./Close.svg"}
+                    alt='close'
+                    width={50}
+                    height={50}
+                />
+            </button>
+            <Swiper
+                navigation
+                modules={[Navigation]}
+                spaceBetween={30}
+                slidesPerView={1}
+                className="w-full h-full"
+                initialSlide={portfolio_data.findIndex(item => item.id === modalID)}
+            >
+                {portfolio_data.map((item) => (
+                    <SwiperSlide key={item.id}>
+                        <div 
+                            className="overflow-y-auto max-h-[90vh] w-full"
+                            style={{scrollbarWidth:"none"}}
+                        >
+                            <Image
+                                src={item.poster}
+                                alt={item.img_alt}
+                                width={800}
+                                height={1500}
+                                className="mx-auto rounded-lg"
+                            />
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
+    </div>
+)}
+
+
         </>
     )
 }

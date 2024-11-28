@@ -1,10 +1,12 @@
 // Types
 type PORTFOLIO_DATA = {
+    id: number,
     title: string,
     img_src: string,
     img_alt: string,
     desc: string,
     category: string[],
+    poster: string,
 }
 
 type SERVICE_DATA = {
@@ -17,25 +19,33 @@ type SERVICE_DATA = {
 // Data
 export const portfolio_data: PORTFOLIO_DATA[] = [
     {
+        id: 1,
         title: "Web-PortFolio Blue",
-        img_src: "./portfolio/k-link.svg",
+        img_src: "/portfolio/Scoldev_Webport_blue.png",
         img_alt: "Web-PortFolio-Blue",
         desc: "เว็บไซต์สำหรับแสดงศักยภาพของทีมพัฒนาโปรเจ็ค ที่เน้นความสร้างสรรค์และความล้ำสมัย ",
         category: ["web"],
+        poster:"/portfolio/PosterWebport_blue.png"
     },
     {
+        id: 2,
         title: "OfficeSCOLDEV",
-        img_src: "./portfolio/k-link.svg",
+        img_src: "/portfolio/Scoldev_Office.png",
         img_alt: "Office-SCOLDEV",
         desc: "เว็บไซต์สำหรับให้ผู้ใช้สามารถมอบหมายงานให้กับสมาชิกทีมได้เพิ่มความสะดวกสบายในการทำงานเป็นทีม และบริหารจัดการได้ง่ายขึ้น",
         category: ["web"],
+        poster:"/portfolio/PosterSCOLDEV_Attendance_System.png"
+
     },
     {
+        id: 3,
         title: "Mushroom Classification",
-        img_src: "./portfolio/k-link.svg",
+        img_src: "/portfolio/Muchroom_Property.png",
         img_alt: "CNN-mushrooms-classify",
         desc: "แอปพลิเคชันสำหรับการวิเคราะห์เห็ด พร้อมทั้งบอกข้อมูลต่างๆ โดยจะใช้ AI ในการแยกชนิดเห็ดจากรูปภาพและส่งข้อมูลของเห็นนั้นออกมา",
         category: ["mobile"],
+        poster:"/portfolio/PosterMushroom.png"
+
     },
 ]
 
