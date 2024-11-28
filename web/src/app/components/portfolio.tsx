@@ -42,7 +42,7 @@ export default function Portfolio({ }: Props) {
             </div>
 
             {/* ส่วนแสดงผลข้อมูล portfolio */}
-            <div className="grid grid-cols-1 gap-9 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8">
+            <div className="grid grid-cols-1 gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8">
                 
                 {/* นำ filteredData ที่ประกาศไว้ก่อนหน้า มาทำการ map แยก array */}
                 {filteredData.map((data, idx) => (
