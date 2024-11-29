@@ -1,6 +1,7 @@
 'use client'
 
 import Navbar from './components/navbar'
+import Order from './components/order';
 import Portfolio from './components/portfolio';
 import Service from './components/service';
 import './globals.css';
@@ -80,6 +81,14 @@ export default function Home() {
             <MemberDataList data={data} />
           ))}
        </section> */}
+
+      {/* //////////////////////////////////////////////////////////////////////// */}
+
+      <section id="services" className="pt-[150px]">
+        <div className='max-w-full mx-[160px]'>
+          <Order />
+        </div>
+      </section>
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
