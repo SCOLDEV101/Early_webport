@@ -1,46 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&family=Noto+Sans+Thai:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&family=Poppins&display=swap');
 
 :root {
   --background: #16151D;
   --foreground: #171717;
 }
 
-/* สำหรับเบราว์เซอร์ที่รองรับ Webkit เช่น Chrome, Edge และ Safari */
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #00aeff, #a68eff);
-  /* สีของแถบ Scroll */
-  border-radius: 20px;
-  /* มุมโค้งมน */
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(150deg, #00aeff, #a68eff);
-  /* box-shadow: 5px 5px 30px 5px #00aeff; */
-  /* สีของแถบ Scroll เมื่อ hover */
-}
-
-::-webkit-scrollbar-track {
-  background: rgb(255 255 255 / 10%);
-  /* สีพื้นหลังของ Scrollbar */
-  border-radius: 20px;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Poppins', sans-serif;
-}
-
-html:lang(th) body {
-  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-family: "Noto Sans Thai", sans-serif;
 }
 
 h1 {
@@ -63,13 +40,11 @@ h5 {
   font-size: 1.25rem;
 }
 
-h6,
-p {
+h6, p {
   font-size: 1rem;
-}
+} 
 
-.gradient-border-mask {
-  /*bordergradient and borderRadius*/
+.gradient-border-mask { /*bordergradient and borderRadius*/
   display: flow-root;
   position: relative;
 }
@@ -91,10 +66,10 @@ p {
 }
 
 .animated-text-gradient {
-  background: linear-gradient(96deg, #969FC1 0%, #6580E1 25%, #5844D7 50%, #6580E1 75%, #969FC1 100%);
+  background: linear-gradient(96deg ,#969FC1 0%, #6580E1 25%, #5844D7 50% , #6580E1 75% ,#969FC1 100%);
   background-size: 200%;
   background-clip: text;
-  -webkit-background-clip: text;
+  -webkit-background-clip: text; 
   -webkit-text-fill-color: transparent;
   animation: animatedTextGradient 2.5s linear infinite;
 }
