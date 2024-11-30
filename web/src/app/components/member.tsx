@@ -1,19 +1,19 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import { member_data } from "../constants/staticData";
+import { member_data } from "../constants/staticData"; // Import ข้อมูล member
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import "swiper/css"; // Import CSS ของ Swiper
 import "swiper/css/navigation";
 import "../globals.css";
 type Props = {};
 
-import { Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules"; // Import Module Navigation ของ Swiper
 
 export default function Member({}: Props) {
-  const [openPopup, setOpenPopup] = useState(false);
-  const [modalID, setModalID] = useState("");
+  const [openPopup, setOpenPopup] = useState(false); // State สำหรับควบคุมการเปิด/ปิด popup
+  const [modalID, setModalID] = useState(""); // State สำหรับเก็บ ID ของ card ที่ถูกคลิก
 
-  // function ในการปิด popup
+  // ฟังก์ชันสำหรับปิด popup
   const HandleRemovePopUp = () => setOpenPopup(false);
 
   return (
@@ -52,114 +52,104 @@ export default function Member({}: Props) {
         ))}
       </div>
 
-      {openPopup && modalID !== null && (
+  {/* Popup แสดงรายละเอียดสมาชิก */}
+  {openPopup && modalID !== null && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
           <div className="rounded-lg max-w-[90vw] w-full relative">
+            {/* ปุ่มปิด popup */}
             <button
               onClick={HandleRemovePopUp}
               className="absolute top-2 right-2 z-[60]"
             >
               <Image src="./Close.svg" alt="close" width={50} height={50} />
             </button>
+
+            {/* Swiper สำหรับแสดงรายละเอียด */}
             <Swiper
               navigation
-              modules={[Navigation]}
-              spaceBetween={30}
-              slidesPerView={1}
+              modules={[Navigation]} // ใช้ module Navigation
+              spaceBetween={30} // ระยะห่างระหว่าง slides
+              slidesPerView={1} // จำนวน slides ที่แสดงต่อหน้าจอ
               className="w-full h-full"
               initialSlide={member_data.findIndex(
-                (item) => item.id === modalID
+                (item) => item.id === modalID // กำหนด slide เริ่มต้นตาม id ที่ถูกคลิก
               )}
             >
               {member_data.map((item) => (
                 <SwiperSlide key={item.id}>
-                <div className="flex justify-center max-h-[90vh]">
-                  <div
-                    className="relative flex flex-row flex-wrap justify-center gap-4 pb-8 px-8 w-fit bg-gradient-to-t from-[#999999] to-[#FFFFFF] overflow-y-auto overflow-x-hidden"
-                  >
-                    {/* พื้นหลัง fade gradient สามอัน */}
-                    <div className="absolute -z-[0] -top-[10%] -left-[5%] rounded-full blur-[140px]  w-[25vw] h-[25vw] bg-[linear-gradient(150deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />
-                    <div className="absolute -z-[0] -top-[15%] -right-[20%] rounded-full blur-[140px]  w-[40vw] h-[40vw] bg-[linear-gradient(45deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />
-                    <div className="absolute -z-[0] top-[30%] left-[5%] rounded-full blur-[140px]  w-[35vw] h-[35vw] bg-[linear-gradient(150deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />
+                  <div className="flex justify-center max-h-[90vh]">
+                    {/* Card รายละเอียดของสมาชิก */}
+                    <div className="relative flex flex-row flex-wrap justify-center gap-4 pb-8 px-8 w-fit bg-gradient-to-t from-[#999999] to-[#FFFFFF] overflow-y-auto overflow-x-hidden">
+                      {/* Effect Gradient Background */}
+                      <div className="absolute -z-[0] -top-[10%] -left-[5%] rounded-full blur-[140px]  w-[25vw] h-[25vw] bg-[linear-gradient(150deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />
+                      <div className="absolute -z-[0] -top-[15%] -right-[20%] rounded-full blur-[140px]  w-[40vw] h-[40vw] bg-[linear-gradient(45deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />
+                      <div className="absolute -z-[0] top-[30%] left-[5%] rounded-full blur-[140px]  w-[35vw] h-[35vw] bg-[linear-gradient(150deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />
 
-                    {/* == Section ทางด้านซ็าย == */}
-                    <div className="p-1 w-fit mt-12 h-fit rounded-[20px] bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD] z-10 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]">
-                      <div className="max-w-[20vw] space-y-4 pt-8 pb-12 px-6 rounded-[20px] bg-[rgba(236,240,255,.96)]">
-                        {/* รูปบุคคล */}
-                        <img
-                          src={item.img_src}
-                          alt={item.img_alt}
-                          className="w-[20vw] h-[20vw] object-cover rounded-[10px] shadow-[0_6px_4px_0_rgba(0,0,0,0.25)]"
-                        />
-
-                        {/* ต่ำแหน่ง กับ ชื่อ */}
-                        <div className="">
-                          <h4 className="font-extrabold text-[#453E72] text-center">
-                            {item.position}
-                          </h4>
-                          <h5 className="text-[#16151D] text-center">
-                            {item.name}
-                          </h5>
-                        </div>
-
-                        {/* เส้นคั้น */}
-                        <hr className="m-5 border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.5px]" />
-
-                        {/* เบอร์โทร กับ อีเมล */}
-                        <div className="px-5 space-y-1">
-                          {/* email แบบกดส่งเมลได้เลย */}
-                          <h5 className="text-[#453E72] underline underline-offset-1 font-normal break-words w-full">
-                            <a href={"mailto:" + item.email}>{item.email}</a>
-                          </h5>
+                      {/* Section ซ้าย (รูปและข้อมูลพื้นฐาน) */}
+                      <div className="p-1 w-fit mt-12 h-fit rounded-[20px] bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD] z-10 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]">
+                        <div className="max-w-[20vw] space-y-4 pt-8 pb-12 px-6 rounded-[20px] bg-[rgba(236,240,255,.96)]">
+                          {/* รูปบุคคล */}
+                          <img
+                            src={item.img_src}
+                            alt={item.img_alt}
+                            className="w-[20vw] h-[20vw] object-cover rounded-[10px] shadow-[0_6px_4px_0_rgba(0,0,0,0.25)]"
+                          />
+                          {/* ตำแหน่งและชื่อ */}
+                          <div>
+                            <h4 className="font-extrabold text-[#453E72] text-center">
+                              {item.position}
+                            </h4>
+                            <h5 className="text-[#16151D] text-center">
+                              {item.name}
+                            </h5>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* == Section ทางด้านขวา == */}
-                    <div className="max-w-[30vw] min-w-[475px] mt-12 space-y-8 py-8 px-10 rounded-[10px] bg-[rgba(255,255,255,.25)] z-10">
-                      {/* หัวเรื่อง (Skills) */}
-                      <div className="-space-y-1">
-                        <h3 className="w-fit font-bold bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#1E1E1E] via-[#5844D7] to-[#6580E1] bg-clip-text text-transparent">
-                          Skills
-                        </h3>
-                        <hr className="m-0 border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.2px] w-[14%]" />
-                      </div>
+                      {/* Section ขวา (Skills & Certificates) */}
+                      <div className="max-w-[30vw] min-w-[475px] mt-12 space-y-8 py-8 px-10 rounded-[10px] bg-[rgba(255,255,255,.25)] z-10">
+                        {/* Skills */}
+                        <div className="-space-y-1">
+                          <h3 className="w-fit font-bold bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#1E1E1E] via-[#5844D7] to-[#6580E1] bg-clip-text text-transparent">
+                            Skills
+                          </h3>
+                          <hr className="m-0 border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.2px] w-[14%]" />
+                        </div>
 
-                      {/* ส่วนแสดงผลสำหรับ skill ของแต่ละคน */}
-                      <div className="grid grid-cols-2 space-y-2">
-                        {item.skills.map((skill, idx) => (
-                          <div
-                            key={idx}
-                            className="w-[5vw] h-[3vw] flex flex-row gap-4"
-                          >
-                            <img
-                              src={skill.skill_icon}
-                              alt={skill.skill_title}
-                              className="h-2/3"
-                            />
-                            <h5 className="font-medium">{skill.skill_title}</h5>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* หัวเรื่อง (Certificates) */}
-                      {item.certificates.length > 0 && (
-                        <>
-                          <div className="-space-y-1">
-                            <h3 className="w-fit font-bold bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#1E1E1E] via-[#5844D7] to-[#6580E1] bg-clip-text text-transparent">
-                              Certificates
-                            </h3>
-                            <hr className="m-0 border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.2px] w-[28%]" />
-                          </div>
-
-                          {/* ส่วนแสดงผลของ Certificate ของแต่ละคน*/}
-                          {item.certificates.map((cert, idx) => (
-                            <CertificateCard key={idx} cert_data={cert} />
+                        {/* Skills List */}
+                        <div className="grid grid-cols-2 space-y-2">
+                          {item.skills.map((skill, idx) => (
+                            <div
+                              key={idx}
+                              className="w-[5vw] h-[3vw] flex flex-row gap-4"
+                            >
+                              <img
+                                src={skill.skill_icon}
+                                alt={skill.skill_title}
+                                className="h-2/3"
+                              />
+                              <h5 className="font-medium">{skill.skill_title}</h5>
+                            </div>
                           ))}
-                        </>
-                      )}
+                        </div>
+
+                        {/* Certificates */}
+                        {item.certificates.length > 0 && (
+                          <>
+                            <div className="-space-y-1">
+                              <h3 className="w-fit font-bold bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#1E1E1E] via-[#5844D7] to-[#6580E1] bg-clip-text text-transparent">
+                                Certificates
+                              </h3>
+                              <hr className="m-0 border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.2px] w-[28%]" />
+                            </div>
+                            {/* Certificates List */}
+                            {item.certificates.map((cert, idx) => (
+                              <CertificateCard key={idx} cert_data={cert} />
+                            ))}
+                          </>
+                        )}
+                      </div>
                     </div>
-                  </div>
                   </div>
                 </SwiperSlide>
               ))}
