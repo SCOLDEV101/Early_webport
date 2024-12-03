@@ -38,7 +38,7 @@ export default function Member({}: Props) {
             <img
               src={data.img_src}
               alt={data.img_alt}
-              className={`w-full h-[400px] object-cover rounded-[11px] ${data.img_style}`}
+              className={`w-full h-[400px] object-cover rounded-[10px] ${data.img_style}`}
             />
 
             {/* ตำแหน่ง กับ ชื่อ */}
@@ -79,7 +79,7 @@ export default function Member({}: Props) {
                 <SwiperSlide key={item.id}>
                   <div className="flex justify-center max-h-[90vh]">
                     {/* Card รายละเอียดของสมาชิก */}
-                    <div className="relative flex flex-row flex-wrap justify-center gap-4 pb-8 px-8 w-fit bg-gradient-to-t from-[#999999] to-[#FFFFFF] overflow-y-auto overflow-x-hidden">
+                    <div className="relative flex flex-row flex-wrap justify-center gap-4 pb-8 px-8 w-fit bg-gradient-to-t from-[#999999] to-[#FFFFFF] overflow-y-auto overflow-x-hidden rounded-[10px]">
                       {/* Effect Gradient Background */}
                       <div className="absolute -z-[0] -top-[10%] -left-[5%] rounded-full blur-[140px]  w-[25vw] h-[25vw] bg-[linear-gradient(150deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />
                       <div className="absolute -z-[0] -top-[15%] -right-[20%] rounded-full blur-[140px]  w-[40vw] h-[40vw] bg-[linear-gradient(45deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />
