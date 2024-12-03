@@ -1,5 +1,6 @@
 'use client'
 
+import Footer from './components/Footer';
 import Navbar from './components/navbar'
 import Portfolio from './components/portfolio';
 import Service from './components/service';
@@ -91,7 +92,7 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-      {/* <Footer/> */}
+      <Footer/>
 
     </div>
   );
