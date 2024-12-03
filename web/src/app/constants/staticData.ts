@@ -63,7 +63,7 @@ export const portfolio_data: PORTFOLIO_DATA[] = [
         img_src: "/portfolio/Mushroom.png",
         img_alt: "CNN-mushrooms-classify",
         desc: "แอปพลิเคชันสำหรับการวิเคราะห์เห็ด พร้อมทั้งบอกข้อมูลต่างๆ โดยจะใช้ AI ในการแยกชนิดเห็ดจากรูปภาพและส่งข้อมูลของเห็นนั้นออกมา",
-        category: ["mobile"],
+        category: ["mobile" , "web"],
         poster:"/portfolio/PosterMushroom.png"
 
     },

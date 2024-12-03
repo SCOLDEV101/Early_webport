@@ -73,7 +73,7 @@ export default function Portfolio({ }: Props) {
                         />
 
                         {/* ส่วนของ detail */}
-                        <div className="space-y-4">
+                        <div className="space-y-1">
                             {/* หัวเรื่องของแต่ละชุดข้อมูล */}
                             <h4 className="font-extrabold text-[#FFFFFF] break-words">{data.title}</h4>
                             {/* description ของแต่ละชุดข้อมูล */}

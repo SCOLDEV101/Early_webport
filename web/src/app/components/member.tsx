@@ -20,7 +20,7 @@ export default function Member({}: Props) {
     <>
       <div className="flex flex-row justify-between items-center px-3">
         {/* Header ของ section นี้ */}
-        <h1 className="font-extrabold text-white">Our Team</h1>
+        <h2 className="font-extrabold text-white">Our Team</h2>
       </div>
 
       {/* ส่วนแสดงผลข้อมูล member */}
@@ -38,7 +38,7 @@ export default function Member({}: Props) {
             <img
               src={data.img_src}
               alt={data.img_alt}
-              className={`w-full h-[450px] object-cover rounded-[11px] ${data.img_style}`}
+              className={`w-full h-[400px] object-cover rounded-[11px] ${data.img_style}`}
             />
 
             {/* ตำแหน่ง กับ ชื่อ */}
