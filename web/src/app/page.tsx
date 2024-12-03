@@ -1,8 +1,10 @@
 'use client'
 
+import Footer from './components/Footer';
 import Navbar from './components/navbar'
 import Portfolio from './components/portfolio';
 import Service from './components/service';
+import Member from './components/member';
 import './globals.css';
 
 
@@ -75,11 +77,11 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-      {/* <section id="member">
-       {MemberData.map((data,i) => (
-            <MemberDataList data={data} />
-          ))}
-       </section> */}
+      <section id="member" className="pt-[150px]">
+        <div className='max-w-full mx-[160px]'>
+          <Member />
+        </div>
+      </section>
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
@@ -91,7 +93,7 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-      {/* <Footer/> */}
+      <Footer/>
 
     </div>
   );
