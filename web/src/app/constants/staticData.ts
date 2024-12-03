@@ -40,18 +40,18 @@ type MEMBER_DATA = {
 export const portfolio_data: PORTFOLIO_DATA[] = [
     {
         id: 1,
-        title: "Web-PortFolio Blue",
-        img_src: "/portfolio/Scoldev_Webport_blue.png",
-        img_alt: "Web-PortFolio-Blue",
-        desc: "เว็บไซต์สำหรับแสดงศักยภาพของทีมพัฒนาโปรเจ็ค ที่เน้นความสร้างสรรค์และความล้ำสมัย ",
-        category: ["web"],
-        poster:"/portfolio/PosterWebport_blue.png"
+        title: "K-Link Application",
+        img_src: "/portfolio/k-link.png",
+        img_alt: "K-Link Application",
+        desc: "แอปพลิเคชันสำหรับนักศึกษาเพื่อใช้ในการค้นหาเพื่อนหรือผู้ที่มีความสนใจในการทำกิจกรรมต่าง ๆ ร่วมกัน",
+        category: ["mobile"],
+        poster:"/portfolio/Poster_K-Link.png"
     },
     {
         id: 2,
         title: "OfficeSCOLDEV",
-        img_src: "/portfolio/Scoldev_Office.png",
-        img_alt: "Office-SCOLDEV",
+        img_src: "/portfolio/OfficeScol.png",
+        img_alt: "OfficeSCOLDEV",
         desc: "เว็บไซต์สำหรับให้ผู้ใช้สามารถมอบหมายงานให้กับสมาชิกทีมได้เพิ่มความสะดวกสบายในการทำงานเป็นทีม และบริหารจัดการได้ง่ายขึ้น",
         category: ["web"],
         poster:"/portfolio/PosterSCOLDEV_Attendance_System.png"
@@ -60,11 +60,41 @@ export const portfolio_data: PORTFOLIO_DATA[] = [
     {
         id: 3,
         title: "Mushroom Classification",
-        img_src: "/portfolio/Muchroom_Property.png",
+        img_src: "/portfolio/Mushroom.png",
         img_alt: "CNN-mushrooms-classify",
         desc: "แอปพลิเคชันสำหรับการวิเคราะห์เห็ด พร้อมทั้งบอกข้อมูลต่างๆ โดยจะใช้ AI ในการแยกชนิดเห็ดจากรูปภาพและส่งข้อมูลของเห็นนั้นออกมา",
         category: ["mobile"],
         poster:"/portfolio/PosterMushroom.png"
+
+    },
+    {
+        id: 4,
+        title: "PopcornTime",
+        img_src: "/portfolio/PopcornTime.png",
+        img_alt: "PopcornTime",
+        desc: "เว็บไซต์สำหรับรวบรวมเรื่องเรื่องราวโดยสรุปของหนังหรือซีรี่ส์ตอนต่างๆ",
+        category: ["web"],
+        poster:"/portfolio/PosterPopcornTime.png"
+
+    },
+    {
+        id: 5,
+        title: "Web-PortFolio Silver",
+        img_src: "/portfolio/Silver.png",
+        img_alt: "Web-PortFolio Silver",
+        desc: "เว็บไซต์สำหรับผู้ที่ต้องการบริการด้านการพัฒนาโปรเจ็คที่เน้นความเป็นมืออาชีพแบบเรียบง่ายและเข้าใจง่าย",
+        category: ["web"],
+        poster:"/portfolio/PosterWebportSilver.png"
+
+    },
+    {
+        id: 6,
+        title: "Web-PortFolio Blue",
+        img_src: "/portfolio/Blue.png",
+        img_alt: "Web-PortFolio Blue",
+        desc: "เว็บไซต์สำหรับแสดงศักยภาพของทีมพัฒนาโปรเจ็ค ที่เน้นความสร้างสรรค์และความล้ำสมัย",
+        category: ["web"],
+        poster:"/portfolio/PosterWebport_blue.png"
 
     },
 ]
