@@ -90,7 +90,7 @@ export default function Portfolio({ }: Props) {
                         {/* ปุ่มปิด Popup */}
                         <button
                             onClick={HandleRemovePopUp}
-                            className="absolute top-2 right-2 z-[60]"
+                            className="flex justify-end w-[100%] z-[60]"
                         >
                             <Image 
                                 src={"./Close.svg"} // รูปไอคอนปิด
@@ -113,7 +113,7 @@ export default function Portfolio({ }: Props) {
                             {portfolio_data.map((item) => (
                                 <SwiperSlide key={item.id}>
                                     <div 
-                                        className="overflow-y-auto max-h-[90vh] w-full" // จัดการ scroll ใน modal
+                                        className="overflow-y-auto h-[80vh] w-full" // จัดการ scroll ใน modal
                                         style={{scrollbarWidth:"none"}} // ซ่อน scrollbar
                                     >
                                         <Image

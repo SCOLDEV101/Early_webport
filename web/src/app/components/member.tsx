@@ -43,9 +43,9 @@ export default function Member({}: Props) {
 
             {/* ตำแหน่ง กับ ชื่อ */}
             <div className="space-y-1 absolute px-8 bottom-0 h-[150px] flex flex-col items-start justify-center rounded-b-[10px] w-full bg-[linear-gradient(0deg,_var(--tw-gradient-stops))] from-[rgba(28,29,43,1)] via-[rgba(88,68,215,.5)] to-[rgba(88,68,215,0)]">
-              <h4 className="font-extrabold text-[#FFFFFF] break-words w-full">
+              <h5 className="font-extrabold text-[#FFFFFF] break-words w-full">
                 {data.position}
-              </h4>
+              </h5>
               <h5 className="text-[#ECF0FF] w-full">{data.name}</h5>
             </div>
           </div>
@@ -55,11 +55,11 @@ export default function Member({}: Props) {
   {/* Popup แสดงรายละเอียดสมาชิก */}
   {openPopup && modalID !== null && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-          <div className="rounded-lg max-w-[90vw] w-full relative">
+          <div className="rounded-lg max-w-[90vw] h-[90vh] w-full relative">
             {/* ปุ่มปิด popup */}
             <button
               onClick={HandleRemovePopUp}
-              className="absolute top-2 right-2 z-[60]"
+              className="flex justify-end w-[100%] z-[60]"
             >
               <Image src="./Close.svg" alt="close" width={50} height={50} />
             </button>
@@ -77,7 +77,7 @@ export default function Member({}: Props) {
             >
               {member_data.map((item) => (
                 <SwiperSlide key={item.id}>
-                  <div className="flex justify-center max-h-[90vh]">
+                  <div className="flex justify-center h-[80vh]">
                     {/* Card รายละเอียดของสมาชิก */}
                     <div className="relative flex flex-row flex-wrap justify-center gap-4 pb-8 px-8 w-fit bg-gradient-to-t from-[#999999] to-[#FFFFFF] overflow-y-auto overflow-x-hidden rounded-[10px]">
                       {/* Effect Gradient Background */}
