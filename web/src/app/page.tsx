@@ -2,6 +2,7 @@
 
 import Footer from './components/Footer';
 import Navbar from './components/navbar'
+import Order from './components/order';
 import Portfolio from './components/portfolio';
 import Service from './components/service';
 import Member from './components/member';
@@ -80,6 +81,14 @@ export default function Home() {
       <section id="member" className="pt-[150px]">
         <div className='max-w-full mx-[160px]'>
           <Member />
+        </div>
+      </section>
+
+      {/* //////////////////////////////////////////////////////////////////////// */}
+
+      <section id="services" className="pt-[150px]">
+        <div className='max-w-full mx-[160px]'>
+          <Order />
         </div>
       </section>
 
