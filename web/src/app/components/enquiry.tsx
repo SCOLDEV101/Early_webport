@@ -31,18 +31,71 @@ const Form_Data: Form_Data_Type = {
     etc: "",
 }
 
+const EnquiryForm_RequireField = {
+    name: false,
+    email: false,
+    phone: false,
+    project_type: false,
+    project_content: false,
+    project_purpose: false,
+    project_target: false,
+}
+
 type Enquiry_Props = {}
 
 export default function Enquiry({ }: Enquiry_Props) {
 
     const [data, setData] = useState(Form_Data)
     const [submitLoading, setSubmitLoading] = useState(false);
-    const [processBar, setProcessBar] = useState(0)
+    const [processBar, setProcessBar] = useState({ 0: 0, 1: 0 })
+    const [requireField, setRequireField] = useState(EnquiryForm_RequireField)
 
     const handlerInputChanged = (key: any, value: any) => {
         setData((prev) => {
-            return { ...prev, [key]: value };
+            return { ...prev, [key.toLowerCase()]: value };
         });
+        setRequireField((prev) => ({
+            ...prev,
+            [key.toLowerCase()]: false,
+        }))
+    }
+
+    const form_validation = (data: Form_Data_Type, currentStep: number) => {
+        if (currentStep === 0) {
+            if (!data.name || !data.email || !data.phone) {
+                setRequireField((prev) => ({
+                    ...prev,
+                    name: !data.name ? true : false,
+                    email: !data.email ? true : false,
+                    phone: !data.phone ? true : false,
+                }))
+                return false;
+            }
+            // if (data.email && !/\S+@\S+\.\S+/.test(data.email)) {
+            //     setRequireField((prev) => ({
+            //         ...prev,
+            //         email: data.email && !/\S+@\S+\.\S+/.test(data.email) ? true : false,
+            //     }))
+            //     return false;
+            // }
+            console.log("urrentStep === 0");
+
+        } else if (currentStep === 1) {
+            if (!data.project_type || !data.project_content || !data.project_purpose || !data.project_target) {
+                setRequireField((prev) => ({
+                    ...prev,
+                    project_type: !data.project_type ? true : false,
+                    project_content: !data.project_content ? true : false,
+                    project_purpose: !data.project_purpose ? true : false,
+                    project_target: !data.project_target ? true : false,
+                }))
+                return false;
+            }
+        }
+        console.log("Trying to");
+
+        setRequireField(EnquiryForm_RequireField)
+        return true;
     }
 
     const sendEmail = ({ data }: { data: Form_Data_Type }) => {
@@ -79,13 +132,13 @@ export default function Enquiry({ }: Enquiry_Props) {
 
     const submitForm = () => {
         // submit your form data here
-        sendEmail({data});
+        sendEmail({ data });
         console.log(data);
     }
 
     const Enquiry_Form_component = [
-        <UserInformation data={data} handlerInputChanged={handlerInputChanged} />,
-        <ProjectInformation data={data} handlerInputChanged={handlerInputChanged} />,
+        <UserInformation data={data} handlerInputChanged={handlerInputChanged} requireField={requireField} />,
+        <ProjectInformation data={data} handlerInputChanged={handlerInputChanged} requireField={requireField} />,
         <Thanks data={data} />,
     ];
 
@@ -114,7 +167,7 @@ export default function Enquiry({ }: Enquiry_Props) {
                         <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 h-[0.3rem] rounded-full overflow-hidden'>
                             <div className='bg-gradient-to-t from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
-                                    width: `${processBar}%`,
+                                    width: `${processBar["0"]}%`,
                                     transition: 'width 0.5s ease-in-out'
                                 }}
                             />
@@ -125,7 +178,12 @@ export default function Enquiry({ }: Enquiry_Props) {
                     <h5 className='bg-gradient-to-r from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-bold'>2. Project Information</h5>
                     <div>
                         <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 h-[0.3rem] rounded-full overflow-hidden'>
-                            <div className='bg-gradient-to-t from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] flex justify-center items-center w-[0%] h-full text-xs text-white font-bold' />
+                            <div className='bg-gradient-to-t from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] flex justify-center items-center h-full text-xs text-white font-bold'
+                                style={{
+                                    width: `${processBar["1"]}%`,
+                                    transition: 'width 0.5s ease-in-out'
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -140,6 +198,10 @@ export default function Enquiry({ }: Enquiry_Props) {
                                 onClick={(e) => {
                                     setData(Form_Data);
                                     changedSteps(0, e);
+                                    setProcessBar({
+                                        0: 0,
+                                        1: 0,
+                                    });
                                 }}
                                 className="h5 mt-12 px-8 py-3 font-bold rounded-[14px] bg-gradient-to-bl from-[rgba(88,68,215,1)] to-[rgba(101,128,225,1)] text-[#ECF0FF] shadow-[0_3px_4px_2px_rgba(0,0,0,0.25)] hover:shadow-[0_2px_8px_2px_rgba(236,240,255,1)]"
                             >
@@ -151,7 +213,10 @@ export default function Enquiry({ }: Enquiry_Props) {
                                     type="button"
                                     onClick={(e) => {
                                         changedSteps(currentStep - 1, e);
-                                        setProcessBar(0);
+                                        setProcessBar(prevState => ({
+                                            ...prevState,
+                                            [currentStep - 1]: 0,
+                                        }));
                                     }}
                                     className={`h5 ${currentStep === 0 && "opacity-0"} px-12 py-3 font-bold rounded-[14px] text-[rgba(88,68,215,1)] bg-[rgba(255,255,255,1)] hover:shadow-[0_4px_8px_rgba(101,128,225,1)]`}
                                 >
@@ -160,9 +225,16 @@ export default function Enquiry({ }: Enquiry_Props) {
                                 <button
                                     type={"button"}
                                     onClick={(e) => {
-                                        if (isLastStep) submitForm();
-                                        changedSteps(currentStep + 1, e)
-                                        setProcessBar(100)
+                                        if (isLastStep && form_validation(data, currentStep)) {
+                                            submitForm()
+                                        };
+                                        if (form_validation(data, currentStep)) {
+                                            changedSteps(currentStep + 1, e)
+                                            setProcessBar(prevState => ({
+                                                ...prevState,
+                                                [currentStep]: 100,
+                                            }));
+                                        }
                                     }}
                                     className="h5 px-12 py-3 font-bold rounded-[14px] bg-gradient-to-r from-[rgba(101,128,225,1)] via-[rgba(88,68,215,1)] to-[rgba(30,30,30,1)] text-[#ECF0FF] shadow-[0_3px_4px_2px_rgba(0,0,0,0.25)] hover:shadow-[0_2px_8px_2px_rgba(101,128,225,1)]"
                                 >
@@ -180,19 +252,20 @@ export default function Enquiry({ }: Enquiry_Props) {
 type User_Information_Props = {
     data: Form_Data_Type;
     handlerInputChanged: (key: Form_Data_Type_Keys, value: string) => void;
+    requireField: any;
 }
-function UserInformation({ data, handlerInputChanged }: User_Information_Props) {
+function UserInformation({ data, handlerInputChanged, requireField }: User_Information_Props) {
     return (
         <div className="space-y-4 mx-48">
             <LabelInputContainer>
                 <label
-                    className="bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"
+                    className={`${requireField.name ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                     htmlFor="name"
                 >
                     Name*
                 </label>
                 <input
-                    className="rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF]"
+                    className={`rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF] ${requireField.name && "border-[3px] border-red-600"}`}
                     id="name"
                     name="name"
                     placeholder="กรุณากรอกชื่อ เช่น 'เจเจ'"
@@ -221,13 +294,13 @@ function UserInformation({ data, handlerInputChanged }: User_Information_Props) 
             <div className="w-full grid grid-cols-2 gap-4">
                 <LabelInputContainer>
                     <label
-                        className="bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"
+                        className={`${requireField.email ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                         htmlFor="email"
                     >
                         Email*
                     </label>
                     <input
-                        className="rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF]"
+                        className={`rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF] ${requireField.email && "border-[3px] border-red-600"}`}
                         id="email"
                         name="email"
                         placeholder="กรุณากรอกอีเมล"
@@ -238,13 +311,13 @@ function UserInformation({ data, handlerInputChanged }: User_Information_Props) 
                 </LabelInputContainer>
                 <LabelInputContainer>
                     <label
-                        className="bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"
+                        className={`${requireField.phone ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                         htmlFor="phone"
                     >
                         Phone*
                     </label>
                     <input
-                        className="rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF]"
+                        className={`rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF] ${requireField.phone && "border-[3px] border-red-600"}`}
                         id="phone"
                         name="phone"
                         placeholder="กรุณากรอกเบอร์โทรศัพท์"
@@ -261,8 +334,9 @@ function UserInformation({ data, handlerInputChanged }: User_Information_Props) 
 type Project_Information_Props = {
     data: Form_Data_Type;
     handlerInputChanged: (key: Form_Data_Type_Keys, value: File[] | string) => void;
+    requireField: any;
 }
-function ProjectInformation({ data, handlerInputChanged }: Project_Information_Props) {
+function ProjectInformation({ data, handlerInputChanged, requireField }: Project_Information_Props) {
     const purpose_options = [
         { name: "ใช้งานส่วนตัว" },
         { name: "ใช้ในองค์กร" },
@@ -278,7 +352,7 @@ function ProjectInformation({ data, handlerInputChanged }: Project_Information_P
 
     return (
         <div className="flex flex-row gap-12 mb-16">
-            <div className="space-y-2 min-w-[250px] w-[400px]">
+            <div className="space-y-2 min-w-[250px] w-[450px]">
                 <p className="bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent">
                     Upload your logo or reference
                 </p>
@@ -304,7 +378,7 @@ function ProjectInformation({ data, handlerInputChanged }: Project_Information_P
                 </LabelInputContainer>
                 <LabelInputContainer>
                     <h5
-                        className="bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"
+                        className={`text-[16px] ${requireField.project_type ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                     >
                         Project type*
                     </h5>
@@ -321,10 +395,10 @@ function ProjectInformation({ data, handlerInputChanged }: Project_Information_P
                             />
                             <label
                                 htmlFor="website"
-                                className="block text-center bg-[#ECF0FF] h-[56px] text-[#453E72] rounded-[10px]  hover:bg-gradient-to-tl hover:from-[rgba(229,213,255,1)] hover:to-[rgba(189,203,253,1)] cursor-pointer peer-checked/website:bg-gradient-to-tl peer-checked/website:from-[#5844D7] peer-checked/website:to-[#6580E1] peer-checked/website:p-[6px] transition-all"
+                                className={`block text-center bg-[#ECF0FF] h-[56px] rounded-[10px] ${requireField.project_type ? "text-red-600 border-[3px] border-red-600" : "text-[#453E72]"} hover:bg-gradient-to-tl hover:from-[rgba(229,213,255,1)] hover:to-[rgba(189,203,253,1)] cursor-pointer peer-checked/website:bg-gradient-to-tl peer-checked/website:from-[#5844D7] peer-checked/website:to-[#6580E1] peer-checked/website:p-[6px] transition-all`}
                             >
                                 <div className={`flex justify-center items-center h-full rounded-[6px] ${data.project_type === "Website" ? "bg-gradient-to-tl from-[rgba(229,213,255,1)] to-[rgba(189,203,253,1)]" : "bg-transparent"}`}>
-                                    <p className="">
+                                    <p>
                                         Website
                                     </p>
                                 </div>
@@ -344,10 +418,10 @@ function ProjectInformation({ data, handlerInputChanged }: Project_Information_P
                             />
                             <label
                                 htmlFor="webapp"
-                                className="block text-center bg-[#ECF0FF] h-[56px] text-[#453E72] rounded-[10px]  hover:bg-gradient-to-tl hover:from-[rgba(229,213,255,1)] hover:to-[rgba(189,203,253,1)] cursor-pointer peer-checked/webapp:bg-gradient-to-tl peer-checked/webapp:from-[#5844D7] peer-checked/webapp:to-[#6580E1] peer-checked/webapp:p-[6px] transition-all"
+                                className={`block text-center bg-[#ECF0FF] h-[56px] rounded-[10px] ${requireField.project_type ? "text-red-600 border-[3px] border-red-600" : "text-[#453E72]"} hover:bg-gradient-to-tl hover:from-[rgba(229,213,255,1)] hover:to-[rgba(189,203,253,1)] cursor-pointer peer-checked/webapp:bg-gradient-to-tl peer-checked/webapp:from-[#5844D7] peer-checked/webapp:to-[#6580E1] peer-checked/webapp:p-[6px] transition-all`}
                             >
                                 <div className={`flex justify-center items-center h-full rounded-[6px] ${data.project_type === "Webapp" ? "bg-gradient-to-tl from-[rgba(229,213,255,1)] to-[rgba(189,203,253,1)]" : "bg-transparent"}`}>
-                                    <p className="">
+                                    <p>
                                         Webapp
                                     </p>
                                 </div>
@@ -357,13 +431,13 @@ function ProjectInformation({ data, handlerInputChanged }: Project_Information_P
                 </LabelInputContainer>
                 <LabelInputContainer>
                     <label
-                        className="bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"
+                        className={`${requireField.project_content ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                         htmlFor="project_content"
                     >
                         content*
                     </label>
                     <textarea
-                        className="rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF]"
+                        className={`rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF] ${requireField.project_content && "border-[3px] border-red-600"}`}
                         id="project_content"
                         name="project_content"
                         rows={6}
@@ -376,21 +450,21 @@ function ProjectInformation({ data, handlerInputChanged }: Project_Information_P
                     <div className="grid grid-cols-2 gap-5 flex-wrap z-20">
                         <div className="">
                             <label
-                                className="bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"
+                                className={`${requireField.project_purpose ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                                 htmlFor="purpose"
                             >
                                 Purpose*
                             </label>
-                            <Dropdown data={data} optionTitle={"Purpose"} options={purpose_options} optionSelected={handlerInputChanged} />
+                            <Dropdown data={data} optionTitle={"Purpose"} options={purpose_options} optionSelected={handlerInputChanged} requireField={requireField} />
                         </div>
                         <div className="">
                             <label
-                                className="bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"
+                                className={`${requireField.project_target ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                                 htmlFor="target"
                             >
                                 Target*
                             </label>
-                            <Dropdown data={data} optionTitle={"Target"} options={target_options} optionSelected={handlerInputChanged} />
+                            <Dropdown data={data} optionTitle={"Target"} options={target_options} optionSelected={handlerInputChanged} requireField={requireField} />
                         </div>
                     </div>
                 </LabelInputContainer>
@@ -516,20 +590,7 @@ const DropFileInput = ({ data, handlerInputChanged }: DropFileInput_Props) => {
                         handleFiles(e.dataTransfer.files);
                     }
                 }}
-                className={`${fileEnter ? "" : ""} dash_container rounded-[10px] flex flex-col w-full h-[370px] items-center justify-center`} //bg-[rgba(22,21,29,0.41)]
-                // style={{
-                //     backgroundColor: "rgba(22,21,29,0.41)",
-                //     background: `radial-gradient(circle at 100% 100%, #000000 0, #000000 3px, transparent 3px) 0% 0%/8px 8px no-repeat,
-                //                 radial-gradient(circle at 0 100%, #000000 0, #000000 3px, transparent 3px) 100% 0%/8px 8px no-repeat,
-                //                 radial-gradient(circle at 100% 0, #000000 0, #000000 3px, transparent 3px) 0% 100%/8px 8px no-repeat,
-                //                 radial-gradient(circle at 0 0, #000000 0, #000000 3px, transparent 3px) 100% 100%/8px 8px no-repeat,
-                //                 linear-gradient(#000000, #000000) 50% 50%/calc(100% - 10px) calc(100% - 16px) no-repeat,
-                //                 linear-gradient(#000000, #000000) 50% 50%/calc(100% - 16px) calc(100% - 10px) no-repeat,
-                //                 linear-gradient(319deg, #e06721 0%, #ed21aa 17.676%, #cd411d 58.476%, #ee5002 65.047%, #ee2aac 100%)`,
-                //     borderRadius: "8px",
-                //     padding: "9px",
-                //     boxSizing: "border-box",
-                // }}
+                className={`${fileEnter ? "" : ""} dash_container rounded-[10px] flex flex-col w-full h-[370px] items-center justify-center`}
                 style={{
                     background: "rgba(22, 21, 29, .41)",
                     border: "5px dashed #5844D7"
@@ -537,7 +598,7 @@ const DropFileInput = ({ data, handlerInputChanged }: DropFileInput_Props) => {
             >
                 <label
                     htmlFor="files"
-                    className="h-full w-full p-6 flex flex-col gap-2 justify-center text-center "
+                    className="h-full w-full p-8 flex flex-col gap-2 justify-center text-center "
                 >
                     <h5 className="text-[#6580E1] font-light">Drop to upload</h5>
                     <div className="text-[#ECF0FF] font-normal cursor-pointer p-3 rounded-[5px] bg-gradient-to-tr from-[rgba(88,68,215,1)] to-[rgba(101,128,225,1)]">
@@ -589,13 +650,14 @@ const DropFileInput = ({ data, handlerInputChanged }: DropFileInput_Props) => {
 
 type DropdownProps = {
     data: Form_Data_Type;
-    optionTitle: Form_Data_Type_Keys;
+    optionTitle: string;
     options: { name: string }[];
     optionSelected: (key: Form_Data_Type_Keys, value: string) => void;
+    requireField: any;
 };
 
-const Dropdown = ({ data, optionTitle, options, optionSelected }: DropdownProps) => {
-    const map_key = optionTitle as Form_Data_Type_Keys; // Explicit type assignment
+const Dropdown = ({ data, optionTitle, options, optionSelected, requireField }: DropdownProps) => {
+    const map_key = optionTitle;
     const [inputValue, setInputValue] = useState("");
     const [selected, setSelected] = useState(data[map_key] || "");
     const [open, setOpen] = useState(false);
@@ -605,8 +667,7 @@ const Dropdown = ({ data, optionTitle, options, optionSelected }: DropdownProps)
         <div className="w-auto font-medium h-[56px]">
             <div
                 onClick={() => setOpen(!open)}
-                className={`relative h-[56px] flex items-center justify-center w-full p-4 ${open ? "rounded-t-[5px] bg-[linear-gradient(-96deg,_var(--tw-gradient-stops))] from-[rgba(88,68,215,1)] to-[rgba(101,128,225,1)]" : "rounded-[5px] bg-[#ECF0FF]"} ${!selected && "text-gray-700"
-                    }`}
+                className={`relative h-[56px] flex items-center justify-center w-full p-4 ${open ? "rounded-t-[5px] bg-[linear-gradient(-96deg,_var(--tw-gradient-stops))] from-[rgba(88,68,215,1)] to-[rgba(101,128,225,1)]" : "rounded-[5px] bg-[#ECF0FF]"} ${!selected && "text-gray-700"} ${requireField["project_" + map_key.toLowerCase()] && "border-[3px] border-red-600"} `}
             >
                 <h5 className={`${open ? "text-[#ECF0FF]" : "text-[#453E72]"} font-normal`}>
                     {selected
@@ -631,8 +692,7 @@ const Dropdown = ({ data, optionTitle, options, optionSelected }: DropdownProps)
                 </svg>
             </div>
             <ul
-                className={`bg-white overflow-y-auto rounded-b-[5px] ${open ? "max-h-60" : "max-h-0"
-                    } `}
+                className={`bg-white overflow-y-auto rounded-b-[5px] ${open ? "max-h-60" : "max-h-0"}`}
             >
                 {options?.map((option) => (
                     <li
@@ -648,7 +708,7 @@ const Dropdown = ({ data, optionTitle, options, optionSelected }: DropdownProps)
                         onClick={() => {
                             if (option?.name?.toLowerCase() !== selected.toLowerCase()) {
                                 setSelected(option?.name);
-                                optionSelected(optionTitle, option?.name);
+                                optionSelected("project_" + optionTitle, option?.name);
                                 setOpen(false);
                                 setInputValue("");
                             }
