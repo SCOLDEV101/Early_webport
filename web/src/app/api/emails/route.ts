@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     // รับข้อมูลจากฝั่ง Client
-    const { sender, receipients, subject, message } = await req.json(); // รับ JSON ที่ส่งมาจาก Client
+    const { sender, receipients, subject, message, attachments, } = await req.json(); // รับ JSON ที่ส่งมาจาก Client
 
     try {
         const result = await sendEmail({
@@ -11,6 +11,7 @@ export async function POST(req: Request) {
             receipients,
             subject,
             message,
+            attachments,
         });
 
         return NextResponse.json({

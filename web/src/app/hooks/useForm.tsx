@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
 
-type useForm_Props = {
-    steps: any,
-}
 
-
-export function useForm(steps?: any) {
+export function useForm(steps: React.ReactNode[] = []) {
 
     const [currentStep, setCurrentStep] = useState(0)
 
-    const changedSteps = (idx: number, event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        
+    const changedSteps = (idx: number, event?: React.MouseEvent<HTMLButtonElement>) => {
+        event?.preventDefault()
+
         if (idx < 0 || idx >= steps.length) return
         setCurrentStep(idx)
     }

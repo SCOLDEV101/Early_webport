@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from '../hooks/useForm'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 
 type Form_Data_Type = {
@@ -9,14 +11,16 @@ type Form_Data_Type = {
     phone: string;
     files: File[];
     project_name: string;
+    project_purpose: string;
+    project_target: string;
     project_type: string;
     project_content: string;
     color: string;
     etc: string;
-    [key: string]: any;
+    [key: string]: string | File[];
 }
 
-type Form_Data_Type_Keys = keyof Form_Data_Type;
+// type Form_Data_Type_Keys = keyof Form_Data_Type;
 
 const Form_Data: Form_Data_Type = {
     name: "",
@@ -25,13 +29,20 @@ const Form_Data: Form_Data_Type = {
     phone: "",
     files: [],
     project_name: "โปรเจกต์ของฉัน",
+    project_purpose: "",
+    project_target: "",
     project_type: "",
     project_content: "",
     color: "",
     etc: "",
 }
 
-const EnquiryForm_RequireField = {
+
+type RequireFieldType = {
+    [key: string]: boolean;
+};
+
+const EnquiryForm_RequireField: RequireFieldType = {
     name: false,
     email: false,
     phone: false,
@@ -41,16 +52,18 @@ const EnquiryForm_RequireField = {
     project_target: false,
 }
 
-type Enquiry_Props = {}
+// type Enquiry_Props = {}
 
-export default function Enquiry({ }: Enquiry_Props) {
+export default function Enquiry() {
 
     const [data, setData] = useState(Form_Data)
-    const [submitLoading, setSubmitLoading] = useState(false);
+    // const [submitLoading, setSubmitLoading] = useState(false);
     const [processBar, setProcessBar] = useState({ 0: 0, 1: 0 })
     const [requireField, setRequireField] = useState(EnquiryForm_RequireField)
 
-    const handlerInputChanged = (key: any, value: any) => {
+    const alertSwal = withReactContent(Swal)
+
+    const handlerInputChanged = (key: string, value: string | File[]) => {
         setData((prev) => {
             return { ...prev, [key.toLowerCase()]: value };
         });
@@ -78,7 +91,8 @@ export default function Enquiry({ }: Enquiry_Props) {
             //     }))
             //     return false;
             // }
-            console.log("urrentStep === 0");
+
+            // console.log("urrentStep === 0");
 
         } else if (currentStep === 1) {
             if (!data.project_type || !data.project_content || !data.project_purpose || !data.project_target) {
@@ -92,54 +106,242 @@ export default function Enquiry({ }: Enquiry_Props) {
                 return false;
             }
         }
-        console.log("Trying to");
+        // console.log("Trying to");
 
         setRequireField(EnquiryForm_RequireField)
         return true;
     }
 
-    const sendEmail = ({ data }: { data: Form_Data_Type }) => {
-        setSubmitLoading(true);
+    const sendEmail = async ({ data }: { data: Form_Data_Type }): Promise<{ success: boolean; message: string }> => {
+        // setSubmitLoading(true);
 
-        // กำหนดเนื้อหาของเมลในตัวแปร
-        const emailData = {
-            sender: {
-                name: "My App",
-                address: "pacharapolpacharapol2547@gmail.com",
-            },
-            receipients: [
-                {
-                    name: "TEST1888",
-                    address: "65010673@kmitl.ac.th",
+        try {
+            const attachments =
+                data.files && data.files.length > 0
+                    ? data.files.map((file) => ({
+                        filename: file.name,
+                        path: `public/uploads/${file.name}`, // URL หรือ path ของไฟล์
+                    }))
+                    : []; // ถ้าไม่มีไฟล์ ให้ส่งอีเมลโดยไม่มีไฟล์แนบ
+
+            const emailData = {
+                sender: {
+                    name: data.email,
+                    address: data.email,
                 },
-            ],
-            subject: "Welcome to our website",
-            message: `User Information: ${JSON.stringify(data)}`, // ส่งข้อมูลฟอร์มในข้อความ
-        };
+                receipients: [
+                    {
+                        name: "TEST1888",
+                        address: "65010673@kmitl.ac.th",
+                    },
+                ],
+                subject: "Welcome to our website",
+                message: `User Information: ${JSON.stringify(data)}`, // ส่งข้อมูลฟอร์มในข้อความ
+                attachments,
+            };
 
-        fetch("/api/emails", {
+            const response = await fetch("/api/emails", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(emailData), // ส่งข้อมูลเป็น JSON
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to send email. Status: ${response.status}`);
+            }
+
+            const emailResponse = await response.json();
+            console.log(emailResponse, "with deleted");
+
+            // ลบไฟล์หลังจากส่งอีเมลสำเร็จ
+            deleteFiles(data.files?.map((file) => file.name) || []);
+            console.log({ data });
+
+            return {
+                success: true,
+                message: "Email sent successfully.",
+            };
+        } catch (error) {
+            console.error("Error in sendEmail:", error);
+
+            return {
+                success: false,
+                message: error instanceof Error ? error.message : "Failed to send email.",
+            };
+        }
+    };
+
+    const saveFileToLocalPath = async ({ data }: { data: Form_Data_Type }): Promise<boolean> => {
+        if (!data.files || data.files.length === 0) {
+            console.log("No files to upload.");
+            return true;
+        }
+
+        try {
+            const formData = new FormData();
+
+            data.files.forEach((file, index) => {
+                if (file instanceof File) {
+                    formData.append(`file[${index}]`, file);
+                } else {
+                    console.error("Invalid file type:", file);
+                }
+            });
+
+            const response = await fetch("/api/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                // alert(`Uploaded files: ${result.files.join(", ")}`);
+                return true;
+            } else {
+                // alert("Upload failed");
+                return false;
+            }
+        } catch (error) {
+            console.error("Error uploading files:", error);
+            // alert("An error occurred during upload.");
+            return false;
+        }
+    };
+
+    const deleteFiles = (fileNames: string[]) => {
+        fetch("/api/delete-uploaded-file", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(emailData), // ส่งข้อมูลเป็น JSON
+            body: JSON.stringify({ fileNames }),
         })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.log(error))
-            .finally(() => setSubmitLoading(false));
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.success) {
+                    console.log("Files deleted successfully:", result.deletedFiles);
+                } else {
+                    console.error("File deletion failed:", result.message);
+                }
+            })
+            .catch((error) => {
+                console.error("Error deleting files:", error);
+            });
     };
 
-    const submitForm = () => {
-        // submit your form data here
-        sendEmail({ data });
-        console.log(data);
-    }
+    // const submitForm = async () => {
+    //     try {
+    //         // รอให้ไฟล์อัปโหลดเสร็จก่อน (หรือข้ามหากไม่มีไฟล์)
+    //         const uploadSuccess = await saveFileToLocalPath({ data });
+    //         if (uploadSuccess) {
+    //             // ส่งอีเมลเมื่อไฟล์อัปโหลดสำเร็จหรือไม่มีไฟล์
+    //             sendEmail({ data });
+    //         } else {
+    //             console.error("File upload failed. Email will not be sent.");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error in submitForm:", error);
+    //     }
+    // };
+
+    const submitForm = async () => {
+        // let cancelSending = false; // สถานะการยกเลิกส่ง
+
+        // เปิด Swal สำหรับการ recheck
+        const recheck = await alertSwal.fire({
+            title: 'ยืนยันการส่งฟอร์มนี้หรือไม่?',
+            text: 'กรุณาตรวจสอบและยืนยันการส่งฟอร์มอีกครั้ง',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+        });
+
+        if (!recheck.isConfirmed) {
+            console.log('Form submission canceled by user.');
+            return; // ยกเลิกการทำงานหากผู้ใช้เลือก Cancel
+        }
+
+        // เปิด Swal ระหว่างส่งข้อมูล
+        await alertSwal.fire({
+            title: 'Sending Email...',
+            text: 'กรุณารอสักครู่จนกว่าการส่งอีเมลจะเสร็จสมบูรณ์ ระยะเวลาในการดำเนินการอาจแตกต่างกันขึ้นอยู่กับขนาดของไฟล์ที่อัปโหลด',
+            didOpen: async () => {
+                // const cancelButton = document.createElement('button');
+                // cancelButton.innerText = 'Cancel Sending';
+                // cancelButton.className = 'swal2-styled swal2-cancel';
+                // cancelButton.onclick = () => {
+                //     cancelSending = true;
+                //     alertSwal.close(); // ปิด Swal
+                // };
+                // document.querySelector('.swal2-actions')?.appendChild(cancelButton);
+
+                // แสดง Loading
+                alertSwal.showLoading();
+
+                try {
+                    // รอการอัปโหลดไฟล์ (หรือข้ามหากไม่มีไฟล์)
+                    const uploadSuccess = await saveFileToLocalPath({ data });
+
+                    // if (cancelSending) {
+                    //     throw new Error('Sending canceled by user.');
+                    // }
+
+                    if (uploadSuccess) {
+                        // ส่งอีเมลเมื่อไฟล์อัปโหลดสำเร็จหรือไม่มีไฟล์
+                        const sendEmail_status = await sendEmail({ data });
+
+                        // if (cancelSending) {
+                        //     throw new Error('Sending canceled by user.');
+                        // }
+
+                        // แสดง Swal สำเร็จ
+                        if (sendEmail_status.success) {
+                            alertSwal.fire({
+                                title: 'สำเร็จ!',
+                                text: 'อีเมลถูกส่งเรียบร้อยแล้ว',
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                            });
+                            changedSteps(currentStep + 1)
+                            setProcessBar(prevState => ({
+                                ...prevState,
+                                [currentStep]: 100,
+                            }));
+                        }
+                    } else {
+                        throw new Error('File upload failed. Email will not be sent.');
+                    }
+                } catch (error) {
+                    console.error('Error in submitForm:', error);
+
+                    // แสดง Swal เมื่อเกิดข้อผิดพลาด
+                    alertSwal.fire({
+                        title: 'Error!',
+                        text: 'เกิดข้อผิดพลาดบางอย่าง โปรดลองใหม่อีกครั้ง',
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancel',
+                    }).then((retry) => {
+                        if (retry.isConfirmed) {
+                            submitForm(); // เรียกการทำงานใหม่
+                        }
+                    });
+                }
+            },
+            allowOutsideClick: false, // ไม่ให้คลิกข้างนอกเพื่อปิด
+            allowEscapeKey: false, // ไม่ให้ปิดด้วย Escape
+            showConfirmButton: false, // ซ่อนปุ่ม OK ระหว่างกำลังโหลด
+        });
+    };
 
     const Enquiry_Form_component = [
-        <UserInformation data={data} handlerInputChanged={handlerInputChanged} requireField={requireField} />,
-        <ProjectInformation data={data} handlerInputChanged={handlerInputChanged} requireField={requireField} />,
-        <Thanks data={data} />,
+        <UserInformation key="user-info" data={data} handlerInputChanged={handlerInputChanged} requireField={requireField} />,
+        <ProjectInformation key="project-info" data={data} handlerInputChanged={handlerInputChanged} requireField={requireField} />,
+        <Thanks key="thanks" />,
     ];
 
     const {
@@ -229,11 +431,13 @@ export default function Enquiry({ }: Enquiry_Props) {
                                             submitForm()
                                         };
                                         if (form_validation(data, currentStep)) {
-                                            changedSteps(currentStep + 1, e)
-                                            setProcessBar(prevState => ({
-                                                ...prevState,
-                                                [currentStep]: 100,
-                                            }));
+                                            if (!isLastStep) {
+                                                changedSteps(currentStep + 1, e)
+                                                setProcessBar(prevState => ({
+                                                    ...prevState,
+                                                    [currentStep]: 100,
+                                                }));
+                                            }
                                         }
                                     }}
                                     className="h5 px-12 py-3 font-bold rounded-[14px] bg-gradient-to-r from-[rgba(101,128,225,1)] via-[rgba(88,68,215,1)] to-[rgba(30,30,30,1)] text-[#ECF0FF] shadow-[0_3px_4px_2px_rgba(0,0,0,0.25)] hover:shadow-[0_2px_8px_2px_rgba(101,128,225,1)]"
@@ -251,8 +455,8 @@ export default function Enquiry({ }: Enquiry_Props) {
 
 type User_Information_Props = {
     data: Form_Data_Type;
-    handlerInputChanged: (key: Form_Data_Type_Keys, value: string) => void;
-    requireField: any;
+    handlerInputChanged: (key: string, value: string) => void;
+    requireField: RequireFieldType;
 }
 function UserInformation({ data, handlerInputChanged, requireField }: User_Information_Props) {
     return (
@@ -333,8 +537,8 @@ function UserInformation({ data, handlerInputChanged, requireField }: User_Infor
 
 type Project_Information_Props = {
     data: Form_Data_Type;
-    handlerInputChanged: (key: Form_Data_Type_Keys, value: File[] | string) => void;
-    requireField: any;
+    handlerInputChanged: (key: string, value: File[] | string) => void;
+    requireField: RequireFieldType;
 }
 function ProjectInformation({ data, handlerInputChanged, requireField }: Project_Information_Props) {
     const purpose_options = [
@@ -449,21 +653,19 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
                 <LabelInputContainer>
                     <div className="grid grid-cols-2 gap-5 flex-wrap z-20">
                         <div className="">
-                            <label
-                                className={`${requireField.project_purpose ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
-                                htmlFor="purpose"
+                            <h5
+                                className={`text-[16px] ${requireField.project_purpose ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                             >
                                 Purpose*
-                            </label>
+                            </h5>
                             <Dropdown data={data} optionTitle={"Purpose"} options={purpose_options} optionSelected={handlerInputChanged} requireField={requireField} />
                         </div>
                         <div className="">
-                            <label
-                                className={`${requireField.project_target ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
-                                htmlFor="target"
+                            <h5
+                                className={`text-[16px] ${requireField.project_target ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                             >
                                 Target*
-                            </label>
+                            </h5>
                             <Dropdown data={data} optionTitle={"Target"} options={target_options} optionSelected={handlerInputChanged} requireField={requireField} />
                         </div>
                     </div>
@@ -508,10 +710,10 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
 }
 
 
-type Thanks_Props = {
-    data: Form_Data_Type;
-}
-function Thanks({ data }: Thanks_Props) {
+// type Thanks_Props = {
+//     data: Form_Data_Type;
+// }
+function Thanks() {
     return (
         <div className="flex flex-col justify-center items-center">
             <h2 className="font-extrabold bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(200,189,228,0.2)] bg-clip-text text-transparent">
@@ -548,10 +750,11 @@ type DropFileInput_Props = {
 const DropFileInput = ({ data, handlerInputChanged }: DropFileInput_Props) => {
     const [files, setFiles] = useState<File[]>(data.files || []);
     const [fileEnter, setFileEnter] = useState(false);
+    const maxFiles = 5;
 
     const handleFiles = (newFiles: FileList | File[]) => {
         const fileArray = Array.from(newFiles);
-        const updatedFiles = [...files, ...fileArray];
+        const updatedFiles = [...files, ...fileArray].slice(0, maxFiles);
         setFiles(updatedFiles);
         handlerInputChanged("files", updatedFiles);
     };
@@ -570,7 +773,7 @@ const DropFileInput = ({ data, handlerInputChanged }: DropFileInput_Props) => {
                     e.preventDefault();
                     setFileEnter(true);
                 }}
-                onDragLeave={(e) => {
+                onDragLeave={() => {
                     setFileEnter(false);
                 }}
                 onDragEnd={(e) => {
@@ -625,9 +828,9 @@ const DropFileInput = ({ data, handlerInputChanged }: DropFileInput_Props) => {
                         {files.map((file, index) => (
                             <li
                                 key={index}
-                                className="flex items-center justify-between p-1 px-3 rounded-[8px] bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] hover:bg-gradient-to-tl hover:from-[rgba(229,213,255,1)] hover:to-[rgba(189,203,253,1)]"
+                                className="flex items-center gap-3 justify-between p-1 px-3 rounded-[8px] bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] hover:bg-gradient-to-tl hover:from-[rgba(229,213,255,1)] hover:to-[rgba(189,203,253,1)]"
                             >
-                                <h5 className="text-[#16151D]">
+                                <h5 className="text-[#16151D] w-[85%]" style={{ wordWrap: 'break-word' }}>
                                     {file.name} {/* ({(file.size / 1024).toFixed(2)} KB) */}
                                 </h5>
                                 <button
@@ -652,14 +855,16 @@ type DropdownProps = {
     data: Form_Data_Type;
     optionTitle: string;
     options: { name: string }[];
-    optionSelected: (key: Form_Data_Type_Keys, value: string) => void;
-    requireField: any;
+    optionSelected: (key: string, value: string) => void;
+    requireField: RequireFieldType;
 };
 
 const Dropdown = ({ data, optionTitle, options, optionSelected, requireField }: DropdownProps) => {
-    const map_key = optionTitle;
+    const map_key = "project_" + optionTitle.toLowerCase();
+    // console.log("Map key: " + map_key);
+
     const [inputValue, setInputValue] = useState("");
-    const [selected, setSelected] = useState(data[map_key] || "");
+    const [selected, setSelected] = useState<string>(typeof data[map_key] === "string" ? data[map_key] : "");
     const [open, setOpen] = useState(false);
 
 
@@ -667,7 +872,7 @@ const Dropdown = ({ data, optionTitle, options, optionSelected, requireField }: 
         <div className="w-auto font-medium h-[56px]">
             <div
                 onClick={() => setOpen(!open)}
-                className={`relative h-[56px] flex items-center justify-center w-full p-4 ${open ? "rounded-t-[5px] bg-[linear-gradient(-96deg,_var(--tw-gradient-stops))] from-[rgba(88,68,215,1)] to-[rgba(101,128,225,1)]" : "rounded-[5px] bg-[#ECF0FF]"} ${!selected && "text-gray-700"} ${requireField["project_" + map_key.toLowerCase()] && "border-[3px] border-red-600"} `}
+                className={`relative h-[56px] flex items-center justify-center w-full p-4 ${open ? "rounded-t-[5px] bg-[linear-gradient(-96deg,_var(--tw-gradient-stops))] from-[rgba(88,68,215,1)] to-[rgba(101,128,225,1)]" : "rounded-[5px] bg-[#ECF0FF]"} ${!selected && "text-gray-700"} ${requireField[map_key.toLowerCase()] && "border-[3px] border-red-600"} `}
             >
                 <h5 className={`${open ? "text-[#ECF0FF]" : "text-[#453E72]"} font-normal`}>
                     {selected

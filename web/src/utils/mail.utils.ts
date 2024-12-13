@@ -17,9 +17,10 @@ type SendEmailDto = {
     receipients: Mail.Address[];
     subject: string;
     message: string;
+    attachments?: Array<{ filename: string; path: string }>;
 }
 export const sendEmail = async (dto: SendEmailDto) => {
-    const { sender, receipients, subject, message } = dto;
+    const { sender, receipients, subject, message, attachments } = dto;
 
     return await transport.sendMail({
         from: sender,
@@ -27,5 +28,6 @@ export const sendEmail = async (dto: SendEmailDto) => {
         subject,
         html: message,
         text: message,
+        attachments,
     })
 }   

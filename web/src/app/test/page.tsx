@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { portfolio_data } from '../constants/staticData';
 import Portfolio from '../components/portfolio';
+import Enquiry from '../components/enquiry';
 
 type Props = {}
 
@@ -17,6 +18,7 @@ function TestPage({ }: Props) {
                 {/* <Navbar /> */}
             </div>
             <Portfolio />
+            <Enquiry />
         </>
     )
 }
