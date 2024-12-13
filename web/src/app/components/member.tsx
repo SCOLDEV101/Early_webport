@@ -5,11 +5,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import CSS ของ Swiper
 import "swiper/css/navigation";
 import "../globals.css";
-type Props = {};
 
 import { Navigation } from "swiper/modules"; // Import Module Navigation ของ Swiper
 
-export default function Member({}: Props) {
+export default function Member() {
   const [openPopup, setOpenPopup] = useState(false); // State สำหรับควบคุมการเปิด/ปิด popup
   const [modalID, setModalID] = useState(""); // State สำหรับเก็บ ID ของ card ที่ถูกคลิก
 
@@ -35,7 +34,7 @@ export default function Member({}: Props) {
             }} // setModalID ให้เป็น id ของ card ที่เรากด
           >
             {/* รูปบุคคล */}
-            <img
+            <Image
               src={data.img_src}
               alt={data.img_alt}
               className={`w-full h-[450px] object-cover rounded-[11px] ${data.img_style}`}
@@ -89,7 +88,7 @@ export default function Member({}: Props) {
                       <div className="p-1 w-fit mt-12 h-fit rounded-[20px] bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD] z-10 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]">
                         <div className="max-w-[20vw] space-y-4 pt-8 pb-12 px-6 rounded-[20px] bg-[rgba(236,240,255,.96)]">
                           {/* รูปบุคคล */}
-                          <img
+                          <Image
                             src={item.img_src}
                             alt={item.img_alt}
                             className="w-[20vw] h-[20vw] object-cover rounded-[10px] shadow-[0_6px_4px_0_rgba(0,0,0,0.25)]"
@@ -123,7 +122,7 @@ export default function Member({}: Props) {
                               key={idx}
                               className="w-[5vw] h-[3vw] flex flex-row gap-4"
                             >
-                              <img
+                              <Image
                                 src={skill.skill_icon}
                                 alt={skill.skill_title}
                                 className="h-2/3"
@@ -172,7 +171,7 @@ const CertificateCard = ({ cert_data }: { cert_data: CertData }) => {
     <div className="grid grid-cols-2 gap-4">
       <div className="w-fit h-fit bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[3px] rounded-[10px]">
         {/* รูปใบ cert */}
-        <img
+        <Image
           src={cert_data.cert_img}
           alt={cert_data.cert_title}
           className="rounded-[8px] w-[280px] h-[150px] object-cover object-center"
