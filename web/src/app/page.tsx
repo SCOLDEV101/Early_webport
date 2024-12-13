@@ -1,9 +1,12 @@
 'use client'
 
 import Enquiry from './components/enquiry';
+import Footer from './components/Footer';
 import Navbar from './components/navbar'
+import Order from './components/order';
 import Portfolio from './components/portfolio';
 import Service from './components/service';
+import Member from './components/member';
 import './globals.css';
 
 
@@ -38,15 +41,15 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
       <section id="About" className="pt-[150px]">
-        <div className="flex flex-nowrap flex-row justify-between items-center gap-12 max-w-full mx-[160px]">
+        <div className="flex flex-nowrap flex-row justify-between items-center gap-20 max-w-full mx-[160px]">
           <div className="text-[#ECF0FF]">
             <h1 className="font-bold">
               About us
             </h1>
             <p className="text-[1rem]"><span className="font-bold">SCOLDEV</span> เราคือผู้เชี่ยวชาญด้านการพัฒนาเว็บไซต์ สร้างสรรค์ให้ตรงตามความต้องการ และ
-              <br /> ช่วยเสริมศักยภาพทางธุรกิจให้กับลูกค้า โดยมุ่งเน้นการพัฒนาเว็บไซต์ที่ สวยงาม ใช้งานง่าย
-              <br /> และมีประสิทธิภาพ เพื่อสร้างความเชื่อมั่นแก่ผู้ใช้งานและแบรนด์ของคุณ เราให้ความสำคัญ
-              <br /> ตั้งแต่การวิเคราะห์ความต้องการของลูกค้า ไปจนถึงการส่งมอบโซลูชันที่ตอบโจทย์ในทุกมิติ
+               ช่วยเสริมศักยภาพทางธุรกิจให้กับลูกค้า โดยมุ่งเน้นการพัฒนาเว็บไซต์ที่ สวยงาม ใช้งานง่าย
+               และมีประสิทธิภาพ เพื่อสร้างความเชื่อมั่นแก่ผู้ใช้งานและแบรนด์ของคุณ เราให้ความสำคัญ
+               ตั้งแต่การวิเคราะห์ความต้องการของลูกค้า ไปจนถึงการส่งมอบโซลูชันที่ตอบโจทย์ในทุกมิติ
             </p>{" "}
           </div>
           <div
@@ -76,11 +79,19 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-      {/* <section id="member">
-       {MemberData.map((data,i) => (
-            <MemberDataList data={data} />
-          ))}
-       </section> */}
+      <section id="member" className="pt-[150px]">
+        <div className='max-w-full mx-[160px]'>
+          <Member />
+        </div>
+      </section>
+
+      {/* //////////////////////////////////////////////////////////////////////// */}
+
+      <section id="services" className="pt-[150px]">
+        <div className='max-w-full mx-[160px]'>
+          <Order />
+        </div>
+      </section>
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
@@ -95,7 +106,7 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-      {/* <Footer/> */}
+      <Footer/>
 
     </div>
   );
