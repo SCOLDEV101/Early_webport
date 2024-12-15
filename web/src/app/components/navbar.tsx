@@ -30,24 +30,24 @@ export default function Navbar() { // Navbar
                 {/* Menus */}
                 <div className="flex flex-row flex-nowrap justify-center items-center gap-16">
                     {/* Home menu กดแล้วไป section Home */}
-                    <MenuItem setActive={setActive} active={active} item="Home" href="#home"></MenuItem>
+                    <MenuItem setActive={setActive} active={active} item="Home" href="#Home"></MenuItem>
                     {/* Portfolio menu กดแล้วไป section Portfolio */}
-                    <MenuItem setActive={setActive} active={active} item="Portfolio" href="#portfolio"></MenuItem>
+                    <MenuItem setActive={setActive} active={active} item="Portfolio" href="#Portfolio"></MenuItem>
                     {/* About menu กดแล้วจะขึ้น popup ของ About */}
-                    <MenuItem setActive={setActive} active={active} item="About >">
+                    <MenuItem setActive={setActive} active={active} item="About" href="#About">
                         {/*  Popup menus ของ About ทั้งชุด */}
-                        <div className="flex flex-col space-y-1">
+                        {/* <div className="flex flex-col space-y-1"> */}
                             {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
-                            <HoveredLink href="/hobby">ประวัติการทำงาน</HoveredLink>
+                            {/* <HoveredLink href="/hobby">ประวัติการทำงาน</HoveredLink>
                             <HoveredLink href="/individual">Contact</HoveredLink>
                             <HoveredLink href="/team">Services</HoveredLink>
-                            <HoveredLink href="/enterprise">Member</HoveredLink>
-                        </div>
+                            <HoveredLink href="/enterprise">Member</HoveredLink> */}
+                        {/* </div> */}
                     </MenuItem>
                 </div>
 
                 {/* Enquiry button */}
-                <button type="button" className="bg-[#ECF0FF] rounded-[10px] w-[150px] px-3 py-1 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
+                <button type="button" className="opacity-0 bg-[#ECF0FF] rounded-[10px] w-[150px] px-3 py-1 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
                     <h5 className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] bg-clip-text text-transparent font-bold">
                         Enquiry
                     </h5>

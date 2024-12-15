@@ -1,31 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&family=Noto+Sans+Thai:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
-  --background: #ffffff;
+  --background: #16151D;
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* สำหรับเบราว์เซอร์ที่รองรับ Webkit เช่น Chrome, Edge และ Safari */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #00aeff, #a68eff);
+  /* สีของแถบ Scroll */
+  border-radius: 20px;
+  /* มุมโค้งมน */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(150deg, #00aeff, #a68eff);
+  /* box-shadow: 5px 5px 30px 5px #00aeff; */
+  /* สีของแถบ Scroll เมื่อ hover */
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(255 255 255 / 10%);
+  /* สีพื้นหลังของ Scrollbar */
+  border-radius: 20px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Noto Sans Thai", sans-serif;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 h3 {
@@ -64,3 +88,50 @@ h6, p {
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
 }
+
+.animated-text-gradient {
+  background: linear-gradient(96deg ,#969FC1 0%, #6580E1 25%, #5844D7 50% , #6580E1 75% ,#969FC1 100%);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  animation: animatedTextGradient 2.5s linear infinite;
+}
+
+@keyframes animatedTextGradient {
+  to {
+    background-position: 200%;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    z-index: 70;
+    top: auto !important;
+    bottom: 10vh;
+    width: 3vw !important;
+    height: 9vh !important;
+}
+
+.swiper-button-prev {
+  background-image: url(/IconPrev.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  }
+  
+  .swiper-button-next {
+  background-image: url(/IconNext.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  }
+  
+  .swiper-button-next::after {
+  display: none;
+  }
+  
+  .swiper-button-prev::after {
+  display: none;
+  }
