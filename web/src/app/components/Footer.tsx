@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-type Props = {}
-
-function Footer({ }: Props) {
+function Footer() {
     return (
         // แบ่ง Footer ออกเป้น 2 ฝั่ง หลัก ๆ
         <div className="h-[400px] w-screen flex justify-center items-center bg-[linear-gradient(2deg,rgba(71,92,165,0.5)0%,rgba(27,35,63,1)45%)]">
