@@ -37,6 +37,9 @@ type MEMBER_DATA = {
 }
 
 // Data
+export const MAIL_USER = "scoldev101@gmail.com"
+export const MAIL_PASSWORD = "ozcfwsczlocoyevd"
+
 export const portfolio_data: PORTFOLIO_DATA[] = [
     {
         id: 1,
