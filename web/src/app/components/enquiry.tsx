@@ -131,12 +131,12 @@ export default function Enquiry() {
                 },
                 receipients: [
                     {
-                        name: "TEST1888",
-                        address: "65010673@kmitl.ac.th",
+                        name: "SCOLDEV",
+                        address: "scoldev101@gmail.com",
                     },
                 ],
-                subject: "Welcome to our website",
-                message: `User Information: ${JSON.stringify(data)}`, // ส่งข้อมูลฟอร์มในข้อความ
+                subject: "Customer sending email from Enquiry form", 
+                message: `Form Information: ${JSON.stringify(data)}`, // ส่งข้อมูลฟอร์มในข้อความ
                 attachments,
             };
 
@@ -153,11 +153,11 @@ export default function Enquiry() {
             }
 
             const emailResponse = await response.json();
-            console.log(emailResponse, "with deleted");
+            // console.log(emailResponse, "with deleted");
 
             // ลบไฟล์หลังจากส่งอีเมลสำเร็จ
             deleteFiles(data.files?.map((file) => file.name) || []);
-            console.log({ data });
+            // console.log({ data });
 
             return {
                 success: true,
