@@ -1,5 +1,6 @@
 'use client'
 
+import Enquiry from './components/enquiry';
 import Footer from './components/Footer';
 import Navbar from './components/navbar'
 import Order from './components/order';
@@ -94,9 +95,12 @@ export default function Home() {
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      {/* <section id="Enquiry">
-        <Enquiry/>
-       </section> */}
+      <section id="Enquiry">
+        <div className="mx-[160px]">
+
+          <Enquiry />
+        </div>
+      </section>
 
 
       {/* //////////////////////////////////////////////////////////////////////// */}
