@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import CSS ของ Swiper
 import "swiper/css/navigation";
 import "../globals.css";
-type Props = {};
+type Props = object;
 
 import { Navigation } from "swiper/modules"; // Import Module Navigation ของ Swiper
 
@@ -79,7 +79,9 @@ export default function Member({}: Props) {
                 <SwiperSlide key={item.id}>
                   <div className="flex justify-center h-[80vh]">
                     {/* Card รายละเอียดของสมาชิก */}
-                    <div className="relative flex flex-row flex-wrap justify-center gap-4 pb-8 px-8 w-fit bg-gradient-to-t from-[#999999] to-[#FFFFFF] overflow-y-auto overflow-x-hidden rounded-[10px]">
+                    <div className="relative flex flex-row flex-wrap justify-center gap-4 pb-8 px-8 w-fit bg-gradient-to-t from-[#999999] to-[#FFFFFF] overflow-y-auto overflow-x-hidden rounded-[10px]"
+                    style={{scrollbarWidth:"none"}} // ซ่อน scrollbar
+                    >
                       {/* Effect Gradient Background */}
                       <div className="absolute -z-[0] -top-[10%] -left-[5%] rounded-full blur-[140px]  w-[25vw] h-[25vw] bg-[linear-gradient(150deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />
                       <div className="absolute -z-[0] -top-[15%] -right-[20%] rounded-full blur-[140px]  w-[40vw] h-[40vw] bg-[linear-gradient(45deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]" />

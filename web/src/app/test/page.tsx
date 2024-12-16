@@ -1,16 +1,11 @@
 'use client'
-import React, { useState } from 'react'
-import Navbar from '../components/navbar'
-import Link from "next/link";
-import Image from "next/image";
-import { portfolio_data } from '../constants/staticData';
+import React from 'react'
 import Portfolio from '../components/portfolio';
 import Enquiry from '../components/enquiry';
 import Member from '../components/member';
 
-type Props = {}
 
-function TestPage({ }: Props) {
+function TestPage() {
     
 
     return (
