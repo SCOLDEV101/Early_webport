@@ -459,7 +459,7 @@ export const member_data: MEMBER_DATA[] = [
         id: "B002",
         position: "Back-End Developer",
         name: "จักรี วรรณทองสุข",
-        img_src: "/member/team/ukij.jpg",
+        img_src: "/member/team/ukiJ.jpg",
         img_alt: "Jakgree Wannathongsuk",
         img_style: "",
         email: "jakgree.wnts@gmail.com",
