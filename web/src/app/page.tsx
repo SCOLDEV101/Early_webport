@@ -7,13 +7,22 @@ import Order from './components/order';
 import Portfolio from './components/portfolio';
 import Service from './components/service';
 import Member from './components/member';
+import Link from "next/link";
 import './globals.css';
 
 
 export default function Home() {
   return (
-    <div className="w-full flex flex-col">
-      <Navbar />
+    <div className="w-full flex flex-col overflow-x-hidden relative">
+      {/* พื้นหลัง */}
+    <div className='backguard-circleblue opacity-[.33] top-[-20%] left-[50%]'/>
+    <div className='backguard-circleblue opacity-[.13] top-[15%] left-[30%]'/>
+    <div className='backguard-circlestockgradient top-[30%] left-[50%]'/>
+    <div className='backguard-circleblue opacity-[.09] top-[50%] left-[45%]'/>
+    <div className='backguard-circleblue opacity-[.13] top-[75%] left-[60%]'/>
+    <div className='backguard-circlewhite opacity-[.2] top-[5%] left-[-20%]'/>
+    <div className='backguard-circlewhite opacity-[.2] top-[0%] left-[130%] '/>
+       <Navbar />
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
@@ -22,10 +31,16 @@ export default function Home() {
           <h1
             className="font-bold animated-text-gradient"
           >
-            "เปลี่ยนไอเดียของคุณให้กลายเป็น<br />
-            เว็บไซต์ระดับมืออาชีพ!"
+            &quot;เปลี่ยนไอเดียของคุณให้กลายเป็น<br />
+            เว็บไซต์ระดับมืออาชีพ!&quot;
           </h1>
-          <h5>เราพร้อมพัฒนาเว็บไซต์ เพื่อตอบโจทย์ความต้องการของคุณโดยเฉพาะ <br /> อย่าปล่อยให้ไอเดียของคุณเป็นแค่ความฝัน!</h5>
+          <h5 className='mb-14'>เราพร้อมพัฒนาเว็บไซต์ เพื่อตอบโจทย์ความต้องการของคุณโดยเฉพาะ <br /> อย่าปล่อยให้ไอเดียของคุณเป็นแค่ความฝัน!</h5>
+
+          <Link href="#Enquiry" className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] rounded-[10px] px-10 py-3 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
+                    <span className="text-[1.25rem] text-[#ECF0FF] text-center font-bold">
+                        Enquiry now
+                    </span>
+          </Link>
         </div>
         {/* <Projectslider/> */}
       </section>
@@ -95,8 +110,8 @@ export default function Home() {
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="Enquiry">
-        <div className="mx-[160px]">
+      <section id="Enquiry" className="pt-[150px] mb-[150px]">
+        <div className="max-w-full mx-[160px]">
 
           <Enquiry />
         </div>

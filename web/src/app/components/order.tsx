@@ -57,9 +57,8 @@ const step_order = [
 ]
 
 
-type Props = {}
 
-export default function Order({ }: Props) {
+export default function Order() {
     const [stepSelected, setStepSelected] = useState<number>(0);
     const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
 

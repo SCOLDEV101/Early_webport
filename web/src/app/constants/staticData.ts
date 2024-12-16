@@ -153,7 +153,7 @@ export const service_data: SERVICE_DATA[] = [
 export const member_data: MEMBER_DATA[] = [
     {
         id: "PM001",
-        position: "CEO , Project manager",
+        position: "Founder , Project manager",
         name: "ธนพล สมฤทธิ์",
         img_src: "/member/team/pk.jpg",
         img_alt: "Thanapol Somrit",

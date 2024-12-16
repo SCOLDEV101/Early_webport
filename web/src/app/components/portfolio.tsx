@@ -9,9 +9,8 @@ import '../globals.css';
 // import required modules
 import { Navigation } from 'swiper/modules';
 
-type Props = {}
 
-export default function Portfolio({ }: Props) {
+export default function Portfolio() {
 
     // State สำหรับการ active ของปุ่ม menu filter
     const [Filter, setFilter] = useState<string>("all"); // ค่า filter เริ่มต้นเป็น all
@@ -143,12 +142,12 @@ const FilterMenus = ({
     // Types ของแต่ละตัวแปร
     setFilter: (item: string) => void,
     Filter: string,
-    Menus: any[]
+    Menus:{ name: string, category: string }[];
 }) => {
     return (
         <div className="flex flex-row flex-nowrap space-x-4">
             {/* Map เมนูแต่ละปุ่มออกมา */}
-            {Menus.length > 0 && Menus.map((menu, idx) => (
+            {Menus.length > 0 && Menus.map((menu) => (
                 <div
                     key={menu.name} // key สำหรับปุ่ม
                     className={`group/filter-btn cursor-pointer py-1 px-4 w-[125px] text-center
