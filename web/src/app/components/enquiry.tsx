@@ -152,7 +152,7 @@ export default function Enquiry() {
                 throw new Error(`Failed to send email. Status: ${response.status}`);
             }
 
-            const emailResponse = await response.json();
+            // const emailResponse = await response.json();
             // console.log(emailResponse, "with deleted");
 
             // ลบไฟล์หลังจากส่งอีเมลสำเร็จ
