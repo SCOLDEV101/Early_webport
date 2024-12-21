@@ -58,7 +58,7 @@ export default function Member({}: Props) {
               {member_data.map((data, idx) => (
                 <SwiperSlide key={idx}>
                   <div
-                    className="w-full relative bg-transparent space-y-4 transition-shadow rounded-[10px]"
+                    className="w-full relative bg-transparent space-y-4 transition-shadow rounded-[10px] hover:shadow-[0px_4px_13px_0px_rgba(255,255,255,.3),0px_10px_30px_-15px_rgba(236,240,255,.9),inset_0px_3px_4px_-2px_rgba(255,255,255,1),inset_0px_-14px_33.2px_-2px_rgba(200,189,228,.9)]"
                     onClick={() => {
                       setOpenPopup(true);
                       setModalID(data.id);
@@ -161,7 +161,7 @@ export default function Member({}: Props) {
               {member_data.map((data, idx) => (
                 <div
                   key={idx}
-                  className="w-full relative bg-transparent space-y-4 transition-shadow rounded-[10px]"
+                  className="w-full relative bg-transparent space-y-4 transition-shadow rounded-[10px] hover:shadow-[0px_4px_13px_0px_rgba(255,255,255,.3),0px_10px_30px_-15px_rgba(236,240,255,.9),inset_0px_3px_4px_-2px_rgba(255,255,255,1),inset_0px_-14px_33.2px_-2px_rgba(200,189,228,.9)]"
                   onClick={() => {
                     setOpenPopup(true);
                     setModalID(data.id);
