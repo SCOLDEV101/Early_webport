@@ -1,31 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&family=Noto+Sans+Thai:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&family=Poppins&display=swap');
 
 :root {
   --background: #16151D;
   --foreground: #171717;
 }
 
+/* สำหรับเบราว์เซอร์ที่รองรับ Webkit เช่น Chrome, Edge และ Safari */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #00aeff, #a68eff);
+  /* สีของแถบ Scroll */
+  border-radius: 20px;
+  /* มุมโค้งมน */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(150deg, #00aeff, #a68eff);
+  /* box-shadow: 5px 5px 30px 5px #00aeff; */
+  /* สีของแถบ Scroll เมื่อ hover */
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(255 255 255 / 10%);
+  /* สีพื้นหลังของ Scrollbar */
+  border-radius: 20px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Poppins', sans-serif;
-}
-
-html:lang(th) body {
-  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-family: "Noto Sans Thai", sans-serif;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 h3 {
@@ -78,4 +102,79 @@ h6, p {
   to {
     background-position: 200%;
   }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    z-index: 70;
+    top: auto !important;
+    bottom: 10vh;
+    width: 6vw !important;
+    height: 10vh !important;
+}
+
+.swiper-button-prev {
+  background-image: url(/IconPrev.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  }
+  
+  .swiper-button-next {
+  background-image: url(/IconNext.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  }
+  
+  .swiper-button-next::after {
+  display: none;
+  }
+  
+  .swiper-button-prev::after {
+  display: none;
+  }
+
+  .swiper-pagination-bullet {
+    background:var(--swiper-pagination-bullet-inactive-color, linear-gradient(90deg, #C8BDE4 , #FFFFFF 20%)) !important ;
+  }
+  .swiper-pagination-bullet-active {
+    background:var(--swiper-pagination-color, radial-gradient(circle, #5844D7, #6580E1)) !important ;
+  }
+
+  .backguard-circleblue {
+    width: 90%;
+    height: 25%;
+    border-radius: 50%;
+    background: radial-gradient(circle, #5844D7, #6580E1);
+    filter: blur(200px); 
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+  .backguard-circlewhite {
+    width: 90%;
+    height: 25%;
+    border-radius: 50%;
+    background-color: #ECF0FF;
+    filter: blur(350px); 
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+.backguard-circlestockgradient {
+  width: 155%;
+  height: 40%;
+  border-radius: 50% ;
+  border: 1px solid transparent;
+  background-color: transparent;
+  background: linear-gradient(45deg, #C8BDE4 10%, #6E687E) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: -1;
+  box-shadow: 5px 5px 5px -5px rgba(236,240,255,0.41); 
 }
