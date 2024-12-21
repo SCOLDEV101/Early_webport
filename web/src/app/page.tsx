@@ -17,7 +17,7 @@ export default function Home() {
       {/* พื้นหลัง */}
     <div className='backguard-circleblue opacity-[.33] top-[-20%] left-[50%]'/>
     <div className='backguard-circleblue opacity-[.13] top-[15%] left-[30%]'/>
-    <div className='backguard-circlestockgradient top-[30%] left-[50%]'/>
+    <div className='md:backguard-circlestockgradient top-[30%] left-[50%]'/>
     <div className='backguard-circleblue opacity-[.09] top-[50%] left-[45%]'/>
     <div className='backguard-circleblue opacity-[.13] top-[75%] left-[60%]'/>
     <div className='backguard-circlewhite opacity-[.2] top-[5%] left-[-20%]'/>
@@ -26,18 +26,17 @@ export default function Home() {
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="Home" className="pt-[150px]">
-        <div className='text-center	my-48 text-[#ECF0FF]'>
-          <h1
-            className="font-bold animated-text-gradient"
+      <section id="Home" className="pt-[150px] max-w-[100vw]">
+      <div className='max-w-full sm:mx-[160px] mx-[20px] w-auto text-center	my-20 text-[#ECF0FF]'>
+          <h3
+            className="md:text-[3.5rem] font-bold animated-text-gradient"
           >
-            &quot;เปลี่ยนไอเดียของคุณให้กลายเป็น<br />
-            เว็บไซต์ระดับมืออาชีพ!&quot;
-          </h1>
-          <h5 className='mb-14'>เราพร้อมพัฒนาเว็บไซต์ เพื่อตอบโจทย์ความต้องการของคุณโดยเฉพาะ <br /> อย่าปล่อยให้ไอเดียของคุณเป็นแค่ความฝัน!</h5>
+            &quot;เปลี่ยนไอเดียของคุณให้กลายเป็นเว็บไซต์ระดับมืออาชีพ!&quot;
+          </h3>
+          <h6 className='md:text-[1.25rem] mb-10 md:mb-14'>เราพร้อมพัฒนาเว็บไซต์ เพื่อตอบโจทย์ความต้องการของคุณโดยเฉพาะ อย่าปล่อยให้ไอเดียของคุณเป็นแค่ความฝัน!</h6>
 
-          <Link href="#Enquiry" className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] rounded-[10px] px-10 py-3 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
-                    <span className="text-[1.25rem] text-[#ECF0FF] text-center font-bold">
+          <Link href="#Enquiry" className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] rounded-[10px] px-5 md:px-10 py-3 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
+                    <span className="text-[1rem] md:text-[1.25rem] text-[#ECF0FF] text-center font-bold">
                         Enquiry now
                     </span>
           </Link>
@@ -47,7 +46,7 @@ export default function Home() {
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="Portfolio"className="pt-[150px] max-w-[100vw]">
+      <section id="Portfolio" className="pt-[150px] max-w-[100vw]">
       <div className='max-w-full sm:mx-[160px] mx-[20px] w-auto'>
           <Portfolio />
         </div>
