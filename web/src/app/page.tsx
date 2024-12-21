@@ -95,7 +95,7 @@ export default function Home() {
 
 
       <section id="member" className="pt-[150px]">
-        <div className='max-w-full mx-[160px]'>
+        <div className='max-w-full md:mx-[160px] mx-[50px]'>
           <Member />
         </div>
       </section>
