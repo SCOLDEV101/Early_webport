@@ -130,12 +130,16 @@ export default function Enquiry() {
                     address: data.email,
                 },
                 receipients: [
+                    // {
+                    //     name: "SCOLDEV",
+                    //     address: "scoldev101@gmail.com",
+                    // },
                     {
                         name: "SCOLDEV",
-                        address: "scoldev101@gmail.com",
+                        address: "pacharapolpacharapol2547@gmail.com",
                     },
                 ],
-                subject: "Customer sending email from Enquiry form", 
+                subject: "Customer sending email from Enquiry form",
                 message: `Form Information: ${JSON.stringify(data)}`, // ส่งข้อมูลฟอร์มในข้อความ
                 attachments,
             };
@@ -354,19 +358,19 @@ export default function Enquiry() {
 
     return (
         <div className="flex flex-col justify-center items-center gap-4">
-            <div>
-                <h1 className="text-[rgba(88,68,215,1)] font-extrabold text-center">
+            <div className="space-y-2">
+                <h1 className="text-[rgba(88,68,215,1)] max-sm:text-[2rem] font-extrabold text-center">
                     Enquiry Form
                 </h1>
-                <h5 className="text-[#ECF0FF] font-light text-center">
-                    กรอกข้อมูล และเป้าหมายของคุณ <br /> เพื่อให้เราสามารถออกแบบเว็บไซต์ที่ตรงตามความต้องการของคุณได้อย่างสมบูรณ์
+                <h5 className="text-[#ECF0FF] max-sm:text-[3.5vw] font-light text-center">
+                    กรอกข้อมูล และเป้าหมายของคุณ <br className='max-sm:hidden' /> เพื่อให้เราสามารถออกแบบเว็บไซต์ที่ตรงตามความต้องการของคุณได้อย่างสมบูรณ์
                 </h5>
             </div>
-            <div className="grid grid-cols-2 w-full mb-5 space-x-5">
+            <div className="grid grid-cols-2 w-full mb-5 gap-5">
                 <div>
-                    <h5 className='bg-gradient-to-r from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-bold'>1. User Information</h5>
+                    <h5 className='bg-gradient-to-r max-sm:text-[3.5vw] from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-extrabold'>1. User Information</h5>
                     <div>
-                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 h-[0.3rem] rounded-full overflow-hidden'>
+                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
                             <div className='bg-gradient-to-t from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
                                     width: `${processBar["0"]}%`,
@@ -377,9 +381,9 @@ export default function Enquiry() {
                     </div>
                 </div>
                 <div>
-                    <h5 className='bg-gradient-to-r from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-bold'>2. Project Information</h5>
+                    <h5 className='bg-gradient-to-r max-sm:text-[3.5vw] from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-extrabold'>2. Project Information</h5>
                     <div>
-                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 h-[0.3rem] rounded-full overflow-hidden'>
+                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
                             <div className='bg-gradient-to-t from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
                                     width: `${processBar["1"]}%`,
@@ -390,10 +394,10 @@ export default function Enquiry() {
                     </div>
                 </div>
             </div>
-            <div className="w-full h-fit px-10 py-11 rounded-[14px] bg-[rgba(236,240,255,0.05)] shadow-[inset_0_3px_3.9px_-2px_rgba(255,255,255,0.25),_inset_0_-14px_33.2px_-2px_rgba(200,189,228,.33)]">
-                <form className="w-full space-y-6">
+            <div className="w-full h-fit px-10 max-sm:px-6 py-11 rounded-[14px] bg-[rgba(236,240,255,0.05)] shadow-[inset_0_3px_3.9px_-2px_rgba(255,255,255,0.25),_inset_0_-14px_33.2px_-2px_rgba(200,189,228,.33)]">
+                <form className="w-full space-y-10">
                     {currentComponent}
-                    <div className={`flex flex-row ${currentStep === 2 ? "justify-center" : "justify-between"}  items-center`}>
+                    <div className={`flex flex-row ${currentStep === 2 ? "justify-center" : currentStep === 1 ? "justify-between" : "justify-end"} gap-5 items-center`}>
                         {currentStep === 2 ? (
                             <button
                                 type="button"
@@ -411,19 +415,21 @@ export default function Enquiry() {
                             </button>
                         ) : (
                             <>
-                                <button
-                                    type="button"
-                                    onClick={(e) => {
-                                        changedSteps(currentStep - 1, e);
-                                        setProcessBar(prevState => ({
-                                            ...prevState,
-                                            [currentStep - 1]: 0,
-                                        }));
-                                    }}
-                                    className={`h5 ${currentStep === 0 && "opacity-0"} px-12 py-3 font-bold rounded-[14px] text-[rgba(88,68,215,1)] bg-[rgba(255,255,255,1)] hover:shadow-[0_4px_8px_rgba(101,128,225,1)]`}
-                                >
-                                    Back
-                                </button>
+                                {currentStep !== 0 && (
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            changedSteps(currentStep - 1, e);
+                                            setProcessBar(prevState => ({
+                                                ...prevState,
+                                                [currentStep - 1]: 0,
+                                            }));
+                                        }}
+                                        className={`h5 px-12 max-sm:px-8 py-3 max-sm:w-full font-bold rounded-[14px] text-[rgba(88,68,215,1)] bg-[rgba(255,255,255,1)] hover:shadow-[0_4px_8px_rgba(101,128,225,1)]`}
+                                    >
+                                        Back
+                                    </button>
+                                )}
                                 <button
                                     type={"button"}
                                     onClick={(e) => {
@@ -440,7 +446,7 @@ export default function Enquiry() {
                                             }
                                         }
                                     }}
-                                    className="h5 px-12 py-3 font-bold rounded-[14px] bg-gradient-to-r from-[rgba(101,128,225,1)] via-[rgba(88,68,215,1)] to-[rgba(30,30,30,1)] text-[#ECF0FF] shadow-[0_3px_4px_2px_rgba(0,0,0,0.25)] hover:shadow-[0_2px_8px_2px_rgba(101,128,225,1)]"
+                                    className={`h5 px-12 max-sm:px-8 py-3 max-sm:w-full font-bold rounded-[14px] bg-gradient-to-r from-[rgba(101,128,225,1)] via-[rgba(88,68,215,1)] to-[rgba(30,30,30,1)] text-[#ECF0FF] shadow-[0_3px_4px_2px_rgba(0,0,0,0.25)] hover:shadow-[0_2px_8px_2px_rgba(101,128,225,1)]`}
                                 >
                                     {isLastStep ? "Submit" : "Next"}
                                 </button>
@@ -460,7 +466,7 @@ type User_Information_Props = {
 }
 function UserInformation({ data, handlerInputChanged, requireField }: User_Information_Props) {
     return (
-        <div className="space-y-4 mx-48">
+        <div className="space-y-4 sm:mx-48">
             <LabelInputContainer>
                 <label
                     className={`${requireField.name ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
@@ -495,7 +501,7 @@ function UserInformation({ data, handlerInputChanged, requireField }: User_Infor
                     onChange={(e) => handlerInputChanged(e.target.name, e.target.value)}
                 />
             </LabelInputContainer>
-            <div className="w-full grid grid-cols-2 gap-4">
+            <div className="w-full grid sm:grid-cols-2 grid-cols-1 gap-4">
                 <LabelInputContainer>
                     <label
                         className={`${requireField.email ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
@@ -555,7 +561,7 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
     ]
 
     return (
-        <div className="flex flex-row gap-12 mb-16">
+        <div className="flex flex-row max-sm:flex-wrap-reverse gap-12 mb-16">
             <div className="space-y-2 min-w-[250px] w-[450px]">
                 <p className="bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent">
                     Upload your logo or reference
@@ -586,8 +592,8 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
                     >
                         Project type*
                     </h5>
-                    <div className="flex flex-row justify-start flex-wrap gap-3">
-                        <div className="relative w-[200px]">
+                    <div className="flex flex-row justify-start max-sm:justify-center flex-wrap max-sm:flex-nowrap gap-3">
+                        <div className="relative w-[200px] max-sm:w-full">
                             <input
                                 id="website"
                                 name="project_type"
@@ -610,7 +616,7 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
                         </div>
 
                         {/* ตัวเลือก Webapp */}
-                        <div className="relative w-[200px]">
+                        <div className="relative w-[200px] max-sm:w-full">
                             <input
                                 id="webapp"
                                 name="project_type"
@@ -651,8 +657,8 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
                     />
                 </LabelInputContainer>
                 <LabelInputContainer>
-                    <div className="grid grid-cols-2 gap-5 flex-wrap z-20">
-                        <div className="">
+                    <div className="grid sm:grid-cols-2 grid-cols-1 gap-5 flex-wrap z-20">
+                        <div className="z-[2]">
                             <h5
                                 className={`text-[16px] ${requireField.project_purpose ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                             >
@@ -660,7 +666,7 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
                             </h5>
                             <Dropdown data={data} optionTitle={"Purpose"} options={purpose_options} optionSelected={handlerInputChanged} requireField={requireField} />
                         </div>
-                        <div className="">
+                        <div className="z-[1]">
                             <h5
                                 className={`text-[16px] ${requireField.project_target ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                             >
@@ -793,7 +799,7 @@ const DropFileInput = ({ data, handlerInputChanged }: DropFileInput_Props) => {
                         handleFiles(e.dataTransfer.files);
                     }
                 }}
-                className={`${fileEnter ? "" : ""} dash_container rounded-[10px] flex flex-col w-full h-[370px] items-center justify-center`}
+                className={`${fileEnter ? "" : ""} dash_container rounded-[10px] flex flex-col w-full sm:h-[370px] h-[170px] items-center justify-center`}
                 style={{
                     background: "rgba(22, 21, 29, .41)",
                     border: "5px dashed #5844D7"
