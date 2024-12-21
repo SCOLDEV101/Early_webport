@@ -110,8 +110,8 @@ h6, p {
     z-index: 70;
     top: auto !important;
     bottom: 10vh;
-    width: 3vw !important;
-    height: 9vh !important;
+    width: 6vw !important;
+    height: 10vh !important;
 }
 
 .swiper-button-prev {
@@ -134,6 +134,13 @@ h6, p {
   
   .swiper-button-prev::after {
   display: none;
+  }
+
+  .swiper-pagination-bullet {
+    background:var(--swiper-pagination-bullet-inactive-color, linear-gradient(90deg, #C8BDE4 , #FFFFFF 20%)) !important ;
+  }
+  .swiper-pagination-bullet-active {
+    background:var(--swiper-pagination-color, radial-gradient(circle, #5844D7, #6580E1)) !important ;
   }
 
   .backguard-circleblue {
