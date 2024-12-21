@@ -47,8 +47,8 @@ export default function Home() {
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="Portfolio" className="pt-[150px]">
-        <div className='max-w-full mx-[160px]'>
+      <section id="Portfolio"className="pt-[150px] max-w-[100vw]">
+      <div className='max-w-full sm:mx-[160px] mx-[20px] w-auto'>
           <Portfolio />
         </div>
       </section>
@@ -94,8 +94,8 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-      <section id="member" className="pt-[150px]">
-        <div className='max-w-full md:mx-[160px] mx-[50px]'>
+      <section id="member" className="pt-[150px] max-w-[100vw]">
+        <div className='max-w-full sm:mx-[160px] mx-[20px] w-auto'>
           <Member />
         </div>
       </section>
