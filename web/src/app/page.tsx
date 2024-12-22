@@ -1,98 +1,126 @@
+'use client'
+
+import Enquiry from './components/enquiry';
+import Footer from './components/Footer';
 import Navbar from './components/navbar'
-// import Projectslider from "./components"
-// import PortfolioDataList from "./components"
-// import ServicesDataList from "./components"
-// import MemberDataList from "./components"
-// import Enquiry from "./components"
-// import Footer from "./components"
-// import PortfolioData from 'data';
-// import ServicesData from 'data';
-// import MemberData from 'data';
+import Order from './components/order';
+import Portfolio from './components/portfolio';
+import Service from './components/service';
+import Member from './components/member';
+import Link from "next/link";
 import './globals.css';
 
 
 export default function Home() {
   return (
-    <div className="relative w-full flex flex-col items-center justify-center">
-            <Navbar/>
+    <div className="w-full flex flex-col overflow-x-hidden relative">
+      {/* พื้นหลัง */}
+    <div className='backguard-circleblue opacity-[.33] top-[-20%] left-[50%]'/>
+    <div className='backguard-circleblue opacity-[.13] top-[15%] left-[30%]'/>
+    <div className='md:backguard-circlestockgradient top-[30%] left-[50%]'/>
+    <div className='backguard-circleblue opacity-[.09] top-[50%] left-[45%]'/>
+    <div className='backguard-circleblue opacity-[.13] top-[75%] left-[60%]'/>
+    <div className='backguard-circlewhite opacity-[.2] top-[5%] left-[-20%]'/>
+    <div className='backguard-circlewhite opacity-[.2] top-[0%] left-[130%] '/>
+       <Navbar />
 
-{/* //////////////////////////////////////////////////////////////////////// */}
+      {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="Home">
-        <div className='text-center	my-48 text-[#ECF0FF]'>
-        <h1 
-          className="font-bold animated-text-gradient"
-        >
-          "เปลี่ยนไอเดียของคุณให้กลายเป็น<br />
-          เว็บไซต์ระดับมืออาชีพ!"
-        </h1>
-        <h5>เราพร้อมพัฒนาเว็บไซต์ เพื่อตอบโจทย์ความต้องการของคุณโดยเฉพาะ <br/> อย่าปล่อยให้ไอเดียของคุณเป็นแค่ความฝัน!</h5>
+      <section id="Home" className="pt-[150px] max-w-[100vw]">
+      <div className='max-w-full sm:mx-[160px] mx-[20px] w-auto text-center	my-20 text-[#ECF0FF]'>
+          <h3
+            className="md:text-[3.5rem] font-bold animated-text-gradient"
+          >
+            &quot;เปลี่ยนไอเดียของคุณให้กลายเป็นเว็บไซต์ระดับมืออาชีพ!&quot;
+          </h3>
+          <h6 className='md:text-[1.25rem] mb-10 md:mb-14'>เราพร้อมพัฒนาเว็บไซต์ เพื่อตอบโจทย์ความต้องการของคุณโดยเฉพาะ อย่าปล่อยให้ไอเดียของคุณเป็นแค่ความฝัน!</h6>
+
+          <Link href="#Enquiry" className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] rounded-[10px] px-5 md:px-10 py-3 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
+                    <span className="text-[1rem] md:text-[1.25rem] text-[#ECF0FF] text-center font-bold">
+                        Enquiry now
+                    </span>
+          </Link>
         </div>
-      {/* <Projectslider/> */}
+        {/* <Projectslider/> */}
       </section>
 
-{/* //////////////////////////////////////////////////////////////////////// */}
+      {/* //////////////////////////////////////////////////////////////////////// */}
 
-       {/* <section id="Portfolio">
-          {PortfolioData.map((data,i) => (
-            <PortfolioDataList data={data} />
-          ))}
-       </section> */}
+      <section id="Portfolio" className="pt-[150px] max-w-[100vw]">
+      <div className='max-w-full sm:mx-[160px] mx-[20px] w-auto'>
+          <Portfolio />
+        </div>
+      </section>
 
-{/* //////////////////////////////////////////////////////////////////////// */}
+      {/* //////////////////////////////////////////////////////////////////////// */}
 
-       <section id="About">
-          <div className="grid grid-cols-4 gap-12 max-w-full mx-[60px]">
-            <div className="col-span-3 text-[#ECF0FF]">
-            <h1 className="font-bold" >
+      <section id="About" className="pt-[150px] max-w-[100vw]">
+        <div className="flex flex-wrap md:flex-nowrap flex-row justify-between items-center gap-20 max-w-full sm:mx-[160px] mx-[20px] w-auto">
+          <div className="text-[#ECF0FF]">
+            <h1 className="font-bold">
               About us
             </h1>
-              <span className="font-bold text-[1rem]">SCOLDEV</span>{" "}
-              <span className="text-wrap text-[1rem]">เราคือผู้เชี่ยวชาญด้านการพัฒนาเว็บไซต์ สร้างสรรค์ให้ตรงตามความต้องการ และ ช่วยเสริมศักยภาพทางธุรกิจให้กับลูกค้า โดยมุ่งเน้นการพัฒนาเว็บไซต์ที่ สวยงาม ใช้งานง่าย และมีประสิทธิภาพ เพื่อสร้างความเชื่อมั่นแก่ผู้ใช้งานและแบรนด์ของคุณ เราให้ความสำคัญ ตั้งแต่การวิเคราะห์ความต้องการของลูกค้า ไปจนถึงการส่งมอบโซลูชันที่ตอบโจทย์ในทุกมิติ</span>
-            </div>
-
-            <div
-            className="gradient-border-mask p-8 text-right rounded-[20px]  text-[#ECF0FF]"
+            <p className="text-[1rem]"><span className="font-bold">SCOLDEV</span> เราคือผู้เชี่ยวชาญด้านการพัฒนาเว็บไซต์ สร้างสรรค์ให้ตรงตามความต้องการ และ
+               ช่วยเสริมศักยภาพทางธุรกิจให้กับลูกค้า โดยมุ่งเน้นการพัฒนาเว็บไซต์ที่ สวยงาม ใช้งานง่าย
+               และมีประสิทธิภาพ เพื่อสร้างความเชื่อมั่นแก่ผู้ใช้งานและแบรนด์ของคุณ เราให้ความสำคัญ
+               ตั้งแต่การวิเคราะห์ความต้องการของลูกค้า ไปจนถึงการส่งมอบโซลูชันที่ตอบโจทย์ในทุกมิติ
+            </p>{" "}
+          </div>
+          <div
+            className="gradient-border-mask p-8 md:p-10 text-right rounded-[20px] w-[350px] text-[#ECF0FF] bg-white/10 backdrop-blur-[30px]"
             style={{
               boxShadow: "0 25px 90px -30px rgba(236,240,255,0.41), inset 0 3px 3.9px -2px rgba(255,255,255,0.36)"
             }}
-            >
-              <h2 className="font-bold my-2 bg-gradient-to-br from-[#BDCBFD] to-[#E5D5FF] inline-block text-transparent bg-clip-text">Contact</h2>   {/*textgradient */}
-              <h5 className="font-bold">063-874-0176</h5>
-              <h5 className="font-bold break-words">scoldev101@gmail.com</h5>
+          >
+            <h3 className="md:text-[2.5rem] my-1 md:my-2 bg-gradient-to-br from-[#BDCBFD] to-[#E5D5FF] inline-block text-transparent bg-clip-text font-[900]">
+              Contact
+            </h3> {/*textgradient */}
+            <h6 className="md:text-[1.25rem] font-bold">063-874-0176</h6>
+            <h6 className="md:text-[1.25rem] font-bold break-words">scoldev101@gmail.com</h6>
           </div>
-          </div>
-       </section>
+        </div>
+      </section>
 
-{/* //////////////////////////////////////////////////////////////////////// */}
-
-
-       {/* <section id="services">
-       {ServicesData.map((data,i) => (
-            <ServicesDataList data={data} />
-          ))}
-       </section> */}
-
-{/* //////////////////////////////////////////////////////////////////////// */}
+      {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-       {/* <section id="member">
-       {MemberData.map((data,i) => (
-            <MemberDataList data={data} />
-          ))}
-       </section> */}
+      <section id="services" className="pt-[150px]">
+        <div className='max-w-full mx-[160px]'>
+          <Service />
+        </div>
+      </section>
 
-{/* //////////////////////////////////////////////////////////////////////// */}
-
-       {/* <section id="Enquiry">
-        <Enquiry/>
-       </section> */}
+      {/* //////////////////////////////////////////////////////////////////////// */}
 
 
-{/* //////////////////////////////////////////////////////////////////////// */}
+      <section id="member" className="pt-[150px] max-w-[100vw]">
+        <div className='max-w-full sm:mx-[160px] mx-[20px] w-auto'>
+          <Member />
+        </div>
+      </section>
+
+      {/* //////////////////////////////////////////////////////////////////////// */}
+
+      <section id="services" className="pt-[150px]">
+        <div className='max-w-full mx-[160px]'>
+          <Order />
+        </div>
+      </section>
+
+      {/* //////////////////////////////////////////////////////////////////////// */}
+
+      <section id="Enquiry" className="pt-[150px] mb-[150px]">
+        <div className="max-w-full mx-[160px]">
+
+          <Enquiry />
+        </div>
+      </section>
 
 
-       {/* <Footer/> */}
+      {/* //////////////////////////////////////////////////////////////////////// */}
+
+
+      <Footer/>
 
     </div>
   );
