@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,15 +9,40 @@ import Image from "next/image";
 export default function Navbar() { // Navbar
 
     const [active, setActive] = useState<string | null>(null); // ใช้สำหรับ active ของตัว dropdown
+    const [mobileNavbarActive, setMobileNavbarActive] = useState<boolean>(false);
+    const [mobileNavbarMenuActive, setMobileNavbarMenuActive] = useState<string | null>(null);
+
+    const [isMobile, setIsMobile] = useState(true);
+
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(min-width: 640px)"); //(min-width: 768px)
+        const handleMediaChange = () => {
+            setIsMobile(!mediaQuery.matches); // กลับค่าของ desktop เป็น mobile
+        };
+
+        handleMediaChange(); // ตรวจสอบค่าตั้งต้น
+        mediaQuery.addEventListener("change", handleMediaChange);
+
+        return () => {
+            mediaQuery.removeEventListener("change", handleMediaChange);
+        };
+    }, []);
 
     return (
         <div
-            className={"fixed top-10 inset-x-0 max-w-full mx-[60px] z-50"}
+            className={"fixed top-10 inset-x-0 max-w-full sm:mx-[60px] mx-[20px] z-50"}
         >
-            <Menu setActive={setActive}>
+            <Menu
+                setActive={setActive}
+                mobileNavbarActive={mobileNavbarActive}
+                setMobileNavbarActive={isMobile ? setMobileNavbarActive : undefined}
+                isMobile={isMobile}
+            >
                 {/* Logo */}
-                <div>
+                <div className="max-sm:w-full relative">
                     <Image
+                        className="hidden sm:block"
                         src="./navbar-logo.svg"
                         alt="logo"
                         width="0"
@@ -25,35 +50,106 @@ export default function Navbar() { // Navbar
                         style={{ width: '150px', height: 'auto' }}
                         priority
                     />
+                    <div
+                        className={`relative sm:hidden max-sm:w-[calc(100%+45px)] transform transition-all flex flex-row justify-between items-center`}
+                        style={{
+                            right: mobileNavbarActive ? "calc(0vw)" : "calc(100vw - 115px)",
+                        }}
+                    >
+                        <Image
+                            className={`relative inline-block ${mobileNavbarActive ? "opacity-100" : "opacity-0"}`}
+                            src={"./mobileNavDropdonwIcon.svg"}
+                            onClick={() => {
+                            }}
+                            alt="logo"
+                            width="0"
+                            height="0"
+                            style={{
+                                width: '30px',
+                                height: 'auto',
+                            }}
+                            priority
+                        />
+                        <Image
+                            className={`relative inline-block`}
+                            src={mobileNavbarActive ? "./navbar-icon-white.svg" : "./navbar-icon.svg"}
+                            onClick={() => {
+                            }}
+                            alt="logo"
+                            width="0"
+                            height="0"
+                            style={{
+                                width: '30px',
+                                height: 'auto',
+                            }}
+                            priority
+                        />
+                    </div>
                 </div>
 
                 {/* Menus */}
-                <div className="flex flex-row flex-nowrap justify-center items-center gap-16">
-                    {/* Home menu กดแล้วไป section Home */}
-                    <MenuItem setActive={setActive} active={active} item="Home" href="#Home"></MenuItem>
-                    {/* Portfolio menu กดแล้วไป section Portfolio */}
-                    <MenuItem setActive={setActive} active={active} item="Portfolio" href="#Portfolio"></MenuItem>
-                    {/* About menu กดแล้วจะขึ้น popup ของ About */}
-                    <MenuItem setActive={setActive} active={active} item="About" href="#About">
-                        {/*  Popup menus ของ About ทั้งชุด */}
-                        {/* <div className="flex flex-col space-y-1"> */}
-                            {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
-                            {/* <HoveredLink href="/hobby">ประวัติการทำงาน</HoveredLink>
-                            <HoveredLink href="/individual">Contact</HoveredLink>
-                            <HoveredLink href="/team">Services</HoveredLink>
-                            <HoveredLink href="/enterprise">Member</HoveredLink> */}
-                        {/* </div> */}
-                    </MenuItem>
-                </div>
-
+                {!isMobile && (
+                    <div className="flex flex-row flex-nowrap justify-center items-center gap-16">
+                        {/* Home menu กดแล้วไป section Home */}
+                        <MenuItem setActive={setActive} active={active} item="Home" href="#Home"></MenuItem>
+                        {/* Portfolio menu กดแล้วไป section Portfolio */}
+                        <MenuItem setActive={setActive} active={active} item="Portfolio" href="#Portfolio"></MenuItem>
+                        {/* About menu กดแล้วจะขึ้น popup ของ About */}
+                        <MenuItem setActive={setActive} active={active} item="About">
+                            {/*  Popup menus ของ About ทั้งชุด */}
+                            <div className="flex flex-col space-y-1">
+                                {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
+                                <HoveredLink href="#1">ประวัติการทำงาน</HoveredLink>
+                                <HoveredLink href="#2">Contact</HoveredLink>
+                                <HoveredLink href="#3">Services</HoveredLink>
+                                <HoveredLink href="#4">Member</HoveredLink>
+                            </div>
+                        </MenuItem>
+                    </div>
+                )}
                 {/* Enquiry button */}
-                <button type="button" className="opacity-0 bg-[#ECF0FF] rounded-[10px] w-[150px] px-3 py-1 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
+                <button type="button" className="max-sm:hidden bg-[#ECF0FF] rounded-[10px] w-[150px] px-3 py-1 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
                     <h5 className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] bg-clip-text text-transparent font-bold">
                         Enquiry
                     </h5>
                 </button>
-            </Menu>
-        </div>
+                <Image
+                    className="block sm:hidden cursor-pointer"
+                    // onClick={() => {
+                    //     setMobileNavbarActive(!mobileNavbarActive);
+                    // }}
+                    src={"./menu.svg"}
+                    alt="logo"
+                    width="0"
+                    height="0"
+                    style={{
+                        width: '30px',
+                        height: 'auto',
+                        opacity: mobileNavbarActive ? '0' : '100',
+                        transition: 'opacity 0.2s ease-in-out',
+                    }}
+                    priority
+                />
+            </Menu >
+            {isMobile && mobileNavbarActive && (
+                <div className="absolute top-[70px] z-[50] right-0 flex flex-col w-full gap-1">
+                    {/* Home menu กดแล้วไป section Home */}
+                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Home" href="#Home" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
+                    {/* Portfolio menu กดแล้วไป section Portfolio */}
+                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Portfolio" href="#Portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
+                    {/* About menu กดแล้วจะขึ้น popup ของ About */}
+                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="About &#129170;">
+                        <div className="flex flex-col space-y-1">
+                            {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
+                            <HoveredLink href="#1" onClick={() => setMobileNavbarActive(false)}>ประวัติการทำงาน</HoveredLink>
+                            <HoveredLink href="#2" onClick={() => setMobileNavbarActive(false)}>Contact</HoveredLink>
+                            <HoveredLink href="#3" onClick={() => setMobileNavbarActive(false)}>Services</HoveredLink>
+                            <HoveredLink href="#4" onClick={() => setMobileNavbarActive(false)}>Member</HoveredLink>
+                        </div>
+                    </MenuItem>
+                </div>
+            )}
+        </div >
     );
 }
 
@@ -67,21 +163,34 @@ const MenuItem = ({ // Props
     item,
     children,
     href,
+    setMobileNavbarActive,
 }: {
     setActive: (item: string | null) => void; // จาก useState ด้านบน
     active: string | null; // จาก useState ด้านบน
     item: string; // ชื่อของหัวข้อที่จะใช้แสดง
     children?: React.ReactNode; // จะมีหรือไม่มีก็ได้
-    href?: string, // จะมีหรือไม่มีก็ได้เป็น link ที่จะใช้ href ไปที่หน้าหรือ section อื่น
+    href?: string; // จะมีหรือไม่มีก็ได้เป็น link ที่จะใช้ href ไปที่หน้าหรือ section อื่น
+    setMobileNavbarActive?: Dispatch<SetStateAction<boolean>>;
 }) => {
+
+
     return (
-        <div onClick={() => setActive(active ? null : item)} className="relative "> {/* onMouseEnter={() => setActive(item)} */} {/* ถ้า active มีค่าอยู่แล้วให้เคลียออก เพื่อที่ dropdown จะได้หายไป ถ้าไม่มีให้ setActive ของ menu นั้นๆ กรณีมีหัวข้อที่กดแล้วเป็น dropdown หลายตัว */}
+        <div
+            onClick={() => {
+                setActive(active === item ? null : item);
+                if (setMobileNavbarActive) {
+                    setMobileNavbarActive(false);
+                }
+            }}
+            className="relative"
+        > {/* onMouseEnter={() => setActive(item)} */} {/* ถ้า active มีค่าอยู่แล้วให้เคลียออก เพื่อที่ dropdown จะได้หายไป ถ้าไม่มีให้ setActive ของ menu นั้นๆ กรณีมีหัวข้อที่กดแล้วเป็น dropdown หลายตัว */}
             {href ? // เช็คว่าปุ่มนั้นเป็นแบบ Link มั้ย
                 (
                     // กรณีปุ่มเป็นแบบ Link จะเข้า case นี้
-                    <Link href={href}> 
+                    <Link href={href}>
                         <h5
-                            className="cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)]"
+                            className="max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)]
+                            max-sm:h-[45px] max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16"
                         >
                             {item}
                         </h5>
@@ -91,7 +200,8 @@ const MenuItem = ({ // Props
                 (
                     // กรณีปุ่ม<ไม่>เป็นแบบ Link จะเข้า case นี้
                     <h5
-                        className="cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)]"
+                        className="max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] cursor-pointer transition-shadow max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)]
+                        max-sm:h-[45px] max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16"
                     >
                         {item}
                     </h5>
@@ -101,18 +211,11 @@ const MenuItem = ({ // Props
             {children && active !== null && ( // Dropdown ตัว children คือ element ของ dropdown
                 <div>
                     {active === item && ( // ไว้แสดง dropdown ของแต่ละหัวข้อที่เลือก
-                        <div className="absolute -top-[20px] left-[calc(100%_+_7rem)] transform -translate-x-1/2 pt-4"> {/* top-[calc(100%_+_1.2rem)] left-1/2*/}
+                        <div className="absolute -top-[20px] max-sm:top-[35px] sm:left-[calc(100%_+_7rem)] max-sm:right-0 transform sm:-translate-x-1/2 pt-4"> {/* top-[calc(100%_+_1.2rem)] left-1/2*/}
                             <div
-                                className="bg-white rounded-[10px] overflow-hidden border border-black/[0.2] shadow-xl"
-                                style={{
-                                    backgroundColor: "#ffffff",
-                                    background: "linear-gradient(90deg, rgba(200, 189, 228, 1) 0%, rgba(255, 255, 255, 0.5) 100%)",
-                                    boxShadow: `
-                                        inset 0px 3px 3.9px -2px rgba(255, 255, 255, .93),
-                                        0px 4px 13.1px 0px rgba(255, 255, 255, .2)`,
-                                }}
+                                className="sm:bg-white sm:rounded-[10px] overflow-hidden sm:border sm:border-black/[0.2] sm:bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] sm:from-[rgba(200,189,228,1)_0%] sm:to-[rgba(255,255,255,0.5)_100%] sm:shadow-xl sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)]"
                             >
-                                <div className="w-max h-full p-1">
+                                <div className="w-max h-full p-1 max-sm:px-2">
                                     {children} {/* เมนู dropdown ที่เป็น list ต่อกันเรื่อยๆ */}
                                 </div>
                             </div>
@@ -130,9 +233,15 @@ const MenuItem = ({ // Props
 const Menu = ({ // Props
     setActive,
     children,
+    mobileNavbarActive,
+    setMobileNavbarActive,
+    isMobile,
 }: {
     setActive: (item: string | null) => void; // จำเป้นต้องมี
     children: React.ReactNode; // จำเป้นต้องมี
+    mobileNavbarActive: boolean;
+    setMobileNavbarActive?: Dispatch<SetStateAction<boolean>>;
+    isMobile: boolean;
 }) => {
     const menuRef = useRef<HTMLDivElement>(null); // refference จากตัว tag <nav></nav>
 
@@ -158,10 +267,16 @@ const Menu = ({ // Props
     return (
         <nav
             ref={menuRef} // refference ที่อ้างจาก useRef
-            className="relative rounded-[15px] flex justify-between items-center space-x-4 ps-8 pe-4 h-[70px] backdrop-blur-[30px]"
+            className="relative rounded-[20px] sm:rounded-[15px] flex flex-nowrap justify-between items-center space-x-4 ps-8 max-sm:ps-4 pe-4 max-sm:pe-5 h-[70px] max-sm:h-[50px] backdrop-blur-[30px]"
+            onClick={() => {
+                if (setMobileNavbarActive) {
+                    setMobileNavbarActive(!mobileNavbarActive)
+                    setActive(null)
+                }
+            }}
             style={{
                 backgroundColor: "#ffffff",
-                background: "linear-gradient(90deg, rgba(200, 189, 228, 1) 0%, rgba(255, 255, 255, 0.5) 100%)",
+                background: mobileNavbarActive && isMobile ? "linear-gradient(83deg, rgba(30, 30, 30, 1) 0%, rgba(88, 68, 215, 1) 50%, rgba(101, 128, 225, 1) 100%)" : "linear-gradient(90deg, rgba(200, 189, 228, 1) 0%, rgba(255, 255, 255, 0.5) 100%)",
                 boxShadow: `
                     inset 0px 3px 3.9px -2px rgba(255, 255, 255, .93),
                     0px 10px 30px -15px #B2A9E7`,
@@ -173,14 +288,11 @@ const Menu = ({ // Props
 };
 
 // ปุ่มของ Popup
-const HoveredLink = ({ children, ...rest }: any) => { // props ทุกตัวจำเป็นต้องมี
+const HoveredLink = ({ children, ...rest }: React.PropsWithChildren<React.ComponentProps<typeof Link>>) => { // props ทุกตัวจำเป็นต้องมี
     return (
         <Link
             {...rest} // ตัวนี้เป็น props อื่นๆ ที่เป็น attribute ของ html tag element เช่น src
-            className="text-[#453E72] text-[1.25rem] px-8 py-2 rounded-[10px] bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[rgba(200,189,228,1)_0%] to-[rgba(255,255,255,0.5)_100%] text-center hover:bg-[linear-gradient(200deg,_var(--tw-gradient-stops))] hover:from-[rgba(88,68,215,1)_0%] hover:via-[rgba(101,128,225,1)_40%] hover:to-[rgba(150,159,193,1)_60%] hover:shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-15px_#B2A9E7]"
-            style={{
-                backgroundColor: "rgba(200, 200, 200, 1)",
-            }}
+            className="sm:text-[#453E72] text-[#16151D] text-[1.25rem] max-sm:text-[1rem] px-8 py-2 rounded-[10px] max-sm:rounded-full bg-[#ECF0FF] sm:bg-[rgba(200,200,200,1)] sm:bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] sm:from-[rgba(200,189,228,1)_0%] sm:to-[rgba(255,255,255,0.5)_100%] text-center hover:bg-[linear-gradient(200deg,_var(--tw-gradient-stops))] hover:from-[rgba(88,68,215,1)_0%] hover:via-[rgba(101,128,225,1)_40%] hover:to-[rgba(150,159,193,1)_60%] hover:shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-15px_#B2A9E7]"
         >
             {children}
         </Link>
