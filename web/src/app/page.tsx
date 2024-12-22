@@ -54,8 +54,8 @@ export default function Home() {
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="About" className="pt-[150px]">
-        <div className="flex flex-nowrap flex-row justify-between items-center gap-20 max-w-full mx-[160px]">
+      <section id="About" className="pt-[150px] max-w-[100vw]">
+        <div className="flex flex-wrap md:flex-nowrap flex-row justify-between items-center gap-20 max-w-full sm:mx-[160px] mx-[20px] w-auto">
           <div className="text-[#ECF0FF]">
             <h1 className="font-bold">
               About us
@@ -67,16 +67,16 @@ export default function Home() {
             </p>{" "}
           </div>
           <div
-            className="gradient-border-mask p-10 text-right rounded-[20px] w-[350px] text-[#ECF0FF] bg-white/10 backdrop-blur-[30px]"
+            className="gradient-border-mask p-8 md:p-10 text-right rounded-[20px] w-[350px] text-[#ECF0FF] bg-white/10 backdrop-blur-[30px]"
             style={{
               boxShadow: "0 25px 90px -30px rgba(236,240,255,0.41), inset 0 3px 3.9px -2px rgba(255,255,255,0.36)"
             }}
           >
-            <h2 className="my-2 bg-gradient-to-br from-[#BDCBFD] to-[#E5D5FF] inline-block text-transparent bg-clip-text font-[900]">
+            <h3 className="md:text-[2.5rem] my-1 md:my-2 bg-gradient-to-br from-[#BDCBFD] to-[#E5D5FF] inline-block text-transparent bg-clip-text font-[900]">
               Contact
-            </h2> {/*textgradient */}
-            <h5 className="font-bold">063-874-0176</h5>
-            <h5 className="font-bold break-words">scoldev101@gmail.com</h5>
+            </h3> {/*textgradient */}
+            <h6 className="md:text-[1.25rem] font-bold">063-874-0176</h6>
+            <h6 className="md:text-[1.25rem] font-bold break-words">scoldev101@gmail.com</h6>
           </div>
         </div>
       </section>
