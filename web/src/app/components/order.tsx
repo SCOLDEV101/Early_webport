@@ -24,7 +24,7 @@ const step_order = [
         },
         alt: "2-confirm",
         desc: {
-            title: 'เราประเมินงานและจัดส่งใบเสนอราคา พร้อมขอบเขตงาน (Scope) <br className=""/>ให้พิจารณาตกลงเงื่อนไขและ ชำระเงินงวดแรกเพื่อเริ่มงาน',
+            title: 'เราประเมินงานและจัดส่งใบเสนอราคา พร้อมขอบเขตงาน (Scope) <br/> ให้พิจารณาตกลงเงื่อนไขและ ชำระเงินงวดแรกเพื่อเริ่มงาน',
             sub: "",
         }
     },
@@ -110,10 +110,10 @@ export default function Order() {
                     height={step_order[stepSelected].img_size.h}
                     className={`absolute max-sm:relative ${stepSelected === 1 ? "top-[-150px]" : "top-[-110px]"} sm:right-32 transition-opacity duration-300 ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}
                 />
-                <div className={`absolute ${stepSelected === 1 ? "max-sm:bottom-[125px]" : "max-sm:bottom-[100px]"} -bottom-[50px] w-full text-end sm:pe-[14rem]`}>
+                <div className={`absolute ${stepSelected === 1 ? "max-sm:bottom-[150px]" : "max-sm:bottom-[100px]"} -bottom-[50px] w-full text-end sm:pe-[14rem]`}>
                     {step_order[stepSelected].desc.title && (
                         <h6
-                            className="text-white font-bold max-sm:text-[.75rem] [text-shadow:_0_10px_30px_rgba(236_240_255_/_0.9)]"
+                            className="text-white font-bold max-sm:text-[.625rem] [text-shadow:_0_10px_30px_rgba(236_240_255_/_0.9)]"
                             dangerouslySetInnerHTML={{
                                 __html: step_order[stepSelected].desc.title,
                             }}
