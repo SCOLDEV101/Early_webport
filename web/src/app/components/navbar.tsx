@@ -2,6 +2,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 
 // Navbar main Element
@@ -14,6 +15,7 @@ export default function Navbar() { // Navbar
 
     const [isMobile, setIsMobile] = useState(true);
 
+    const router = useRouter()
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(min-width: 640px)"); //(min-width: 768px)
@@ -91,24 +93,23 @@ export default function Navbar() { // Navbar
                 {!isMobile && (
                     <div className="flex flex-row flex-nowrap justify-center items-center gap-16">
                         {/* Home menu กดแล้วไป section Home */}
-                        <MenuItem setActive={setActive} active={active} item="Home" href="#Home"></MenuItem>
+                        <MenuItem setActive={setActive} active={active} item="Home" href="#home"></MenuItem>
                         {/* Portfolio menu กดแล้วไป section Portfolio */}
-                        <MenuItem setActive={setActive} active={active} item="Portfolio" href="#Portfolio"></MenuItem>
+                        <MenuItem setActive={setActive} active={active} item="Portfolio" href="#portfolio"></MenuItem>
                         {/* About menu กดแล้วจะขึ้น popup ของ About */}
                         <MenuItem setActive={setActive} active={active} item="About">
                             {/*  Popup menus ของ About ทั้งชุด */}
                             <div className="flex flex-col space-y-1">
                                 {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
-                                <HoveredLink href="#1">ประวัติการทำงาน</HoveredLink>
-                                <HoveredLink href="#2">Contact</HoveredLink>
-                                <HoveredLink href="#3">Services</HoveredLink>
-                                <HoveredLink href="#4">Member</HoveredLink>
+                                <HoveredLink href="#about">Contact</HoveredLink>
+                                <HoveredLink href="#services">Services</HoveredLink>
+                                <HoveredLink href="#member">Member</HoveredLink>
                             </div>
                         </MenuItem>
                     </div>
                 )}
                 {/* Enquiry button */}
-                <button type="button" className="max-sm:hidden bg-[#ECF0FF] rounded-[10px] w-[150px] px-3 py-1 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
+                <button type="button" onClick={() => router.push('#enquiry')} className="max-sm:hidden bg-[#ECF0FF] rounded-[10px] w-[150px] px-3 py-1 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
                     <h5 className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] bg-clip-text text-transparent font-bold">
                         Enquiry
                     </h5>
@@ -134,17 +135,16 @@ export default function Navbar() { // Navbar
             {isMobile && mobileNavbarActive && (
                 <div className="absolute top-[70px] z-[50] right-0 flex flex-col w-full gap-1">
                     {/* Home menu กดแล้วไป section Home */}
-                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Home" href="#Home" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
+                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Home" href="#home" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                     {/* Portfolio menu กดแล้วไป section Portfolio */}
-                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Portfolio" href="#Portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
+                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Portfolio" href="#portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                     {/* About menu กดแล้วจะขึ้น popup ของ About */}
                     <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="About &#129170;">
                         <div className="flex flex-col space-y-1">
                             {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
-                            <HoveredLink href="#1" onClick={() => setMobileNavbarActive(false)}>ประวัติการทำงาน</HoveredLink>
-                            <HoveredLink href="#2" onClick={() => setMobileNavbarActive(false)}>Contact</HoveredLink>
-                            <HoveredLink href="#3" onClick={() => setMobileNavbarActive(false)}>Services</HoveredLink>
-                            <HoveredLink href="#4" onClick={() => setMobileNavbarActive(false)}>Member</HoveredLink>
+                            <HoveredLink href="#about" onClick={() => setMobileNavbarActive(false)}>Contact</HoveredLink>
+                            <HoveredLink href="#services" onClick={() => setMobileNavbarActive(false)}>Services</HoveredLink>
+                            <HoveredLink href="#member" onClick={() => setMobileNavbarActive(false)}>Member</HoveredLink>
                         </div>
                     </MenuItem>
                 </div>
