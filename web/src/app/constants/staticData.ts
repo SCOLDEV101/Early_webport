@@ -37,6 +37,9 @@ type MEMBER_DATA = {
 }
 
 // Data
+export const MAIL_USER = "scoldev101@gmail.com"
+export const MAIL_PASSWORD = "ozcfwsczlocoyevd"
+
 export const portfolio_data: PORTFOLIO_DATA[] = [
     {
         id: 1,
@@ -150,7 +153,7 @@ export const service_data: SERVICE_DATA[] = [
 export const member_data: MEMBER_DATA[] = [
     {
         id: "PM001",
-        position: "CEO , Project manager",
+        position: "Founder , Project manager",
         name: "ธนพล สมฤทธิ์",
         img_src: "/member/team/pk.jpg",
         img_alt: "Thanapol Somrit",
@@ -456,7 +459,7 @@ export const member_data: MEMBER_DATA[] = [
         id: "B002",
         position: "Back-End Developer",
         name: "จักรี วรรณทองสุข",
-        img_src: "/member/team/ukij.jpg",
+        img_src: "/member/team/ukiJ.jpg",
         img_alt: "Jakgree Wannathongsuk",
         img_style: "",
         email: "jakgree.wnts@gmail.com",

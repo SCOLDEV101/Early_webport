@@ -110,8 +110,8 @@ h6, p {
     z-index: 70;
     top: auto !important;
     bottom: 10vh;
-    width: 3vw !important;
-    height: 9vh !important;
+    width: 6vw !important;
+    height: 10vh !important;
 }
 
 .swiper-button-prev {
@@ -135,3 +135,46 @@ h6, p {
   .swiper-button-prev::after {
   display: none;
   }
+
+  .swiper-pagination-bullet {
+    background:var(--swiper-pagination-bullet-inactive-color, linear-gradient(90deg, #C8BDE4 , #FFFFFF 20%)) !important ;
+  }
+  .swiper-pagination-bullet-active {
+    background:var(--swiper-pagination-color, radial-gradient(circle, #5844D7, #6580E1)) !important ;
+  }
+
+  .backguard-circleblue {
+    width: 90%;
+    height: 25%;
+    border-radius: 50%;
+    background: radial-gradient(circle, #5844D7, #6580E1);
+    filter: blur(200px); 
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+  .backguard-circlewhite {
+    width: 90%;
+    height: 25%;
+    border-radius: 50%;
+    background-color: #ECF0FF;
+    filter: blur(350px); 
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+.backguard-circlestockgradient {
+  width: 155%;
+  height: 40%;
+  border-radius: 50% ;
+  border: 1px solid transparent;
+  background-color: transparent;
+  background: linear-gradient(45deg, #C8BDE4 10%, #6E687E) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: -1;
+  box-shadow: 5px 5px 5px -5px rgba(236,240,255,0.41); 
+}

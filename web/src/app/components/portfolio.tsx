@@ -9,9 +9,8 @@ import '../globals.css';
 // import required modules
 import { Navigation } from 'swiper/modules';
 
-type Props = {}
 
-export default function Portfolio({ }: Props) {
+export default function Portfolio() {
 
     // State สำหรับการ active ของปุ่ม menu filter
     const [Filter, setFilter] = useState<string>("all"); // ค่า filter เริ่มต้นเป็น all
@@ -43,7 +42,7 @@ export default function Portfolio({ }: Props) {
 
     return (
         <>
-            <div className="flex flex-row justify-between items-center px-3">
+            <div className="flex flex-col items-start md:flex-row md:justify-between md:items-center px-3">
                 {/* Header ของ section นี้ */}
                 <h1 className="font-extrabold text-white">Portfolio</h1>
 
@@ -52,7 +51,7 @@ export default function Portfolio({ }: Props) {
             </div>
 
             {/* ส่วนแสดงผลข้อมูล portfolio */}
-            <div className="grid grid-cols-1 gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8">
+            <div className="grid gap-3 md:gap-10 grid-cols-2 md:grid-cols-3 my-8">
                 
                 {/* นำ filteredData ที่ประกาศไว้ก่อนหน้า มาทำการ map แยก array */}
                 {filteredData.map((data, idx) => (
@@ -63,7 +62,7 @@ export default function Portfolio({ }: Props) {
                             setModalID(data.id); // เก็บ id ของข้อมูลที่ถูกคลิก
                             console.log(modalID); // Debugging: ตรวจสอบค่า modalID
                         }}
-                        className="w-full bg-transparent space-y-4 transition-shadow p-4 rounded-[15px] hover:bg-[linear-gradient(0deg,_var(--tw-gradient-stops))] from-[rgba(200,189,228,.55)_0%] to-[rgba(96,81,81,0.1)_64%] hover:shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-5px_#ECF0FF]"
+                        className="w-full bg-transparent space-y-4 transition-shadow p-2 md:p-4 rounded-[15px] hover:bg-[linear-gradient(0deg,_var(--tw-gradient-stops))] from-[rgba(200,189,228,.55)_0%] to-[rgba(96,81,81,0.1)_64%] hover:shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-5px_#ECF0FF]"
                     >
                         {/* รูปของแต่ละ 1 ชุดข้อมูล */}
                         <img
@@ -75,7 +74,7 @@ export default function Portfolio({ }: Props) {
                         {/* ส่วนของ detail */}
                         <div className="space-y-1">
                             {/* หัวเรื่องของแต่ละชุดข้อมูล */}
-                            <h4 className="font-extrabold text-[#FFFFFF] break-words">{data.title}</h4>
+                            <h6 className="md:text-[1.5rem] font-extrabold text-[#FFFFFF] break-words">{data.title}</h6>
                             {/* description ของแต่ละชุดข้อมูล */}
                             <p className="text-sm text-[#ECF0FF]">{data.desc}</p>
                         </div>
@@ -113,15 +112,13 @@ export default function Portfolio({ }: Props) {
                             {portfolio_data.map((item) => (
                                 <SwiperSlide key={item.id}>
                                     <div 
-                                        className="overflow-y-auto h-[80vh] w-full" // จัดการ scroll ใน modal
+                                        className="overflow-y-auto  h-[50vh] md:h-[80vh] w-full" // จัดการ scroll ใน modal
                                         style={{scrollbarWidth:"none"}} // ซ่อน scrollbar
                                     >
-                                        <Image
+                                        <img
                                             src={item.poster} // URL รูปใน Swiper
                                             alt={item.img_alt} // คำอธิบายรูป
-                                            width={800}
-                                            height={1500}
-                                            className="mx-auto rounded-lg"
+                                            className="w-[70vw] mx-auto rounded-lg"
                                         />
                                     </div>
                                 </SwiperSlide>
@@ -143,22 +140,22 @@ const FilterMenus = ({
     // Types ของแต่ละตัวแปร
     setFilter: (item: string) => void,
     Filter: string,
-    Menus: any[]
+    Menus:{ name: string, category: string }[];
 }) => {
     return (
-        <div className="flex flex-row flex-nowrap space-x-4">
+        <div className="flex flex-row flex-nowrap space-x-2 md:space-x-4">
             {/* Map เมนูแต่ละปุ่มออกมา */}
-            {Menus.length > 0 && Menus.map((menu, idx) => (
+            {Menus.length > 0 && Menus.map((menu) => (
                 <div
                     key={menu.name} // key สำหรับปุ่ม
-                    className={`group/filter-btn cursor-pointer py-1 px-4 w-[125px] text-center
+                    className={`group/filter-btn cursor-pointer py-1 px-4 w-[25vw] md:w-[125px] text-center
                         ${menu.category === Filter // เช็คว่าปุ่มนี้เป็นปุ่มที่ active อยู่มั้ย ถ้าใช่ (===) ให้ทำในส่วนด้านหลัง && (และ)
                         && "rounded-[10px] shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-15px_#B2A9E7] bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[rgba(200,189,228,1)_0%] to-[rgba(255,255,255,0.5)_100%]"}`}
                     onClick={() => setFilter(menu.category)} // กรณีกดปุ่มนี้แล้วจะ set active ให้ปุ่มที่กด
                 >
-                    <h5 className={`text-[#ECF0FF] ${menu.category !== Filter && "group-hover/filter-btn:[text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25),_0_4px_13.1px_rgba(255_255_255_/_0.2),_0_10px_20px_rgba(236_240_255_/_0.9)]"}`}>
+                    <h6 className={`text-[#ECF0FF] md:text-[1.25rem] ${menu.category !== Filter && "group-hover/filter-btn:[text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25),_0_4px_13.1px_rgba(255_255_255_/_0.2),_0_10px_20px_rgba(236_240_255_/_0.9)]"}`}>
                         {menu.name} {/* ชื่อปุ่ม */}
-                    </h5>
+                    </h6>
                 </div>
             ))}
         </div>

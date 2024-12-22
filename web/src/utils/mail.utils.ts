@@ -1,3 +1,4 @@
+import { MAIL_PASSWORD, MAIL_USER } from '@/app/constants/staticData'
 import nodemailer from 'nodemailer'
 import Mail from 'nodemailer/lib/mailer'
 import SMTPTransport from 'nodemailer/lib/smtp-transport'
@@ -7,8 +8,8 @@ const transport = nodemailer.createTransport({
     port: 465,
     secure: true, //true
     auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASSWORD,
+        user: process.env.MAIL_USER || MAIL_USER || "",
+        pass: process.env.MAIL_PASSWORD || MAIL_PASSWORD || "",
     },
 } as SMTPTransport.Options)
 
