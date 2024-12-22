@@ -13,7 +13,7 @@ import './globals.css';
 
 export default function Home() {
   return (
-    <div className="w-screen flex flex-col overflow-x-hidden relative">
+    <div className="flex flex-col overflow-x-hidden relative">
       {/* พื้นหลัง */}
       <div className='backguard-circleblue opacity-[.33] top-[-20%] left-[50%]' />
       <div className='backguard-circleblue opacity-[.13] top-[15%] left-[30%]' />
@@ -41,7 +41,6 @@ export default function Home() {
             </span>
           </Link>
         </div>
-        {/* <Projectslider/> */}
       </section>
 
       {/* //////////////////////////////////////////////////////////////////////// */}
@@ -74,7 +73,7 @@ export default function Home() {
           >
             <h3 className="md:text-[2.5rem] my-1 md:my-2 bg-gradient-to-br from-[#BDCBFD] to-[#E5D5FF] inline-block text-transparent bg-clip-text font-[900]">
               Contact
-            </h3> {/*textgradient */}
+            </h3> 
             <h6 className="md:text-[1.25rem] font-bold">063-874-0176</h6>
             <h6 className="md:text-[1.25rem] font-bold break-words">scoldev101@gmail.com</h6>
           </div>
@@ -109,13 +108,11 @@ export default function Home() {
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
-      <section id="enquiry" className="pt-[150px] mb-[150px] max-w-[100vw]">
-        <div className="max-w-full sm:mx-[160px] mx-[0px] w-auto">
+      <section id="enquiry" className="pt-[150px] max-sm:pt-0 mb-[150px] max-w-[100vw]">
+        <div className="max-w-full sm:mx-[160px] mx-[20px] w-auto">
           <Enquiry />
         </div>
       </section>
-
-
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
