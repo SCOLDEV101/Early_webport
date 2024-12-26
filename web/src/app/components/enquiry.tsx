@@ -370,7 +370,7 @@ export default function Enquiry() {
                 <div>
                     <h5 className='bg-gradient-to-r max-sm:text-[3.5vw] from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-extrabold'>1. User Information</h5>
                     <div>
-                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
+                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
                             <div className='bg-gradient-to-t from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
                                     width: `${processBar["0"]}%`,
@@ -383,7 +383,7 @@ export default function Enquiry() {
                 <div>
                     <h5 className='bg-gradient-to-r max-sm:text-[3.5vw] from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-extrabold'>2. Project Information</h5>
                     <div>
-                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
+                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
                             <div className='bg-gradient-to-t from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
                                     width: `${processBar["1"]}%`,
