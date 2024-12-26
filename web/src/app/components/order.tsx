@@ -24,7 +24,7 @@ const step_order = [
         },
         alt: "2-confirm",
         desc: {
-            title: 'เราประเมินงานและจัดส่งใบเสนอราคา พร้อมขอบเขตงาน (Scope) <br/> ให้พิจารณาตกลงเงื่อนไขและ ชำระเงินงวดแรกเพื่อเริ่มงาน',
+            title: `เราประเมินงานและจัดส่งใบเสนอราคา พร้อมขอบเขตงาน (Scope) <br class="max-sm:hidden"/> ให้พิจารณาตกลงเงื่อนไขและ ชำระเงินงวดแรกเพื่อเริ่มงาน`,
             sub: "",
         }
     },
@@ -37,7 +37,7 @@ const step_order = [
         },
         alt: "3-update",
         desc: {
-            title: "ทีมงานเริ่มดำเนินการและอัปเดตความคืบหน้า <br/> ลูกค้าสามารถแจ้งแก้ไขได้ตามที่ตกลงไว",
+            title: `ทีมงานเริ่มดำเนินการและอัปเดตความคืบหน้า <br/> ลูกค้าสามารถแจ้งแก้ไขได้ตามที่ตกลงไว`,
             sub: "",
         }
     },
@@ -50,7 +50,7 @@ const step_order = [
         },
         alt: "4-check",
         desc: {
-            title: "เมื่องานเสร็จสมบูรณ์ เราส่งมอบงานทั้งหมดให้ <br max-sm:hidden/> พร้อมชำระเงินส่วนที่เหลือ",
+            title: `เมื่องานเสร็จสมบูรณ์ เราส่งมอบงานทั้งหมดให้ <br class='max-sm:hidden'/> พร้อมชำระเงินส่วนที่เหลือ`, // ใช้ class ไม่ใช้ className เพราะ มันเป็น element บนหน้าเว็ปแล้ว ไม่ใช่ของ tsx
             sub: "*บริการหลังการขาย: เรามีบริการดูแลและบำรุงรักษาเว็บไซต์ เช่น การปรับปรุงข้อมูล <br/> แก้ไขข้อบกพร่อง หรืออัปเดตฟีเจอร์เล็ก ๆ ในระยะเวลาที่กำหนด",
         }
     },
@@ -90,7 +90,7 @@ export default function Order() {
                                 }}
                             >
                                 <h3
-                                    className={`text-[20px] max-sm:text-[14px] font-bold ${stepSelected === idx
+                                    className={`text-[20px] max-sm:text-[1rem] font-bold ${stepSelected === idx
                                         ? "bg-[linear-gradient(-97deg,_var(--tw-gradient-stops))] from-[#5844D7] to-[#6580E1]"
                                         : "bg-opacity-[0.1] bg-[linear-gradient(-97deg,_var(--tw-gradient-stops))] from-[#E5D5FF] to-[#BDCBFD]"
                                         } bg-clip-text text-transparent`}
@@ -110,10 +110,10 @@ export default function Order() {
                     height={step_order[stepSelected].img_size.h}
                     className={`absolute max-sm:relative ${stepSelected === 1 ? "top-[-150px]" : "top-[-110px]"} sm:right-32 transition-opacity duration-300 ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}
                 />
-                <div className={`absolute ${stepSelected === 1 ? "max-sm:bottom-[150px]" : "max-sm:bottom-[100px]"} -bottom-[50px] w-full text-end sm:pe-[14rem]`}>
+                <div className={`absolute ${stepSelected === 1 ? "max-sm:bottom-[110px]" : "max-sm:bottom-[90px]"} -bottom-[50px] w-full text-end sm:pe-[14rem]`}>
                     {step_order[stepSelected].desc.title && (
                         <h6
-                            className="text-white font-bold max-sm:text-[.625rem] [text-shadow:_0_10px_30px_rgba(236_240_255_/_0.9)]"
+                            className="text-white font-bold max-sm:text-[0.9rem] [text-shadow:_0_10px_30px_rgba(236_240_255_/_0.9)]"
                             dangerouslySetInnerHTML={{
                                 __html: step_order[stepSelected].desc.title,
                             }}
