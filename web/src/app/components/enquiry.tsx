@@ -721,12 +721,12 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
 // }
 function Thanks() {
     return (
-        <div className="flex flex-col justify-center items-center">
-            <h2 className="font-extrabold bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(200,189,228,0.2)] bg-clip-text text-transparent">
+        <div className="flex flex-col justify-center items-center pt-12">
+            <h2 className="font-extrabold max-sm:text-[1.25rem] bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(200,189,228,0.2)] bg-clip-text text-transparent">
                 ขอบคุณที่เลือกใช้บริการของเรา
             </h2>
-            <h5 className="text-center text-[#ECF0FF] font-light">
-                ทีมงานของเราจะติดต่อกลับไปภายใน 1 - 3 วัน หากต้องการแก้ไขข้อมูล <br />
+            <h5 className="text-center max-sm:text-[1rem] text-[#ECF0FF] font-light">
+                ทีมงานของเราจะติดต่อกลับไปภายใน 1 - 3 วัน หากต้องการแก้ไขข้อมูล <br className="max-sm:hidden block"/>
                 ท่านสามารถกรอกฟอร์มใหม่อีกครั้ง หรือ สามาถแจ้งเราได้ในภายหลัง
             </h5>
         </div>
@@ -811,7 +811,7 @@ const DropFileInput = ({ data, handlerInputChanged }: DropFileInput_Props) => {
                 >
                     <h5 className="text-[#6580E1] font-light">Drop to upload</h5>
                     <div className="text-[#ECF0FF] font-normal cursor-pointer p-3 rounded-[5px] bg-gradient-to-tr from-[rgba(88,68,215,1)] to-[rgba(101,128,225,1)]">
-                        <h5>Select files</h5>
+                        <h5 className="max-sm:text-[1.125rem]">Select files</h5>
                     </div>
                 </label>
                 <input
@@ -880,7 +880,7 @@ const Dropdown = ({ data, optionTitle, options, optionSelected, requireField }: 
                 onClick={() => setOpen(!open)}
                 className={`relative h-[56px] flex items-center justify-center w-full p-4 ${open ? "rounded-t-[5px] bg-[linear-gradient(-96deg,_var(--tw-gradient-stops))] from-[rgba(88,68,215,1)] to-[rgba(101,128,225,1)]" : "rounded-[5px] bg-[#ECF0FF]"} ${!selected && "text-gray-700"} ${requireField[map_key.toLowerCase()] && "border-[3px] border-red-600"} `}
             >
-                <h5 className={`${open ? "text-[#ECF0FF]" : "text-[#453E72]"} font-normal`}>
+                <h5 className={`${open ? "text-[#ECF0FF]" : "text-[#453E72]"} font-normal max-sm:text-[1.0625rem] max-sm:font-bold`}>
                     {selected
                         ? selected?.length > 25
                             ? selected?.substring(0, 25) + "..."
