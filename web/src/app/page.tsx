@@ -35,7 +35,7 @@ export default function Home() {
           </h3>
           <h6 className='md:text-[1.25rem] mb-10 md:mb-14'>เราพร้อมพัฒนาเว็บไซต์ เพื่อตอบโจทย์ความต้องการของคุณโดยเฉพาะ อย่าปล่อยให้ไอเดียของคุณเป็นแค่ความฝัน!</h6>
 
-          <Link href="#enquiry" className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] rounded-[10px] px-5 md:px-10 py-3 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
+          <Link href="#enquiry" className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] rounded-[15px] px-10 md:px-10 py-3 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
             <span className="text-[1rem] md:text-[1.25rem] text-[#ECF0FF] text-center font-bold">
               Enquiry now
             </span>
