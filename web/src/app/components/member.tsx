@@ -19,7 +19,7 @@ export default function Member({}: Props) {
   useEffect(() => {
     // ฟังก์ชันสำหรับตรวจสอบขนาดหน้าจอ
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 640);
+      setIsSmallScreen(window.innerWidth < 845);
     };
 
     // ตรวจสอบขนาดจอเมื่อคอมโพเนนต์โหลดครั้งแรก
@@ -58,7 +58,7 @@ export default function Member({}: Props) {
               {member_data.map((data, idx) => (
                 <SwiperSlide key={idx}>
                   <div
-                    className="w-full relative bg-transparent space-y-4 transition-shadow rounded-[10px]"
+                    className="w-full relative bg-transparent space-y-4 transition-shadow rounded-[10px] hover:shadow-[0px_4px_13px_0px_rgba(255,255,255,.3),0px_10px_30px_-15px_rgba(236,240,255,.9),inset_0px_3px_4px_-2px_rgba(255,255,255,1),inset_0px_-14px_33.2px_-2px_rgba(200,189,228,.9)]"
                     onClick={() => {
                       setOpenPopup(true);
                       setModalID(data.id);
@@ -146,6 +146,55 @@ export default function Member({}: Props) {
                                 </div>
                               </div>
                             </div>
+                            {/* (Skills & Certificates) */}
+                            <div className="w-[50vw] my-12 space-y-8 py-8 px-5 rounded-[10px] bg-[rgba(255,255,255,.25)] z-10">
+                              {/* Skills */}
+                              <div className="-space-y-1">
+                                <h3 className="w-fit font-bold bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#1E1E1E] via-[#5844D7] to-[#6580E1] bg-clip-text text-transparent">
+                                  Skills
+                                </h3>
+                                <hr className="m-0 border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.2px] w-[14%]" />
+                              </div>
+
+                              {/* Skills List */}
+                              <div className="grid grid-cols-1 space-y-8">
+                                {item.skills.map((skill, idx) => (
+                                  <div
+                                    key={idx}
+                                    className="text-start w-[20vw] h-[5vw] flex flex-row gap-4"
+                                  >
+                                    <img
+                                      src={skill.skill_icon}
+                                      alt={skill.skill_title}
+                                      className="w-fit max-w-[24px] h-full mt-1"
+                                    />
+                                    <h5 className="font-medium">
+                                      {skill.skill_title}
+                                    </h5>
+                                  </div>
+                                ))}
+                              </div>
+
+                              {/* Certificates */}
+                              {item.certificates.length > 0 && (
+                                <>
+                                  <div className="-space-y-1">
+                                    <h3 className="w-fit font-bold bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#1E1E1E] via-[#5844D7] to-[#6580E1] bg-clip-text text-transparent">
+                                      Certificates
+                                    </h3>
+                                    <hr className="m-0 border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.2px] w-[28%]" />
+                                  </div>
+                                  {/* Certificates List */}
+                                  {item.certificates.map((cert, idx) => (
+                                    <CertificateCard
+                                      key={idx}
+                                      cert_data={cert}
+                                    />
+                                  ))}
+                                </>
+                              )}
+                            </div>
+
                           </div>
                         </div>
                       </SwiperSlide>
@@ -161,7 +210,7 @@ export default function Member({}: Props) {
               {member_data.map((data, idx) => (
                 <div
                   key={idx}
-                  className="w-full relative bg-transparent space-y-4 transition-shadow rounded-[10px]"
+                  className="w-full relative bg-transparent space-y-4 transition-shadow rounded-[10px] hover:shadow-[0px_4px_13px_0px_rgba(255,255,255,.3),0px_10px_30px_-15px_rgba(236,240,255,.9),inset_0px_3px_4px_-2px_rgba(255,255,255,1),inset_0px_-14px_33.2px_-2px_rgba(200,189,228,.9)]"
                   onClick={() => {
                     setOpenPopup(true);
                     setModalID(data.id);
@@ -239,6 +288,10 @@ export default function Member({}: Props) {
                                   <h5 className="text-[#16151D] text-center">
                                     {item.name}
                                   </h5>
+                                  <hr className="m-0 my-2 mx-auto border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.2px] w-[15vw]" />
+                                  <p className="text-[#453E72] text-[0.75rem] text-center break-words">
+                                    {item.email}
+                                  </p>
                                 </div>
                               </div>
                             </div>
