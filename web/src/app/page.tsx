@@ -46,7 +46,7 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
       <section id="portfolio" className="pt-[150px] max-w-[100vw]">
-        <div className='max-w-full sm:mx-[160px] mx-[20px] w-auto'>
+        <div className='max-w-full sm:mx-[160px] mx-[20px] w-auto min-h-[1000px]'>
           <Portfolio />
         </div>
       </section>
