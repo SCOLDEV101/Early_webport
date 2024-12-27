@@ -153,7 +153,7 @@ export default function Member({}: Props) {
                                 <h3 className="w-fit font-bold bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] from-[#1E1E1E] via-[#5844D7] to-[#6580E1] bg-clip-text text-transparent">
                                   Skills
                                 </h3>
-                                <hr className="m-0 border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.2px] w-[14%]" />
+                                <hr className="m-0 border-0 bg-gradient-to-r from-[#1E1E1E] via-[#5844D7] to-[#6580E1] p-[1.2px] w-[35%]" />
                               </div>
 
                               {/* Skills List */}
