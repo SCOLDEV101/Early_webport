@@ -101,7 +101,7 @@ export default function Home() {
       {/* //////////////////////////////////////////////////////////////////////// */}
 
       <section id="order" className="pt-[150px] max-w-[100vw]">
-        <div className='max-w-full sm:mx-[160px] mx-[20px]'>
+        <div className='max-w-full sm:mx-[160px] mx-[20px] min-h-[900px]'>
           <Order />
         </div>
       </section>
