@@ -300,7 +300,7 @@ const Menu = ({ // Props
             }}
             style={{
                 backgroundColor: "#ffffff",
-                background: mobileNavbarActive && isMobile ? "linear-gradient(83deg, rgba(30, 30, 30, 1) 0%, rgba(88, 68, 215, 1) 50%, rgba(101, 128, 225, 1) 100%)" : "linear-gradient(90deg, rgba(200, 189, 228, 1) 0%, rgba(255, 255, 255, 0.5) 100%)",
+                background: mobileNavbarActive && isMobile ? "linear-gradient(83deg, rgba(30, 30, 30, 0.3) 0%, rgba(88, 68, 215, 0.3) 50%, rgba(101, 128, 225, 0.3) 100%)" : "linear-gradient(90deg, rgba(200, 189, 228, 1) 0%, rgba(255, 255, 255, 0.5) 100%)",
                 boxShadow: `
                     inset 0px 3px 3.9px -2px rgba(255, 255, 255, .93),
                     0px 10px 30px -15px #B2A9E7`,
