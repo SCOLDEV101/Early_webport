@@ -31,125 +31,149 @@ export default function Navbar() { // Navbar
         };
     }, []);
 
+    const MobileMenuRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const handleOutSideClick = (event: MouseEvent) => {
+            if (!MobileMenuRef.current?.contains(event.target as Node) && mobileNavbarActive) {
+                setMobileNavbarActive(false);
+            } else {
+                return
+            }
+        };
+
+        window.addEventListener("mousedown", handleOutSideClick);
+
+        return () => {
+            window.removeEventListener("mousedown", handleOutSideClick);
+        };
+    }, [mobileNavbarActive, mobileNavbarMenuActive]);
+
     return (
         <div
-            className={"fixed top-10 inset-x-0 max-w-full sm:mx-[60px] mx-[20px] z-50"}
+            className={isMobile ? `${mobileNavbarActive && "fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-20"}` : ""}
         >
-            <Menu
-                setActive={setActive}
-                mobileNavbarActive={mobileNavbarActive}
-                setMobileNavbarActive={isMobile ? setMobileNavbarActive : undefined}
-                isMobile={isMobile}
+            <div
+                className={"fixed top-10 inset-x-0 max-w-full sm:mx-[60px] mx-[20px] z-50"}
             >
-                {/* Logo */}
-                <div className="max-sm:w-full relative">
+                <Menu
+                    setActive={setActive}
+                    mobileNavbarActive={mobileNavbarActive}
+                    setMobileNavbarActive={isMobile ? setMobileNavbarActive : undefined}
+                    isMobile={isMobile}
+                >
+                    {/* Logo */}
+                    <div className="max-sm:w-full relative">
+                        <Image
+                            className="hidden sm:block"
+                            src="./navbar-logo.svg"
+                            alt="logo"
+                            width="0"
+                            height="0"
+                            style={{ width: '150px', height: 'auto' }}
+                            priority
+                        />
+                        <div
+                            className={`relative sm:hidden max-sm:w-[calc(100%+45px)] transform transition-all flex flex-row justify-between items-center`}
+                            style={{
+                                right: mobileNavbarActive ? "calc(0vw)" : "calc(100vw - 115px)",
+                            }}
+                        >
+                            <Image
+                                className={`relative inline-block ${mobileNavbarActive ? "opacity-100" : "opacity-0"}`}
+                                src={"./mobileNavDropdonwIcon.svg"}
+                                onClick={() => {
+                                }}
+                                alt="logo"
+                                width="0"
+                                height="0"
+                                style={{
+                                    width: '30px',
+                                    height: 'auto',
+                                }}
+                                priority
+                            />
+                            <Image
+                                className={`relative inline-block`}
+                                src={mobileNavbarActive ? "./navbar-icon-white.svg" : "./navbar-icon.svg"}
+                                onClick={() => {
+                                }}
+                                alt="logo"
+                                width="0"
+                                height="0"
+                                style={{
+                                    width: '30px',
+                                    height: 'auto',
+                                }}
+                                priority
+                            />
+                        </div>
+                    </div>
+
+                    {/* Menus */}
+                    {!isMobile && (
+                        <div className="flex flex-row flex-nowrap justify-center items-center gap-16">
+                            {/* Home menu กดแล้วไป section Home */}
+                            <MenuItem setActive={setActive} active={active} item="Home" href="#home"></MenuItem>
+                            {/* Portfolio menu กดแล้วไป section Portfolio */}
+                            <MenuItem setActive={setActive} active={active} item="Portfolio" href="#portfolio"></MenuItem>
+                            {/* About menu กดแล้วจะขึ้น popup ของ About */}
+                            <MenuItem setActive={setActive} active={active} item="About">
+                                {/*  Popup menus ของ About ทั้งชุด */}
+                                <div className="flex flex-col space-y-1">
+                                    {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
+                                    <HoveredLink href="#about">Contact</HoveredLink>
+                                    <HoveredLink href="#services">Services</HoveredLink>
+                                    <HoveredLink href="#member">Member</HoveredLink>
+                                </div>
+                            </MenuItem>
+                        </div>
+                    )}
+                    {/* Enquiry button */}
+                    <button type="button" onClick={() => router.push('#enquiry')} className="max-sm:hidden bg-[#ECF0FF] rounded-[10px] w-[150px] px-3 py-1 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
+                        <h5 className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] bg-clip-text text-transparent font-bold">
+                            Enquiry
+                        </h5>
+                    </button>
                     <Image
-                        className="hidden sm:block"
-                        src="./navbar-logo.svg"
+                        className="block sm:hidden cursor-pointer"
+                        // onClick={() => {
+                        //     setMobileNavbarActive(!mobileNavbarActive);
+                        // }}
+                        src={"./menu.svg"}
                         alt="logo"
                         width="0"
                         height="0"
-                        style={{ width: '150px', height: 'auto' }}
+                        style={{
+                            width: '30px',
+                            height: 'auto',
+                            opacity: mobileNavbarActive ? '0' : '100',
+                            transition: 'opacity 0.2s ease-in-out',
+                        }}
                         priority
                     />
+                </Menu >
+                {isMobile && mobileNavbarActive && (
                     <div
-                        className={`relative sm:hidden max-sm:w-[calc(100%+45px)] transform transition-all flex flex-row justify-between items-center`}
-                        style={{
-                            right: mobileNavbarActive ? "calc(0vw)" : "calc(100vw - 115px)",
-                        }}
+                        ref={MobileMenuRef}
+                        className="absolute top-[70px] z-[50] right-0 flex flex-col w-full gap-1"
                     >
-                        <Image
-                            className={`relative inline-block ${mobileNavbarActive ? "opacity-100" : "opacity-0"}`}
-                            src={"./mobileNavDropdonwIcon.svg"}
-                            onClick={() => {
-                            }}
-                            alt="logo"
-                            width="0"
-                            height="0"
-                            style={{
-                                width: '30px',
-                                height: 'auto',
-                            }}
-                            priority
-                        />
-                        <Image
-                            className={`relative inline-block`}
-                            src={mobileNavbarActive ? "./navbar-icon-white.svg" : "./navbar-icon.svg"}
-                            onClick={() => {
-                            }}
-                            alt="logo"
-                            width="0"
-                            height="0"
-                            style={{
-                                width: '30px',
-                                height: 'auto',
-                            }}
-                            priority
-                        />
-                    </div>
-                </div>
-
-                {/* Menus */}
-                {!isMobile && (
-                    <div className="flex flex-row flex-nowrap justify-center items-center gap-16">
                         {/* Home menu กดแล้วไป section Home */}
-                        <MenuItem setActive={setActive} active={active} item="Home" href="#home"></MenuItem>
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Home" href="#home" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                         {/* Portfolio menu กดแล้วไป section Portfolio */}
-                        <MenuItem setActive={setActive} active={active} item="Portfolio" href="#portfolio"></MenuItem>
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Portfolio" href="#portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                         {/* About menu กดแล้วจะขึ้น popup ของ About */}
-                        <MenuItem setActive={setActive} active={active} item="About">
-                            {/*  Popup menus ของ About ทั้งชุด */}
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="About &#129170;">
                             <div className="flex flex-col space-y-1">
                                 {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
-                                <HoveredLink href="#about">Contact</HoveredLink>
-                                <HoveredLink href="#services">Services</HoveredLink>
-                                <HoveredLink href="#member">Member</HoveredLink>
+                                <HoveredLink href="#about" onClick={() => setMobileNavbarActive(false)}>Contact</HoveredLink>
+                                <HoveredLink href="#services" onClick={() => setMobileNavbarActive(false)}>Services</HoveredLink>
+                                <HoveredLink href="#member" onClick={() => setMobileNavbarActive(false)}>Member</HoveredLink>
                             </div>
                         </MenuItem>
                     </div>
                 )}
-                {/* Enquiry button */}
-                <button type="button" onClick={() => router.push('#enquiry')} className="max-sm:hidden bg-[#ECF0FF] rounded-[10px] w-[150px] px-3 py-1 transition-shadow hover:shadow-[0px_4px_13.1px_0px_rgba(255,255,255,0.4),0px_10px_20px_-15px_rgba(236,240,255,1)]">
-                    <h5 className="bg-gradient-to-r from-[#6580E1] to-[#5844D7] bg-clip-text text-transparent font-bold">
-                        Enquiry
-                    </h5>
-                </button>
-                <Image
-                    className="block sm:hidden cursor-pointer"
-                    // onClick={() => {
-                    //     setMobileNavbarActive(!mobileNavbarActive);
-                    // }}
-                    src={"./menu.svg"}
-                    alt="logo"
-                    width="0"
-                    height="0"
-                    style={{
-                        width: '30px',
-                        height: 'auto',
-                        opacity: mobileNavbarActive ? '0' : '100',
-                        transition: 'opacity 0.2s ease-in-out',
-                    }}
-                    priority
-                />
-            </Menu >
-            {isMobile && mobileNavbarActive && (
-                <div className="absolute top-[70px] z-[50] right-0 flex flex-col w-full gap-1">
-                    {/* Home menu กดแล้วไป section Home */}
-                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Home" href="#home" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
-                    {/* Portfolio menu กดแล้วไป section Portfolio */}
-                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Portfolio" href="#portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
-                    {/* About menu กดแล้วจะขึ้น popup ของ About */}
-                    <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="About &#129170;">
-                        <div className="flex flex-col space-y-1">
-                            {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
-                            <HoveredLink href="#about" onClick={() => setMobileNavbarActive(false)}>Contact</HoveredLink>
-                            <HoveredLink href="#services" onClick={() => setMobileNavbarActive(false)}>Services</HoveredLink>
-                            <HoveredLink href="#member" onClick={() => setMobileNavbarActive(false)}>Member</HoveredLink>
-                        </div>
-                    </MenuItem>
-                </div>
-            )}
-        </div >
+            </div >
+        </div>
     );
 }
 
