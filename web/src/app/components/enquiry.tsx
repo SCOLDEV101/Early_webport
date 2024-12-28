@@ -375,10 +375,9 @@ export default function Enquiry() {
                         <div className='bg-gradient-to-b from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
                             <div className=' flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
-                                    // width: `${processBar["0"]}%`,
-                                    width: `100%`,
+                                    width: `${processBar["0"]}%`,
                                     transition: 'width 0.5s ease-in-out',
-                                    background: 'linear-gradient(75deg, ##6580E1 0%, #6068DD 59%, #5844D7 100%)',
+                                    background: 'linear-gradient(  #5844D7 0%, #6068DD 59%, #6580E1 100%)',
                                 }}
                             />
                         </div>
@@ -390,10 +389,9 @@ export default function Enquiry() {
                         <div className='bg-gradient-to-b from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
                             <div className='flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
-                                    // width: `${processBar["1"]}%`,
-                                    width: `100%`,
+                                    width: `${processBar["1"]}%`,
                                     transition: 'width 0.5s ease-in-out',
-                                    background: 'linear-gradient(75deg, ##6580E1 0%, #6068DD 59%, #5844D7 100%)',
+                                    background: 'linear-gradient(  #5844D7 0%, #6068DD 59%, #6580E1 100%)',
                                 }}
                             />
                         </div>
