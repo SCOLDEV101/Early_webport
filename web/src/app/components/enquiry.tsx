@@ -370,28 +370,35 @@ export default function Enquiry() {
             </div>
             <div className="grid grid-cols-2 w-full mb-5 gap-5">
                 <div>
-                    <h5 className='bg-gradient-to-r max-sm:text-[3.5vw] from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-extrabold'>1. User Information</h5>
+                     <h5 className={`max-sm:text-[3.5vw] bg-clip-text text-transparent font-extrabold ${
+                            currentStep >= 1
+                            ? 'bg-gradient-to-r from-[#5844D7] from-0% via-[#6068DD] via-59% to-[#6580E1] to-100%'
+                            : 'bg-gradient-to-r from-[#C8BDE4] to-[#FFFFFF]/20'
+                        }`}
+                    >1. User Information</h5>
                     <div>
-                        <div className='bg-gradient-to-b from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
-                            <div className=' flex justify-center items-center h-full text-xs text-white font-bold'
+                        <div className='bg-gradient-to-t from-[rgba(88,68,215,1)]/50 to-[rgba(101,128,225,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
+                            <div className='bg-gradient-to-t from-[#6580E1] from-0% via-[#6068DD] via-59% to-[#5844D7] to-100% flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
                                     width: `${processBar["0"]}%`,
                                     transition: 'width 0.5s ease-in-out',
-                                    background: 'linear-gradient(  #5844D7 0%, #6068DD 59%, #6580E1 100%)',
                                 }}
                             />
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h5 className='bg-gradient-to-r max-sm:text-[3.5vw] from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-extrabold'>2. Project Information</h5>
+                    <h5 className={`max-sm:text-[3.5vw] bg-clip-text text-transparent font-extrabold ${
+                            currentStep >= 2
+                            ? 'bg-gradient-to-r from-[#5844D7] from-0% via-[#6068DD] via-59% to-[#6580E1] to-100%'
+                            : 'bg-gradient-to-r from-[#C8BDE4] to-[#FFFFFF]/20'
+                        }`}>2. Project Information</h5>
                     <div>
-                        <div className='bg-gradient-to-b from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
-                            <div className='flex justify-center items-center h-full text-xs text-white font-bold'
+                        <div className='bg-gradient-to-b from-[rgba(88,68,215,1)]/50 to-[rgba(101,128,225,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
+                            <div className='bg-gradient-to-t from-[#6580E1] from-0% via-[#6068DD] via-59% to-[#5844D7] to-100% flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
                                     width: `${processBar["1"]}%`,
                                     transition: 'width 0.5s ease-in-out',
-                                    background: 'linear-gradient(  #5844D7 0%, #6068DD 59%, #6580E1 100%)',
                                 }}
                             />
                         </div>
