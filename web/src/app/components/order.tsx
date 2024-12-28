@@ -73,7 +73,7 @@ export default function Order() {
     return (
         <div className="grid grid-cols-3 max-sm:flex max-sm:flex-col max-sm:gap-32 sm:pb-32 pb-10">
             <div className="col-span-1">
-                <h1 className="text-[#ECF0FF] font-extrabold mb-6 max-sm:text-[1.5rem]">How to Order</h1>
+                <h1 className="text-[#ECF0FF] font-extrabold mb-6 max-sm:text-[2.5rem]">How to Order</h1>
                 <div className="w-[200px] max-sm:w-full">
                     <ul className="flex flex-col gap-6 max-sm:gap-4">
                         {step_order.length > 0 && step_order.map((step, idx) => (

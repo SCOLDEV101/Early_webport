@@ -46,6 +46,7 @@ const EnquiryForm_RequireField: RequireFieldType = {
     name: false,
     email: false,
     phone: false,
+    project_name: false,
     project_type: false,
     project_content: false,
     project_purpose: false,
@@ -95,9 +96,10 @@ export default function Enquiry() {
             // console.log("urrentStep === 0");
 
         } else if (currentStep === 1) {
-            if (!data.project_type || !data.project_content || !data.project_purpose || !data.project_target) {
+            if (!data.project_name || !data.project_type || !data.project_content || !data.project_purpose || !data.project_target) {
                 setRequireField((prev) => ({
                     ...prev,
+                    project_name: !data.project_name ? true : false,
                     project_type: !data.project_type ? true : false,
                     project_content: !data.project_content ? true : false,
                     project_purpose: !data.project_purpose ? true : false,
@@ -370,11 +372,13 @@ export default function Enquiry() {
                 <div>
                     <h5 className='bg-gradient-to-r max-sm:text-[3.5vw] from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-extrabold'>1. User Information</h5>
                     <div>
-                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
-                            <div className='bg-gradient-to-t from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] flex justify-center items-center h-full text-xs text-white font-bold'
+                        <div className='bg-gradient-to-b from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
+                            <div className=' flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
-                                    width: `${processBar["0"]}%`,
-                                    transition: 'width 0.5s ease-in-out'
+                                    // width: `${processBar["0"]}%`,
+                                    width: `100%`,
+                                    transition: 'width 0.5s ease-in-out',
+                                    background: 'linear-gradient(75deg, ##6580E1 0%, #6068DD 59%, #5844D7 100%)',
                                 }}
                             />
                         </div>
@@ -383,11 +387,13 @@ export default function Enquiry() {
                 <div>
                     <h5 className='bg-gradient-to-r max-sm:text-[3.5vw] from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] bg-clip-text text-transparent font-extrabold'>2. Project Information</h5>
                     <div>
-                        <div className='bg-gradient-to-t from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
-                            <div className='bg-gradient-to-t from-[rgba(101,128,225,1)] to-[rgba(88,68,215,1)] flex justify-center items-center h-full text-xs text-white font-bold'
+                        <div className='bg-gradient-to-b from-[rgba(101,128,225,1)]/50 to-[rgba(88,68,215,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
+                            <div className='flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
-                                    width: `${processBar["1"]}%`,
-                                    transition: 'width 0.5s ease-in-out'
+                                    // width: `${processBar["1"]}%`,
+                                    width: `100%`,
+                                    transition: 'width 0.5s ease-in-out',
+                                    background: 'linear-gradient(75deg, ##6580E1 0%, #6068DD 59%, #5844D7 100%)',
                                 }}
                             />
                         </div>
@@ -571,13 +577,13 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
             <div className="w-full space-y-4">
                 <LabelInputContainer>
                     <label
-                        className="bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"
+                        className={`text-[16px] ${requireField.project_name ? "text-red-600" :"bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                         htmlFor="project_name"
                     >
-                        Project name
+                        Project name*
                     </label>
                     <input
-                        className="rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF]"
+                        className={`rounded-[5px] p-4 text-[#453E72] bg-[#ECF0FF] ${requireField.project_name && "border-[3px] border-red-600"}`}
                         id="project_name"
                         name="project_name"
                         placeholder="กรุณากรอกชื่อ เช่น 'เจเจ'"
@@ -725,7 +731,7 @@ function Thanks() {
             <h2 className="font-extrabold max-sm:text-[1.25rem] bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(200,189,228,0.2)] bg-clip-text text-transparent">
                 ขอบคุณที่เลือกใช้บริการของเรา
             </h2>
-            <h5 className="text-center max-sm:text-[1rem] text-[#ECF0FF] font-light">
+            <h5 className="text-center  text-[#ECF0FF] font-light">
                 ทีมงานของเราจะติดต่อกลับไปภายใน 1 - 3 วัน หากต้องการแก้ไขข้อมูล <br className="max-sm:hidden block"/>
                 ท่านสามารถกรอกฟอร์มใหม่อีกครั้ง หรือ สามาถแจ้งเราได้ในภายหลัง
             </h5>
