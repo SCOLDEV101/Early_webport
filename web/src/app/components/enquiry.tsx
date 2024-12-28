@@ -736,7 +736,7 @@ function Thanks() {
             <h2 className="font-extrabold max-sm:text-[1.25rem] bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(200,189,228,0.2)] bg-clip-text text-transparent">
                 ขอบคุณที่เลือกใช้บริการของเรา
             </h2>
-            <h5 className="text-center text-[1.15rem]  text-[#ECF0FF] font-light">
+            <h5 className="text-center text-[1rem]  text-[#ECF0FF] font-light">
                 ทีมงานของเราจะติดต่อกลับไปภายใน 1 - 3 วัน หากต้องการแก้ไขข้อมูล <br className="max-sm:hidden block"/>
                 ท่านสามารถกรอกฟอร์มใหม่อีกครั้ง หรือ สามาถแจ้งเราได้ในภายหลัง
             </h5>
