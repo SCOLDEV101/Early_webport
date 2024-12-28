@@ -377,7 +377,7 @@ export default function Enquiry() {
                         }`}
                     >1. User Information</h5>
                     <div>
-                        <div className='bg-gradient-to-t from-[rgba(88,68,215,1)]/50 to-[rgba(101,128,225,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
+                        <div className='bg-gradient-to-t from-[rgba(255,255,255,.5)]/40 to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
                             <div className='bg-gradient-to-t from-[#6580E1] from-0% via-[#6068DD] via-59% to-[#5844D7] to-100% flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
                                     width: `100%`,
@@ -394,7 +394,7 @@ export default function Enquiry() {
                             : 'bg-gradient-to-r from-[#C8BDE4] to-[#FFFFFF]/20'
                         }`}>2. Project Information</h5>
                     <div>
-                        <div className='bg-gradient-to-t from-[rgba(88,68,215,1)]/50 to-[rgba(101,128,225,1)]/50 max-sm:from-[rgba(255,255,255,.5)]/40 max-sm:to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
+                        <div className='bg-gradient-to-t from-[rgba(255,255,255,.5)]/40 to-[rgba(200,189,228,1)]/90 h-[0.3rem] max-sm:h-[0.6rem] rounded-full overflow-hidden'>
                             <div className='bg-gradient-to-t from-[#6580E1] from-0% via-[#6068DD] via-59% to-[#5844D7] to-100% flex justify-center items-center h-full text-xs text-white font-bold'
                                 style={{
                                     width: `${processBar["0"]}%`,
@@ -736,7 +736,7 @@ function Thanks() {
             <h2 className="font-extrabold max-sm:text-[1.25rem] bg-gradient-to-r from-[rgba(200,189,228,1)] to-[rgba(200,189,228,0.2)] bg-clip-text text-transparent">
                 ขอบคุณที่เลือกใช้บริการของเรา
             </h2>
-            <h5 className="text-center text-[1rem]  text-[#ECF0FF] font-light">
+            <h5 className="text-center max-sm:text-[1rem]  text-[#ECF0FF] font-light">
                 ทีมงานของเราจะติดต่อกลับไปภายใน 1 - 3 วัน หากต้องการแก้ไขข้อมูล <br className="max-sm:hidden block"/>
                 ท่านสามารถกรอกฟอร์มใหม่อีกครั้ง หรือ สามาถแจ้งเราได้ในภายหลัง
             </h5>

@@ -8,10 +8,34 @@ import Portfolio from './components/portfolio';
 import Service from './components/service';
 import Member from './components/member';
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import './globals.css';
 
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState<string>("");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll<HTMLElement>("section");
+      let currentSection = "";
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+
+        if (window.scrollY >= sectionTop - sectionHeight / 3) {
+          currentSection = section.getAttribute("id") || "";
+        }
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="flex flex-col overflow-x-hidden relative">
       {/* พื้นหลัง */}
@@ -22,7 +46,7 @@ export default function Home() {
       <div className='backguard-circleblue opacity-[.13] top-[75%] left-[60%]' />
       <div className='backguard-circlewhite opacity-[.2] top-[5%] left-[-20%]' />
       <div className='backguard-circlewhite opacity-[.2] top-[0%] left-[130%] ' />
-      <Navbar />
+      <Navbar activeSection={activeSection} />
 
       {/* //////////////////////////////////////////////////////////////////////// */}
 
