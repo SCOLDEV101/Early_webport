@@ -246,7 +246,7 @@ const MenuItem = ({ // Props
                     {active === item && ( // ไว้แสดง dropdown ของแต่ละหัวข้อที่เลือก
                         <div className="absolute top-[-20px] sm:top-[20px] max-sm:top-[35px] sm:left-[calc(100%_+_1rem)] max-sm:right-0 transform sm:-translate-x-1/2 pt-4 sm:pt-8"> {/* top-[calc(100%_+_1.2rem)] left-1/2*/}
                             <div
-                                className="sm:bg-[url('/bg-dropdown.svg')] sm:pt-8 px-[1.35rem]  sm:rounded-[10px] overflow-hidden "
+                                className="sm:bg-[url('/bg-dropdown2.svg')] sm:pt-8 px-[1.35rem]  sm:rounded-[10px] overflow-hidden "
                                 >
                                 <div className="w-max h-full py-5 max-sm:px-2">
                                     {children} {/* เมนู dropdown ที่เป็น list ต่อกันเรื่อยๆ */}
