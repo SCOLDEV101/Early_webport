@@ -244,11 +244,11 @@ const MenuItem = ({ // Props
             {children && active !== null && ( // Dropdown ตัว children คือ element ของ dropdown
                 <div>
                     {active === item && ( // ไว้แสดง dropdown ของแต่ละหัวข้อที่เลือก
-                        <div className="absolute top-[-20px] sm:top-[20px] max-sm:top-[35px] sm:left-[calc(100%_+_4rem)] max-sm:right-0 transform sm:-translate-x-1/2 pt-4 sm:pt-8"> {/* top-[calc(100%_+_1.2rem)] left-1/2*/}
+                        <div className="absolute top-[-20px] sm:top-[20px] max-sm:top-[35px] sm:left-[calc(100%_+_1rem)] max-sm:right-0 transform sm:-translate-x-1/2 pt-4 sm:pt-8"> {/* top-[calc(100%_+_1.2rem)] left-1/2*/}
                             <div
-                                className="sm:bg-[url('/bg-dropdown.svg')] sm:pt-8 px-[0.65rem]  sm:rounded-[10px] overflow-hidden"
+                                className="sm:bg-[url('/bg-dropdown.svg')] sm:pt-8 px-[1.35rem]  sm:rounded-[10px] overflow-hidden "
                                 >
-                                <div className="w-max h-full p-1 max-sm:px-2">
+                                <div className="w-max h-full py-5 max-sm:px-2">
                                     {children} {/* เมนู dropdown ที่เป็น list ต่อกันเรื่อยๆ */}
                                 </div>
                             </div>
@@ -325,7 +325,7 @@ const HoveredLink = ({ children, ...rest }: React.PropsWithChildren<React.Compon
     return (
         <Link
             {...rest} // ตัวนี้เป็น props อื่นๆ ที่เป็น attribute ของ html tag element เช่น src
-            className="sm:text-[#453E72] text-[#16151D] text-[1.25rem] max-sm:text-[1rem] px-8 sm:px-28 py-2 rounded-[10px] max-sm:rounded-full bg-[#ECF0FF] sm:bg-[rgba(200,200,200,1)] sm:bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] sm:from-[rgba(200,189,228,1)_0%] sm:to-[rgba(255,255,255,0.5)_100%] text-center hover:bg-[linear-gradient(200deg,_var(--tw-gradient-stops))] hover:from-[rgba(88,68,215,1)_0%] hover:via-[rgba(101,128,225,1)_40%] hover:to-[rgba(150,159,193,1)_60%] hover:shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-15px_#B2A9E7]"
+            className="sm:text-[#453E72] text-[#16151D] text-[1.25rem] max-sm:text-[1rem] px-8 sm:px-12 py-2 rounded-[10px] max-sm:rounded-full bg-[#ECF0FF] sm:bg-[rgba(200,200,200,1)] sm:bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] sm:from-[rgba(200,189,228,1)_0%] sm:to-[rgba(255,255,255,0.2)_100%] text-center hover:bg-[linear-gradient(99deg,_var(--tw-gradient-stops))] hover:from-[rgba(88,68,215,1)_0%] hover:via-[rgba(101,128,225,1)_68%] hover:to-[rgba(150,159,193,1)_100%] hover:text-white shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-15px_#B2A9E7] backdrop-blur-sm"
         >
             {children}
         </Link>
