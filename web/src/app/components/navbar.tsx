@@ -5,9 +5,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 
-// Navbar main Element
-
-export default function Navbar() { // Navbar
+interface NavbarProps {
+    activeSection: string; // กำหนดชนิดของ activeSection เป็น string
+  }
+  
+  export default function Navbar({ activeSection }: NavbarProps) { // Navbar
 
     const [active, setActive] = useState<string | null>(null); // ใช้สำหรับ active ของตัว dropdown
     const [mobileNavbarActive, setMobileNavbarActive] = useState<boolean>(false);
@@ -113,11 +115,11 @@ export default function Navbar() { // Navbar
                     {!isMobile && (
                         <div className="flex flex-row flex-nowrap justify-center items-center gap-16">
                             {/* Home menu กดแล้วไป section Home */}
-                            <MenuItem setActive={setActive} active={active} item="Home" href="#home"></MenuItem>
+                            <MenuItem setActive={setActive} active={active} activeSection={activeSection} session="home"  item="Home" href="#home"></MenuItem>
                             {/* Portfolio menu กดแล้วไป section Portfolio */}
-                            <MenuItem setActive={setActive} active={active} item="Portfolio" href="#portfolio"></MenuItem>
+                            <MenuItem setActive={setActive} active={active} activeSection={activeSection} session="portfolio" item="Portfolio" href="#portfolio"></MenuItem>
                             {/* About menu กดแล้วจะขึ้น popup ของ About */}
-                            <MenuItem setActive={setActive} active={active} item="About">
+                            <MenuItem setActive={setActive} active={active} activeSection={activeSection} session="about" item="About >">
                                 {/*  Popup menus ของ About ทั้งชุด */}
                                 <div className="flex flex-col space-y-1">
                                     {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
@@ -158,11 +160,11 @@ export default function Navbar() { // Navbar
                         className="absolute top-[70px] z-[50] right-0 flex flex-col w-full gap-1"
                     >
                         {/* Home menu กดแล้วไป section Home */}
-                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Home" href="#home" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="home" item="Home" href="#home" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                         {/* Portfolio menu กดแล้วไป section Portfolio */}
-                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="Portfolio" href="#portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="portfolio" item="portfolio" href="#portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                         {/* About menu กดแล้วจะขึ้น popup ของ About */}
-                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} item="About &#129170;">
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="about" item="About &#129170;">
                             <div className="flex flex-col space-y-1">
                                 {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
                                 <HoveredLink href="#about" onClick={() => setMobileNavbarActive(false)}>Contact</HoveredLink>
@@ -188,6 +190,8 @@ const MenuItem = ({ // Props
     children,
     href,
     setMobileNavbarActive,
+    activeSection,
+    session,
 }: {
     setActive: (item: string | null) => void; // จาก useState ด้านบน
     active: string | null; // จาก useState ด้านบน
@@ -195,6 +199,9 @@ const MenuItem = ({ // Props
     children?: React.ReactNode; // จะมีหรือไม่มีก็ได้
     href?: string; // จะมีหรือไม่มีก็ได้เป็น link ที่จะใช้ href ไปที่หน้าหรือ section อื่น
     setMobileNavbarActive?: Dispatch<SetStateAction<boolean>>;
+    activeSection : string;
+    session : string;
+
 }) => {
 
 
@@ -212,9 +219,10 @@ const MenuItem = ({ // Props
                 (
                     // กรณีปุ่มเป็นแบบ Link จะเข้า case นี้
                     <Link href={href}>
-                        <h5
-                            className="max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)]
-                            max-sm:h-[45px] max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16"
+                       <h5
+                            className={`${activeSection === session ? "sm:bg-gradient-to-b sm:from-[#D9D9D9]/0 sm:from-50% sm:via-[#6580E1] sm:via-95% sm:to-[#453E72] sm:to-120% sm:border-b-[#453E72] sm:border-b-4 py-5 px-3" : ""} 
+                            flex-grow h-full max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)] 
+                            max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16 sm:text-center`}
                         >
                             {item}
                         </h5>
@@ -224,9 +232,10 @@ const MenuItem = ({ // Props
                 (
                     // กรณีปุ่ม<ไม่>เป็นแบบ Link จะเข้า case นี้
                     <h5
-                        className="max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] cursor-pointer transition-shadow max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)]
-                        max-sm:h-[45px] max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16"
-                    >
+                        className={`${ activeSection !== "home" && activeSection !== "portfolio" && activeSection !== "" ? "sm:bg-gradient-to-b sm:from-[#D9D9D9]/0 sm:from-50% sm:via-[#6580E1] sm:via-95% sm:to-[#453E72] sm:to-120% sm:border-b-[#453E72] sm:border-b-4 py-5 px-3" : ""} 
+                            flex-grow h-full max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)] 
+                            max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16 sm:text-center`}
+                        >
                         {item}
                     </h5>
                 )
@@ -235,11 +244,11 @@ const MenuItem = ({ // Props
             {children && active !== null && ( // Dropdown ตัว children คือ element ของ dropdown
                 <div>
                     {active === item && ( // ไว้แสดง dropdown ของแต่ละหัวข้อที่เลือก
-                        <div className="absolute -top-[20px] max-sm:top-[35px] sm:left-[calc(100%_+_7rem)] max-sm:right-0 transform sm:-translate-x-1/2 pt-4"> {/* top-[calc(100%_+_1.2rem)] left-1/2*/}
+                        <div className="absolute top-[-20px] sm:top-[20px] max-sm:top-[35px] sm:left-[calc(100%_+_1rem)] max-sm:right-0 transform sm:-translate-x-1/2 pt-4 sm:pt-8"> {/* top-[calc(100%_+_1.2rem)] left-1/2*/}
                             <div
-                                className="sm:bg-white sm:rounded-[10px] overflow-hidden sm:border sm:border-black/[0.2] sm:bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] sm:from-[rgba(200,189,228,1)_0%] sm:to-[rgba(255,255,255,0.5)_100%] sm:shadow-xl sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)]"
-                            >
-                                <div className="w-max h-full p-1 max-sm:px-2">
+                                className="sm:bg-[url('/bg-dropdown2.svg')] sm:pt-8 px-[1.35rem]  sm:rounded-[10px] overflow-hidden "
+                                >
+                                <div className="w-max h-full py-5 max-sm:px-2">
                                     {children} {/* เมนู dropdown ที่เป็น list ต่อกันเรื่อยๆ */}
                                 </div>
                             </div>
@@ -300,7 +309,7 @@ const Menu = ({ // Props
             }}
             style={{
                 backgroundColor: "#ffffff",
-                background: mobileNavbarActive && isMobile ? "linear-gradient(83deg, rgba(30, 30, 30, 1) 0%, rgba(88, 68, 215, 1) 50%, rgba(101, 128, 225, 1) 100%)" : "linear-gradient(90deg, rgba(200, 189, 228, 1) 0%, rgba(255, 255, 255, 0.5) 100%)",
+                background: mobileNavbarActive && isMobile ? "linear-gradient(83deg, rgba(30, 30, 30, 0.3) 0%, rgba(88, 68, 215, 0.3) 50%, rgba(101, 128, 225, 0.3) 100%)" : "linear-gradient(90deg, rgba(200, 189, 228, 1) 0%, rgba(255, 255, 255, 0.5) 100%)",
                 boxShadow: `
                     inset 0px 3px 3.9px -2px rgba(255, 255, 255, .93),
                     0px 10px 30px -15px #B2A9E7`,
@@ -316,7 +325,7 @@ const HoveredLink = ({ children, ...rest }: React.PropsWithChildren<React.Compon
     return (
         <Link
             {...rest} // ตัวนี้เป็น props อื่นๆ ที่เป็น attribute ของ html tag element เช่น src
-            className="sm:text-[#453E72] text-[#16151D] text-[1.25rem] max-sm:text-[1rem] px-8 py-2 rounded-[10px] max-sm:rounded-full bg-[#ECF0FF] sm:bg-[rgba(200,200,200,1)] sm:bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] sm:from-[rgba(200,189,228,1)_0%] sm:to-[rgba(255,255,255,0.5)_100%] text-center hover:bg-[linear-gradient(200deg,_var(--tw-gradient-stops))] hover:from-[rgba(88,68,215,1)_0%] hover:via-[rgba(101,128,225,1)_40%] hover:to-[rgba(150,159,193,1)_60%] hover:shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-15px_#B2A9E7]"
+            className="sm:text-[#453E72] text-[#16151D] text-[1.25rem] max-sm:text-[1rem] px-8 sm:px-12 py-2 rounded-[10px] max-sm:rounded-full bg-[#ECF0FF] sm:bg-[rgba(200,200,200,1)] sm:bg-[linear-gradient(90deg,_var(--tw-gradient-stops))] sm:from-[rgba(200,189,228,1)_0%] sm:to-[rgba(255,255,255,0.2)_100%] text-center hover:bg-[linear-gradient(99deg,_var(--tw-gradient-stops))] hover:from-[rgba(88,68,215,1)_0%] hover:via-[rgba(101,128,225,1)_68%] hover:to-[rgba(150,159,193,1)_100%] hover:text-white shadow-[inset_0px_3px_3.9px_-2px_#ffff,0px_10px_30px_-15px_#B2A9E7] backdrop-blur-sm"
         >
             {children}
         </Link>

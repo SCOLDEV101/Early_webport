@@ -4,10 +4,10 @@ import React from 'react'
 function Footer() {
     return (
         // แบ่ง Footer ออกเป้น 2 ฝั่ง หลัก ๆ
-        <div className="h-[400px] w-screen flex justify-center items-center bg-[linear-gradient(2deg,rgba(71,92,165,0.5)0%,rgba(27,35,63,1)45%)]">
+        <div className="h-[400px] w-screen flex jusityfy-start md:justify-center items-center bg-[linear-gradient(2deg,rgba(71,92,165,0.5)0%,rgba(27,35,63,1)45%)]">
             <div className="flex flex-row gap-32">
                 {/* ส่วนด้านซ้าย ของ footer */}
-                <div className="">
+                <div className="ml-5 md:m-0">
                     {/* Brand company */}
                     <h1 className="text-[#FFFFFF] text-[3rem] font-extrabold">SCOLDEV</h1>
                     <br />
@@ -22,7 +22,7 @@ function Footer() {
                 </div>
 
                 {/* ส่วนด้านขวาของ footer */}
-                <div className="flex flex-row justify-between gap-24">
+                <div className="hidden md:flex flex-row justify-between gap-24">
                     {/* ปุ่ม menu ที่ใช้ในการ href กลับไปที่ section ต่าง ๆ */}
                     <Link href={"#Home"} className="text-[#FFFFFF] text-[1.25rem]">home</Link>
                     <Link href={"#Portfolio"} className="text-[#FFFFFF] text-[1.25rem]">portfolio</Link>
