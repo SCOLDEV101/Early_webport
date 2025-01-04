@@ -305,7 +305,7 @@ const Menu = ({ // Props
             onClick={() => {
                 // if (setMobileNavbarActive) {
                 //     setMobileNavbarActive(!mobileNavbarActive)
-                setActive(null)
+                // setActive(null)
                 // }
             }}
             style={{
