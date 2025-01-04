@@ -268,7 +268,7 @@ const Menu = ({ // Props
     setActive,
     children,
     mobileNavbarActive,
-    setMobileNavbarActive,
+    // setMobileNavbarActive,
     isMobile,
 }: {
     setActive: (item: string | null) => void; // จำเป้นต้องมี
