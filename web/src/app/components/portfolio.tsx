@@ -118,7 +118,7 @@ export default function Portfolio() {
                                         <img
                                             src={item.poster} // URL รูปใน Swiper
                                             alt={item.img_alt} // คำอธิบายรูป
-                                            className="w-[70vw] mx-auto rounded-lg"
+                                            className="w-[70vw] mx-auto"
                                         />
                                     </div>
                                 </SwiperSlide>
