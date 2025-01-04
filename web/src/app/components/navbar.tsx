@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 
 interface NavbarProps {
     activeSection: string; // กำหนดชนิดของ activeSection เป็น string
-  }
-  
-  export default function Navbar({ activeSection }: NavbarProps) { // Navbar
+}
+
+export default function Navbar({ activeSection }: NavbarProps) { // Navbar
 
     const [active, setActive] = useState<string | null>(null); // ใช้สำหรับ active ของตัว dropdown
     const [mobileNavbarActive, setMobileNavbarActive] = useState<boolean>(false);
@@ -38,9 +38,9 @@ interface NavbarProps {
         const handleOutSideClick = (event: MouseEvent) => {
             if (!MobileMenuRef.current?.contains(event.target as Node) && mobileNavbarActive) {
                 setMobileNavbarActive(false);
-            } else {
-                return
+                setActive("");
             }
+            return
         };
 
         window.addEventListener("mousedown", handleOutSideClick);
@@ -115,11 +115,11 @@ interface NavbarProps {
                     {!isMobile && (
                         <div className="flex flex-row flex-nowrap justify-center items-center gap-16">
                             {/* Home menu กดแล้วไป section Home */}
-                            <MenuItem setActive={setActive} active={active} activeSection={activeSection} session="home"  item="Home" href="#home"></MenuItem>
+                            <MenuItem setActive={setActive} active={active} activeSection={activeSection} session="home" item="Home" href="#home"></MenuItem>
                             {/* Portfolio menu กดแล้วไป section Portfolio */}
                             <MenuItem setActive={setActive} active={active} activeSection={activeSection} session="portfolio" item="Portfolio" href="#portfolio"></MenuItem>
                             {/* About menu กดแล้วจะขึ้น popup ของ About */}
-                            <MenuItem setActive={setActive} active={active} activeSection={activeSection} session="about" item="About >">
+                            <MenuItem setActive={setActive} active={active} activeSection={activeSection} session="about" item="About ›">
                                 {/*  Popup menus ของ About ทั้งชุด */}
                                 <div className="flex flex-col space-y-1">
                                     {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
@@ -138,9 +138,10 @@ interface NavbarProps {
                     </button>
                     <Image
                         className="block sm:hidden cursor-pointer"
-                        // onClick={() => {
-                        //     setMobileNavbarActive(!mobileNavbarActive);
-                        // }}
+                        onClick={() => {
+                            setMobileNavbarActive(!mobileNavbarActive);
+                            setActive(null);
+                        }}
                         src={"./menu.svg"}
                         alt="logo"
                         width="0"
@@ -164,7 +165,7 @@ interface NavbarProps {
                         {/* Portfolio menu กดแล้วไป section Portfolio */}
                         <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="portfolio" item="portfolio" href="#portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                         {/* About menu กดแล้วจะขึ้น popup ของ About */}
-                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="about" item="About &#129170;">
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="about" item="About ›">
                             <div className="flex flex-col space-y-1">
                                 {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
                                 <HoveredLink href="#about" onClick={() => setMobileNavbarActive(false)}>Contact</HoveredLink>
@@ -199,8 +200,8 @@ const MenuItem = ({ // Props
     children?: React.ReactNode; // จะมีหรือไม่มีก็ได้
     href?: string; // จะมีหรือไม่มีก็ได้เป็น link ที่จะใช้ href ไปที่หน้าหรือ section อื่น
     setMobileNavbarActive?: Dispatch<SetStateAction<boolean>>;
-    activeSection : string;
-    session : string;
+    activeSection: string;
+    session: string;
 
 }) => {
 
@@ -219,7 +220,7 @@ const MenuItem = ({ // Props
                 (
                     // กรณีปุ่มเป็นแบบ Link จะเข้า case นี้
                     <Link href={href}>
-                       <h5
+                        <h5
                             className={`${activeSection === session ? "sm:bg-gradient-to-b sm:from-[#D9D9D9]/0 sm:from-50% sm:via-[#6580E1] sm:via-95% sm:to-[#453E72] sm:to-120% sm:border-b-[#453E72] sm:border-b-4 py-5 px-3" : ""} 
                             flex-grow h-full max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)] 
                             max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16 sm:text-center`}
@@ -232,10 +233,10 @@ const MenuItem = ({ // Props
                 (
                     // กรณีปุ่ม<ไม่>เป็นแบบ Link จะเข้า case นี้
                     <h5
-                        className={`${ activeSection !== "home" && activeSection !== "portfolio" && activeSection !== "" ? "sm:bg-gradient-to-b sm:from-[#D9D9D9]/0 sm:from-50% sm:via-[#6580E1] sm:via-95% sm:to-[#453E72] sm:to-120% sm:border-b-[#453E72] sm:border-b-4 py-5 px-3" : ""} 
+                        className={`${activeSection !== "home" && activeSection !== "portfolio" && activeSection !== "" ? "sm:bg-gradient-to-b sm:from-[#D9D9D9]/0 sm:from-50% sm:via-[#6580E1] sm:via-95% sm:to-[#453E72] sm:to-120% sm:border-b-[#453E72] sm:border-b-4 py-5 px-3" : ""} 
                             flex-grow h-full max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)] 
-                            max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16 sm:text-center`}
-                        >
+                            max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16 sm:text-center whitespace-nowrap`}
+                    >
                         {item}
                     </h5>
                 )
@@ -247,8 +248,8 @@ const MenuItem = ({ // Props
                         <div className="absolute top-[-20px] sm:top-[20px] max-sm:top-[35px] sm:left-[calc(100%_+_1rem)] max-sm:right-0 transform sm:-translate-x-1/2 pt-4 sm:pt-8"> {/* top-[calc(100%_+_1.2rem)] left-1/2*/}
                             <div
                                 className="sm:bg-[url('/bg-dropdown2.svg')] sm:pt-8 px-[1.35rem]  sm:rounded-[10px] overflow-hidden "
-                                >
-                                <div className="w-max h-full py-5 max-sm:px-2">
+                            >
+                                <div className="w-max h-full py-1 md:py-5 max-sm:px-2 ">
                                     {children} {/* เมนู dropdown ที่เป็น list ต่อกันเรื่อยๆ */}
                                 </div>
                             </div>
@@ -302,10 +303,10 @@ const Menu = ({ // Props
             ref={menuRef} // refference ที่อ้างจาก useRef
             className="relative rounded-[20px] sm:rounded-[15px] flex flex-nowrap justify-between items-center space-x-4 ps-8 max-sm:ps-4 pe-4 max-sm:pe-5 h-[70px] max-sm:h-[50px] backdrop-blur-[30px]"
             onClick={() => {
-                if (setMobileNavbarActive) {
-                    setMobileNavbarActive(!mobileNavbarActive)
-                    setActive(null)
-                }
+                // if (setMobileNavbarActive) {
+                //     setMobileNavbarActive(!mobileNavbarActive)
+                setActive(null)
+                // }
             }}
             style={{
                 backgroundColor: "#ffffff",
