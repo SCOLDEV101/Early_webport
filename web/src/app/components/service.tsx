@@ -21,7 +21,10 @@ export default function Service() {
             <img
               src={data.img_src} // URL ของภาพ
               alt={data.img_alt} // คำอธิบายภาพสำหรับ SEO และการเข้าถึง
+              width={100}
+              height={100}
               className="w-full h-[25vh] md:h-auto object-cover" // กำหนดรูปแบบการครอบภาพให้เหมาะสม
+              loading='lazy'
             />
 
             {/* คอนเทนต์ซ้อนทับบนภาพ */}
