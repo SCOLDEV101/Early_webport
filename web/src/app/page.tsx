@@ -1,15 +1,16 @@
 'use client'
-
-import Enquiry from './components/enquiry';
-import Footer from './components/Footer';
-import Navbar from './components/navbar'
-import Order from './components/order';
-import Portfolio from './components/portfolio';
-import Service from './components/service';
-import Member from './components/member';
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import './globals.css';
+import dynamic from "next/dynamic";
+
+const Enquiry = dynamic(() => import('./components/enquiry'), { ssr: false })
+const Footer = dynamic(() => import('./components/Footer'), { ssr: false })
+const Navbar = dynamic(() => import('./components/navbar'), { ssr: false })
+const Order = dynamic(() => import('./components/order'))
+const Portfolio = dynamic(() => import('./components/portfolio'), { ssr: false })
+const Service = dynamic(() => import('./components/service'), { ssr: false })
+const Member = dynamic(() => import('./components/member'), { ssr: false })
 
 
 export default function Home() {
@@ -64,6 +65,15 @@ export default function Home() {
               Enquiry now
             </span>
           </Link>
+          <div className="flex justify-center items-center mt-20">
+            <a href="#portfolio">
+              <img
+                src="./arrow-dropdown.svg"
+                alt="arrow-dropdown"
+                style={{ width: '62px', height: 'auto' }}
+              />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -97,7 +107,7 @@ export default function Home() {
           >
             <h3 className="md:text-[2.5rem] my-1 md:my-2 bg-gradient-to-br from-[#BDCBFD] to-[#E5D5FF] inline-block text-transparent bg-clip-text font-[900]">
               Contact
-            </h3> 
+            </h3>
             <h6 className="md:text-[1.25rem] font-bold">063-874-0176</h6>
             <h6 className="md:text-[1.25rem] font-bold break-words">scoldev101@gmail.com</h6>
           </div>

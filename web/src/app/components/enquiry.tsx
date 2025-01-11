@@ -370,8 +370,7 @@ export default function Enquiry() {
             </div>
             <div className="grid grid-cols-2 w-full mb-5 gap-5">
                 <div>
-                     <h5 className={`max-sm:text-[3.5vw] bg-clip-text text-transparent font-extrabold ${
-                            currentStep >= 0
+                    <h5 className={`max-sm:text-[3.5vw] bg-clip-text text-transparent font-extrabold ${currentStep >= 0
                             ? 'bg-gradient-to-r from-[#5844D7] from-0% via-[#6068DD] via-59% to-[#6580E1] to-100%'
                             : 'bg-gradient-to-r from-[#C8BDE4] to-[#FFFFFF]/20'
                         }`}
@@ -388,8 +387,7 @@ export default function Enquiry() {
                     </div>
                 </div>
                 <div>
-                    <h5 className={`max-sm:text-[3.5vw] bg-clip-text text-transparent font-extrabold ${
-                            currentStep >= 1
+                    <h5 className={`max-sm:text-[3.5vw] bg-clip-text text-transparent font-extrabold ${currentStep >= 1
                             ? 'bg-gradient-to-r from-[#5844D7] from-0% via-[#6068DD] via-59% to-[#6580E1] to-100%'
                             : 'bg-gradient-to-r from-[#C8BDE4] to-[#FFFFFF]/20'
                         }`}>2. Project Information</h5>
@@ -542,7 +540,7 @@ function UserInformation({ data, handlerInputChanged, requireField }: User_Infor
                         id="phone"
                         name="phone"
                         placeholder="กรุณากรอกเบอร์โทรศัพท์"
-                        type="text"
+                        type="number"
                         value={data.phone || ""}
                         onChange={(e) => handlerInputChanged(e.target.name, e.target.value)}
                     />
@@ -582,7 +580,7 @@ function ProjectInformation({ data, handlerInputChanged, requireField }: Project
             <div className="w-full space-y-4">
                 <LabelInputContainer>
                     <label
-                        className={`text-[16px] ${requireField.project_name ? "text-red-600" :"bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
+                        className={`text-[16px] ${requireField.project_name ? "text-red-600" : "bg-gradient-to-br from-[rgba(200,189,228,1)] to-[rgba(255,255,255,0.2)] bg-clip-text text-transparent [text-shadow:_0_4px_4px_rgba(0_0_0_/_0.25)]"}`}
                         htmlFor="project_name"
                     >
                         Project name*
@@ -737,7 +735,7 @@ function Thanks() {
                 ขอบคุณที่เลือกใช้บริการของเรา
             </h2>
             <h5 className="text-center max-sm:text-[1rem]  text-[#ECF0FF] font-light">
-                ทีมงานของเราจะติดต่อกลับไปภายใน 1 - 3 วัน หากต้องการแก้ไขข้อมูล <br className="max-sm:hidden block"/>
+                ทีมงานของเราจะติดต่อกลับไปภายใน 1 - 3 วัน หากต้องการแก้ไขข้อมูล <br className="max-sm:hidden block" />
                 ท่านสามารถกรอกฟอร์มใหม่อีกครั้ง หรือ สามาถแจ้งเราได้ในภายหลัง
             </h5>
         </div>
