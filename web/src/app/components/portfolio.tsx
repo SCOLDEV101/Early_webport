@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import React, { useState } from 'react'
 import { portfolio_data } from '../constants/staticData';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -68,7 +67,10 @@ export default function Portfolio() {
                         <img
                             src={data.img_src} // URL รูปภาพของข้อมูล
                             alt={data.img_alt} // คำอธิบายรูปภาพ
+                            width={100}
+                            height={100}
                             className="w-full h-auto object-cover rounded-[10px]" // CSS class สำหรับการจัดการรูป
+                            loading='lazy'
                         />
 
                         {/* ส่วนของ detail */}
@@ -91,7 +93,7 @@ export default function Portfolio() {
                             onClick={HandleRemovePopUp}
                             className="flex justify-end w-[100%] z-[60]"
                         >
-                            <Image 
+                            <img 
                                 src={"./Close.svg"} // รูปไอคอนปิด
                                 alt='close' // คำอธิบายรูป
                                 width={50}
@@ -118,7 +120,7 @@ export default function Portfolio() {
                                         <img
                                             src={item.poster} // URL รูปใน Swiper
                                             alt={item.img_alt} // คำอธิบายรูป
-                                            className="w-[70vw] mx-auto rounded-lg"
+                                            className="w-[70vw] mx-auto"
                                         />
                                     </div>
                                 </SwiperSlide>

@@ -109,6 +109,7 @@ export default function Order() {
                     width={step_order[stepSelected].img_size.w}
                     height={step_order[stepSelected].img_size.h}
                     className={`absolute max-sm:relative ${stepSelected === 1 ? "top-[-150px]" : "top-[-110px]"} sm:right-32 transition-opacity duration-300 ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+                    loading='lazy'
                 />
                 <div className={`absolute ${stepSelected === 1 ? "max-sm:bottom-[110px]" : "max-sm:bottom-[90px]"} -bottom-[50px] w-full text-end sm:pe-[14rem]`}>
                     {step_order[stepSelected].desc.title && (

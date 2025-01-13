@@ -1,7 +1,6 @@
 "use client";
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 
@@ -65,14 +64,14 @@ export default function Navbar({ activeSection }: NavbarProps) { // Navbar
                 >
                     {/* Logo */}
                     <div className="max-sm:w-full relative">
-                        <Image
+                        <img
                             className="hidden sm:block"
+                            onClick={() => router.push('#home')}
                             src="./navbar-logo.svg"
                             alt="logo"
                             width="0"
                             height="0"
                             style={{ width: '150px', height: 'auto' }}
-                            priority
                         />
                         <div
                             className={`relative sm:hidden max-sm:w-[calc(100%+45px)] transform transition-all flex flex-row justify-between items-center`}
@@ -80,7 +79,7 @@ export default function Navbar({ activeSection }: NavbarProps) { // Navbar
                                 right: mobileNavbarActive ? "calc(0vw)" : "calc(100vw - 115px)",
                             }}
                         >
-                            <Image
+                            <img
                                 className={`relative inline-block ${mobileNavbarActive ? "opacity-100" : "opacity-0"}`}
                                 src={"./mobileNavDropdonwIcon.svg"}
                                 onClick={() => {
@@ -92,13 +91,11 @@ export default function Navbar({ activeSection }: NavbarProps) { // Navbar
                                     width: '30px',
                                     height: 'auto',
                                 }}
-                                priority
                             />
-                            <Image
+                            <img
                                 className={`relative inline-block`}
                                 src={mobileNavbarActive ? "./navbar-icon-white.svg" : "./navbar-icon.svg"}
-                                onClick={() => {
-                                }}
+                                onClick={() => router.push('#home')}
                                 alt="logo"
                                 width="0"
                                 height="0"
@@ -106,7 +103,6 @@ export default function Navbar({ activeSection }: NavbarProps) { // Navbar
                                     width: '30px',
                                     height: 'auto',
                                 }}
-                                priority
                             />
                         </div>
                     </div>
@@ -136,7 +132,7 @@ export default function Navbar({ activeSection }: NavbarProps) { // Navbar
                             Enquiry
                         </h5>
                     </button>
-                    <Image
+                    <img
                         className="block sm:hidden cursor-pointer"
                         onClick={() => {
                             setMobileNavbarActive(!mobileNavbarActive);
@@ -152,7 +148,6 @@ export default function Navbar({ activeSection }: NavbarProps) { // Navbar
                             opacity: mobileNavbarActive ? '0' : '100',
                             transition: 'opacity 0.2s ease-in-out',
                         }}
-                        priority
                     />
                 </Menu >
                 {isMobile && mobileNavbarActive && (
@@ -163,16 +158,18 @@ export default function Navbar({ activeSection }: NavbarProps) { // Navbar
                         {/* Home menu กดแล้วไป section Home */}
                         <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="home" item="Home" href="#home" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                         {/* Portfolio menu กดแล้วไป section Portfolio */}
-                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="portfolio" item="portfolio" href="#portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="portfolio" item="Portfolio" href="#portfolio" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                         {/* About menu กดแล้วจะขึ้น popup ของ About */}
-                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="about" item="About ›">
+                        {/* <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="about" item="About ›">
                             <div className="flex flex-col space-y-1">
-                                {/*  Popup menu ของ About แค่ปุ่มเดียว ในที่นี้มี 4 ปุ่ม */}
                                 <HoveredLink href="#about" onClick={() => setMobileNavbarActive(false)}>Contact</HoveredLink>
                                 <HoveredLink href="#services" onClick={() => setMobileNavbarActive(false)}>Services</HoveredLink>
                                 <HoveredLink href="#member" onClick={() => setMobileNavbarActive(false)}>Member</HoveredLink>
                             </div>
-                        </MenuItem>
+                        </MenuItem> */}
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="about" item="About us" href="#about" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="about" item="Services" href="#services" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
+                        <MenuItem setActive={setMobileNavbarMenuActive} active={mobileNavbarMenuActive} activeSection={activeSection} session="about" item="Member" href="#member" setMobileNavbarActive={setMobileNavbarActive}></MenuItem>
                     </div>
                 )}
             </div >
@@ -268,7 +265,7 @@ const Menu = ({ // Props
     setActive,
     children,
     mobileNavbarActive,
-    setMobileNavbarActive,
+    // setMobileNavbarActive,
     isMobile,
 }: {
     setActive: (item: string | null) => void; // จำเป้นต้องมี
@@ -305,7 +302,7 @@ const Menu = ({ // Props
             onClick={() => {
                 // if (setMobileNavbarActive) {
                 //     setMobileNavbarActive(!mobileNavbarActive)
-                setActive(null)
+                // setActive(null)
                 // }
             }}
             style={{
