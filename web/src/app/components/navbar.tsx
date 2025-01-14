@@ -218,8 +218,8 @@ const MenuItem = ({ // Props
                     // กรณีปุ่มเป็นแบบ Link จะเข้า case นี้
                     <Link href={href}>
                         <h5
-                            className={`${activeSection === session ? "sm:bg-gradient-to-b sm:from-[#D9D9D9]/0 sm:from-50% sm:via-[#6580E1] sm:via-95% sm:to-[#453E72] sm:to-120% sm:border-b-[#453E72] sm:border-b-4 py-5 px-3" : ""} 
-                            flex-grow h-full max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)] 
+                            className={`${activeSection === session ? "sm:bg-gradient-to-b sm:from-[#D9D9D9]/0 sm:from-50% sm:via-[#6580E1] sm:via-95% sm:to-[#453E72] sm:to-120% sm:border-b-[#453E72] sm:border-b-4 py-5" : ""} 
+                            px-3 flex-grow h-full max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)] 
                             max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16 sm:text-center`}
                         >
                             {item}
@@ -230,8 +230,8 @@ const MenuItem = ({ // Props
                 (
                     // กรณีปุ่ม<ไม่>เป็นแบบ Link จะเข้า case นี้
                     <h5
-                        className={`${activeSection !== "home" && activeSection !== "portfolio" && activeSection !== "" ? "sm:bg-gradient-to-b sm:from-[#D9D9D9]/0 sm:from-50% sm:via-[#6580E1] sm:via-95% sm:to-[#453E72] sm:to-120% sm:border-b-[#453E72] sm:border-b-4 py-5 px-3" : ""} 
-                            flex-grow h-full max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)] 
+                        className={`${activeSection !== "home" && activeSection !== "portfolio" && activeSection !== "" ? "sm:bg-gradient-to-b sm:from-[#D9D9D9]/0 sm:from-50% sm:via-[#6580E1] sm:via-95% sm:to-[#453E72] sm:to-120% sm:border-b-[#453E72] sm:border-b-4 py-5" : ""} 
+                           px-3 flex-grow h-full max-sm:hover:text-[#ECF0FF] max-sm:hover:bg-gradient-to-tr max-sm:hover:from-[rgba(88,68,215,1)_0%] max-sm:hover:via-[rgba(101,128,225,1)_95%] max-sm:hover:to-[rgba(208,216,242,1)_100%] max-sm:[box-shadow:inset_0px_3px_3.9px_-2px_rgba(255_255_255_/_0.93),_0px_4px_13.1px_rgba(255_255_255_/_0.2)] cursor-pointer transition-shadow [text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25)] text-[#453E72] sm:hover:[text-shadow:_0_4px_3px_rgba(0_0_0_/_0.25),_0_4px_4px_rgba(255_255_255_/_0.4)] 
                             max-sm:w-full max-sm:bg-gradient-to-r max-sm:from-[rgba(200,189,228,1)] max-sm:to-[rgba(255,255,255,.25)] max-sm:rounded-[18px] max-sm:py-2 max-sm:px-16 sm:text-center whitespace-nowrap`}
                     >
                         {item}
@@ -244,7 +244,7 @@ const MenuItem = ({ // Props
                     {active === item && ( // ไว้แสดง dropdown ของแต่ละหัวข้อที่เลือก
                         <div className="absolute top-[-20px] sm:top-[20px] max-sm:top-[35px] sm:left-[calc(100%_+_1rem)] max-sm:right-0 transform sm:-translate-x-1/2 pt-4 sm:pt-8"> {/* top-[calc(100%_+_1.2rem)] left-1/2*/}
                             <div
-                                className="sm:bg-[url('/bg-dropdown2.svg')] sm:pt-8 px-[1.35rem]  sm:rounded-[10px] overflow-hidden "
+                                className="sm:bg-[url('/bg-dropdown2.svg')] sm:bg-no-repeat sm:bg-cover sm:pt-8 px-[1.35rem] sm:rounded-[10px] overflow-hidden "
                             >
                                 <div className="w-max h-full py-1 md:py-5 max-sm:px-2 ">
                                     {children} {/* เมนู dropdown ที่เป็น list ต่อกันเรื่อยๆ */}
